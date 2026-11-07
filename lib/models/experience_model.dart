@@ -32,7 +32,7 @@ class ExperienceModel {
       highlights: [
         'Skripsi: "Rancang Bangun IoT pada Prototype Smart Home dengan Penerapan Rule-Based Decision System sebagai Artificial Intelligence" (Lulus Sidang 29 Juli 2026)',
         'Membangun Aplikasi Android Flutter "STARZAR" berbasis model 7 Lapisan OSI Layer, protokol MQTT HiveMQ Cloud, dan Hive DB dengan respon 180 ms',
-        'Dibimbing oleh: Husaini, S.Si., M.T. & Atthariq, S.S.T., M.T. (Ketua Jurusan: Salahuddin, S.T., M.Cs., Kaprodi: Nanda Saputri, S.S.T., M.T.)',
+        'Dibimbing oleh: Husaini, S.Si., M.IT. & Atthariq, S.S.T., M.T. (Ketua Jurusan: Salahuddin, S.T., M.Cs., Kaprodi: Nanda Saputri, S.S.T., M.T.)',
       ],
       isEducation: true,
       icon: Icons.school_rounded,

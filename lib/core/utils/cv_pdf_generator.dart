@@ -584,7 +584,7 @@ class CvPdfGenerator {
               _infoRow('Tanggal Lulus', '29 Juli 2026', b, r),
               pw.SizedBox(height: 5),
               _infoRow('Pembimbing I',
-                  'Husaini, S.Si., M.T.', b, r),
+                  'Husaini, S.Si., M.IT.', b, r),
             ])),
           ]),
           pw.SizedBox(height: 10),
