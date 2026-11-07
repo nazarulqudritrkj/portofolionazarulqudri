@@ -80,6 +80,7 @@ flutter:
     - lib/images/sertifikasi_perlombaan/lombakmipn2025/
     - lib/images/ijazah/
     - lib/images/transkripnilai/
+    - assets/resume/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

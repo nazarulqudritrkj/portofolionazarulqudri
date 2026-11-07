@@ -190,26 +190,13 @@ class FloatingNavbar extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 10),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  AppConstants.fullName,
-                  style: AppTypography.headingSmall.copyWith(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 14.5,
-                  ),
-                ),
-                Text(
-                  strings.portfolioTitle,
-                  style: AppTypography.bodySmall.copyWith(
-                    color: AppColors.primary,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 10.5,
-                  ),
-                ),
-              ],
+            Text(
+              AppConstants.fullName,
+              style: AppTypography.headingSmall.copyWith(
+                fontWeight: FontWeight.w700,
+                fontSize: 14.5,
+                color: AppColors.textPrimary,
+              ),
             ),
           ],
         ),

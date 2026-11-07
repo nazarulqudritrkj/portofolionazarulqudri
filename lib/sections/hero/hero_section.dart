@@ -5,10 +5,10 @@ import '../../core/constants/app_constants.dart';
 import '../../core/constants/app_typography.dart';
 import '../../core/localization/app_locale.dart';
 import '../../core/utils/responsive.dart';
-import '../../core/utils/url_helper.dart';
 import '../../controllers/navigation_controller.dart';
 import '../../widgets/badges/pulsing_badge.dart';
 import '../../widgets/common/clean_button.dart';
+import '../../widgets/modals/digital_cv_modal.dart';
 import 'hero_visual_card.dart';
 
 class HeroSection extends StatelessWidget {
@@ -192,8 +192,7 @@ class HeroSection extends StatelessWidget {
               variant: CleanButtonVariant.outline,
               height: 52,
               padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 14),
-              onPressed: () =>
-                  UrlHelper.openUrl(AppConstants.resumeUrl, context: context),
+              onPressed: () => DigitalCvModal.show(context),
             ),
           ],
         )

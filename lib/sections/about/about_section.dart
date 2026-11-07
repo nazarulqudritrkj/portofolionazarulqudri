@@ -5,12 +5,12 @@ import '../../core/constants/app_constants.dart';
 import '../../core/constants/app_typography.dart';
 import '../../core/localization/app_locale.dart';
 import '../../core/utils/responsive.dart';
-import '../../core/utils/url_helper.dart';
 import '../../models/experience_model.dart';
 import '../../widgets/cards/architecture_terminal.dart';
 import '../../widgets/cards/glass_card.dart';
 import '../../widgets/common/clean_button.dart';
 import '../../widgets/common/section_title.dart';
+import '../../widgets/modals/digital_cv_modal.dart';
 import 'timeline_item_widget.dart';
 
 class AboutSection extends StatelessWidget {
@@ -175,8 +175,7 @@ class AboutSection extends StatelessWidget {
                 variant: CleanButtonVariant.outline,
                 height: 46,
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                onPressed: () =>
-                    UrlHelper.openUrl(AppConstants.resumeUrl, context: context),
+                onPressed: () => DigitalCvModal.show(context),
               ),
             ],
           ),

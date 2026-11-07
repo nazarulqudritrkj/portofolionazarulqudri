@@ -58,14 +58,14 @@ class AppStrings {
       isId ? 'Terbuka untuk Peluang Baru & Proyek' : 'Available for New Opportunities';
   String get heroGreeting => isId ? 'Halo, Saya ' : "Hi, I'm ";
   String get heroRole => isId
-      ? 'Flutter Developer & IoT Solutions Specialist'
-      : 'Flutter Specialist & IoT Solutions Engineer';
+      ? 'Flutter Developer, IoT CPS & AI Specialist'
+      : 'Flutter Developer, IoT CPS & AI Specialist';
   String get heroTagline => isId
-      ? 'Membangun Pengalaman Digital Berkinerja Tinggi & Solusi Modern Bersih'
-      : 'Crafting High-Performance Digital Experiences & Clean Modern Solutions';
+      ? 'Rekayasa Aplikasi Flutter, Sistem Siber-Fisik IoT & Solusi Kecerdasan Buatan'
+      : 'Engineering Flutter Apps, Cyber-Physical IoT Systems & Artificial Intelligence';
   String get heroBio => isId
-      ? 'Software Engineer & Spesialis Flutter dengan keahlian mendalam dalam arsitektur aplikasi mobile, web, integrasi perangkat IoT real-time, serta antarmuka modern Clean Island.'
-      : 'Passionate Software Engineer & Flutter Specialist with extensive experience in architecting cross-platform mobile, web, and IoT-integrated solutions.';
+      ? 'Sarjana Terapan Teknik (S.Tr.T.) bidang TRKJ PNL & Software Engineer. Berpengalaman dalam arsitektur mobile Flutter cross-platform (Clean Architecture & BLoC), rekayasa sistem siber-fisik (IoT CPS 7 OSI Layer & MQTT/TLS), kecerdasan buatan (Rule-Based Decision Systems & AI Studio), serta pengembangan sistem informasi web institusi.'
+      : 'Bachelor of Applied Engineering (S.Tr.T.) in TRKJ from PNL & Software Engineer. Experienced in Flutter cross-platform architecture (Clean Architecture & BLoC), Cyber-Physical Systems (IoT CPS 7 OSI Layer & MQTT/TLS), Artificial Intelligence (Rule-Based Decision Systems & AI Studio), and institutional web systems.';
   String get viewWorks => isId ? 'Lihat Portofolio' : 'View My Works';
   String get downloadCv => isId ? 'Unduh CV / Resume' : 'Download CV';
   String get specializedIn => isId ? 'KEAHLIAN UTAMA:' : 'SPECIALIZED IN:';
