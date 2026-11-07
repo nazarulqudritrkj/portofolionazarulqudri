@@ -32,7 +32,9 @@ class FloatingNavbar extends StatelessWidget {
         final navLabels = [
           strings.navHome,
           strings.navAbout,
+          strings.isId ? 'Ijazah & Transkrip' : 'Degree & Records',
           strings.navProjects,
+          strings.isId ? 'Prestasi Lomba' : 'Awards',
           strings.navCertificates,
           strings.navSkills,
           strings.navContact,

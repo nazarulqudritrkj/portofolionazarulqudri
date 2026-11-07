@@ -26,7 +26,14 @@ class _CertificationsSectionState extends State<CertificationsSection> {
     final isTablet = Responsive.isTablet(context);
     final strings = AppStrings(LocaleController.instance.currentLanguage);
 
-    final allCerts = CertificationModel.allCertifications;
+    final allCerts = CertificationModel.trainingCertifications;
+    final trainingCategories = [
+      CertificationCategory.all,
+      CertificationCategory.aiTech,
+      CertificationCategory.cloudSecurity,
+      CertificationCategory.digitalProduct,
+      CertificationCategory.strategy,
+    ];
     final filteredCerts = _selectedCategory == CertificationCategory.all
         ? allCerts
         : allCerts.where((c) => c.category == _selectedCategory).toList();
@@ -68,7 +75,7 @@ class _CertificationsSectionState extends State<CertificationsSection> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
-                  children: CertificationCategory.values.map((cat) {
+                  children: trainingCategories.map((cat) {
                     final label = strings.isId ? cat.labelId : cat.labelEn;
                     return Padding(
                       padding: const EdgeInsets.only(right: 8),

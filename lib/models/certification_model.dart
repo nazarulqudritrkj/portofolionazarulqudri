@@ -46,6 +46,12 @@ class CertificationModel {
   });
 
   static List<CertificationModel> get allCertifications => [
+        ...academicDocuments,
+        ...competitionAwards,
+        ...trainingCertifications,
+      ];
+
+  static List<CertificationModel> get academicDocuments => [
     const CertificationModel(
       id: 'cert-ijazah-resmi',
       titleId: 'Ijazah Resmi Pendidikan Tinggi - Teknologi Rekayasa Komputer Jaringan',
@@ -80,6 +86,9 @@ class CertificationModel {
       icon: Icons.receipt_long_rounded,
       accentColor: Color(0xFF2563EB),
     ),
+  ];
+
+  static List<CertificationModel> get competitionAwards => [
     const CertificationModel(
       id: 'cert-kmipn-2025',
       titleId: 'KMIPN VI - Kompetisi Mahasiswa Informatika Politeknik Nasional',
@@ -156,6 +165,9 @@ class CertificationModel {
       icon: Icons.auto_stories_rounded,
       accentColor: Color(0xFF8B5CF6),
     ),
+  ];
+
+  static List<CertificationModel> get trainingCertifications => [
     const CertificationModel(
       id: 'cert-ai-engineer',
       titleId: 'AI Engineer For Milenial',

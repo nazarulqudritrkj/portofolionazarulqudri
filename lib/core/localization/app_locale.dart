@@ -91,7 +91,28 @@ class AppStrings {
       : 'Tuned widget rebuild cycles, custom painter shaders, and micro-interactions delivering native desktop and mobile fluidity.';
   String get timelineTitle => isId ? 'TIMELINE PENGALAMAN & PENDIDIKAN' : 'EXPERIENCE & EDUCATION TIMELINE';
 
-  // Certifications Section
+  // Academic Credentials Section (Ijazah & Transkrip)
+  String get academicTag => isId ? 'Kredensial Akademik Resmi' : 'Official Academic Credentials';
+  String get academicTitle => isId
+      ? 'Ijazah Pendidikan Tinggi & Transkrip Nilai'
+      : 'Higher Education Degree & Academic Transcripts';
+  String get academicSubtitle => isId
+      ? 'Kualifikasi formal sarjana terapan program studi Teknologi Rekayasa Komputer Jaringan (TRKJ) dengan predikat unggul dan terakreditasi.'
+      : 'Official qualifications in Computer Network Engineering Technology, fully accredited with strong academic performance.';
+  String get viewDegree => isId ? 'Buka Salinan Ijazah Resmi' : 'View Official Degree Certificate';
+  String get viewTranscript => isId ? 'Buka Transkrip Nilai Lengkap' : 'View Full Academic Transcript';
+
+  // Competitions & Honors Section
+  String get competitionsTag => isId ? 'Prestasi & Kejuaraan Nasional' : 'Honors & National Competitions';
+  String get competitionsTitle => isId
+      ? 'Kejuaraan, Kompetisi & Olimpiade Sains'
+      : 'Championships, Olympiads & Awards';
+  String get competitionsSubtitle => isId
+      ? 'Pencapaian kompetitif di ajang bergengsi nasional seperti KMIPN (Informatika Politeknik Nasional), NSO Bahasa Inggris, OSPN Akuntansi, dan OSH Bahasa Indonesia.'
+      : 'Distinguished competitive milestones in national polytechnic informatics championships (KMIPN), science olympiads, and humanities honors.';
+  String get viewAward => isId ? 'Lihat Piagam Penghargaan' : 'View Award Certificate';
+
+  // Certifications Section (11 Pelatihan Keahlian)
   String get certsTag => isId ? 'Kredensial & Pelatihan Resmi' : 'Official Certifications & Training';
   String get certsTitle => isId
       ? '11 Sertifikasi Pelatihan Profesional'

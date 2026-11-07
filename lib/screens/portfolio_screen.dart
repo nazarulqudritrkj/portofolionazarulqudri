@@ -6,7 +6,9 @@ import '../sections/navigation/floating_navbar.dart';
 import '../sections/navigation/mobile_drawer.dart';
 import '../sections/hero/hero_section.dart';
 import '../sections/about/about_section.dart';
+import '../sections/academic/academic_credentials_section.dart';
 import '../sections/projects/projects_section.dart';
+import '../sections/competitions/competitions_section.dart';
 import '../sections/certifications/certifications_section.dart';
 import '../sections/skills/skills_section.dart';
 import '../sections/contact/contact_section.dart';
@@ -70,13 +72,25 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                       child: const AboutSection(),
                     ),
 
-                    // 3. Projects Showcase
+                    // 3. Official Academic Credentials (Ijazah & Transkrip Nilai TRKJ)
+                    KeyedSubtree(
+                      key: _navController.academicKey,
+                      child: const AcademicCredentialsSection(),
+                    ),
+
+                    // 4. Projects Showcase
                     KeyedSubtree(
                       key: _navController.projectsKey,
                       child: const ProjectsSection(),
                     ),
 
-                    // 4. Official Certifications & Training (11 Pelatihan Asli)
+                    // 5. National Competitions & Championships (Prestasi Perlombaan)
+                    KeyedSubtree(
+                      key: _navController.competitionsKey,
+                      child: const CompetitionsSection(),
+                    ),
+
+                    // 6. Professional Training Accreditations (11 Pelatihan Keahlian Asli)
                     KeyedSubtree(
                       key: _navController.certificatesKey,
                       child: const CertificationsSection(),

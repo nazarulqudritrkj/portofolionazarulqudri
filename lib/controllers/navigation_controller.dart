@@ -5,7 +5,9 @@ class NavigationController extends ChangeNotifier {
 
   final GlobalKey homeKey = GlobalKey();
   final GlobalKey aboutKey = GlobalKey();
+  final GlobalKey academicKey = GlobalKey();
   final GlobalKey projectsKey = GlobalKey();
+  final GlobalKey competitionsKey = GlobalKey();
   final GlobalKey certificatesKey = GlobalKey();
   final GlobalKey skillsKey = GlobalKey();
   final GlobalKey contactKey = GlobalKey();
@@ -36,12 +38,16 @@ class NavigationController extends ChangeNotifier {
       case 1:
         return aboutKey;
       case 2:
-        return projectsKey;
+        return academicKey;
       case 3:
-        return certificatesKey;
+        return projectsKey;
       case 4:
-        return skillsKey;
+        return competitionsKey;
       case 5:
+        return certificatesKey;
+      case 6:
+        return skillsKey;
+      case 7:
         return contactKey;
       default:
         return homeKey;
