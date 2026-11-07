@@ -53,15 +53,15 @@ class ExperienceModel {
       icon: Icons.devices_other_rounded,
     ),
     const ExperienceModel(
-      period: '2019 - 2021',
-      role: 'Software Engineering & Informatics Graduate',
-      company: 'Universitas Syiah Kuala (USK)',
-      location: 'Banda Aceh, Indonesia',
+      period: 'Graduate • TRKJ',
+      role: 'Teknologi Rekayasa Komputer Jaringan (TRKJ)',
+      company: 'Pendidikan Tinggi / Politeknik',
+      location: 'Banda Aceh / Lhokseumawe, Indonesia',
       description:
-          'Graduated with honors in Computer Science / Informatics. Focused research on mobile ubiquitous computing and distributed sensor systems.',
+          'Lulusan program studi Teknologi Rekayasa Komputer Jaringan (TRKJ) dengan capaian akademik unggul. Memiliki kompetensi mendalam dalam arsitektur perangkat lunak modern, jaringan komputer, dan sistem terdistribusi.',
       highlights: [
-        'Published thesis on Real-Time IoT Telemetry Processing in Mobile Environments',
-        'Led university developer student club holding workshops in Dart & Flutter',
+        'Ijazah Resmi & Transkrip Nilai Akademik Lengkap (Versi Indonesia & Inggris)',
+        'Fokus Keahlian: Mobile Computing, Cloud Infrastructure & IoT Sensor Telemetry',
       ],
       isEducation: true,
       icon: Icons.school_rounded,

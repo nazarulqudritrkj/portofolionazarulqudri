@@ -194,8 +194,12 @@ class _CertificationDetailModalState extends State<CertificationDetailModal> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       _buildPageTab(
-                                        label: strings.page1Front,
-                                        icon: Icons.workspace_premium_rounded,
+                                        label: cert.category == CertificationCategory.academic
+                                            ? '🇮🇩 Versi Indonesia'
+                                            : strings.page1Front,
+                                        icon: cert.category == CertificationCategory.academic
+                                            ? Icons.translate_rounded
+                                            : Icons.workspace_premium_rounded,
                                         isSelected: _activePage == 0,
                                         onTap: () {
                                           setState(() => _activePage = 0);
@@ -204,8 +208,12 @@ class _CertificationDetailModalState extends State<CertificationDetailModal> {
                                       ),
                                       const SizedBox(width: 6),
                                       _buildPageTab(
-                                        label: strings.page2Back,
-                                        icon: Icons.menu_book_rounded,
+                                        label: cert.category == CertificationCategory.academic
+                                            ? '🇬🇧 English Version'
+                                            : strings.page2Back,
+                                        icon: cert.category == CertificationCategory.academic
+                                            ? Icons.language_rounded
+                                            : Icons.menu_book_rounded,
                                         isSelected: _activePage == 1,
                                         onTap: () {
                                           setState(() => _activePage = 1);

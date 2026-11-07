@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 enum CertificationCategory {
   all('Semua', 'All'),
+  academic('Ijazah & Transkrip', 'Degree & Transcript'),
   competitions('Prestasi & Lomba', 'Competitions & Awards'),
   aiTech('AI & Komputasi', 'AI & Computing'),
   cloudSecurity('Cloud & Security', 'Cloud & Security'),
@@ -45,6 +46,40 @@ class CertificationModel {
   });
 
   static List<CertificationModel> get allCertifications => [
+    const CertificationModel(
+      id: 'cert-ijazah-resmi',
+      titleId: 'Ijazah Resmi Pendidikan Tinggi - Teknologi Rekayasa Komputer Jaringan',
+      titleEn: 'Official Degree Certificate - Computer Network Engineering Technology',
+      issuer: 'Kementerian Pendidikan Tinggi, Riset & Teknologi',
+      year: 'Dokumen Resmi',
+      category: CertificationCategory.academic,
+      frontImage: 'lib/images/ijazah/ijazah_nazarul_qudri_id.png',
+      backImage: 'lib/images/ijazah/ijazah_nazarul_qudri_en.png',
+      skills: ['Sarjana Terapan / Diploma', 'Network Engineering', 'Software Architecture', 'Accredited'],
+      descriptionId:
+          'Salinan digital Ijazah resmi perguruan tinggi program studi Teknologi Rekayasa Komputer Jaringan (TRKJ). Dilengkapi versi Bahasa Indonesia dan versi Terjemahan Bahasa Inggris resmi.',
+      descriptionEn:
+          'Digital copy of official higher education degree certificate in Computer Network Engineering Technology. Includes both the official Indonesian and certified English translation.',
+      icon: Icons.school_rounded,
+      accentColor: Color(0xFF0284C7),
+    ),
+    const CertificationModel(
+      id: 'cert-transkrip-akademik',
+      titleId: 'Transkrip Nilai Akademik Lengkap & Kumulatif',
+      titleEn: 'Official Cumulative Academic Transcript of Records',
+      issuer: 'Bagian Akademik & Kemahasiswaan Perguruan Tinggi',
+      year: 'Dokumen Resmi',
+      category: CertificationCategory.academic,
+      frontImage: 'lib/images/transkripnilai/transkrip_nilai_nazarul_qudri_id.png',
+      backImage: 'lib/images/transkripnilai/transkrip_nilai_nazarul_qudri_en.png',
+      skills: ['Cumulative GPA / IPK', 'Software Engineering', 'Network Security', 'IoT Architecture'],
+      descriptionId:
+          'Transkrip nilai akademik kumulatif resmi yang memuat seluruh nilai mata kuliah rekayasa komputer, algoritma, pemrograman, dan jaringan. Tersedia dalam versi Indonesia dan Inggris.',
+      descriptionEn:
+          'Official cumulative academic transcript of records detailing all completed coursework in computer engineering, algorithms, programming, and network systems in Indonesian and English.',
+      icon: Icons.receipt_long_rounded,
+      accentColor: Color(0xFF2563EB),
+    ),
     const CertificationModel(
       id: 'cert-kmipn-2025',
       titleId: 'KMIPN VI - Kompetisi Mahasiswa Informatika Politeknik Nasional',
