@@ -5,6 +5,7 @@ import '../../core/constants/app_constants.dart';
 import '../../core/constants/app_typography.dart';
 import '../../core/localization/app_locale.dart';
 import '../../core/utils/responsive.dart';
+import '../../core/utils/visitor_service.dart';
 
 class Footer extends StatefulWidget {
   final VoidCallback onScrollToTop;
@@ -18,6 +19,7 @@ class Footer extends StatefulWidget {
 class _FooterState extends State<Footer> {
   late Timer _timer;
   late DateTime _currentTime;
+  int _visitorCount = 1420;
 
   @override
   void initState() {
@@ -30,6 +32,12 @@ class _FooterState extends State<Footer> {
         });
       }
     });
+
+    VisitorService.getAndIncrementCount().then((count) {
+      if (mounted) {
+        setState(() => _visitorCount = count);
+      }
+    });
   }
 
   @override
@@ -39,6 +47,13 @@ class _FooterState extends State<Footer> {
   }
 
   String _formatTwoDigits(int n) => n.toString().padLeft(2, '0');
+
+  String _formatNumber(int n) {
+    return n.toString().replaceAllMapped(
+      RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+      (Match m) => '${m[1]}.',
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -193,7 +208,15 @@ class _FooterState extends State<Footer> {
                   spacing: 20,
                   children: [
                     _buildCopyrightText(strings),
-                    _buildLiveClockBadge(hours, minutes, seconds),
+                    Wrap(
+                      spacing: 12,
+                      runSpacing: 10,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        _buildVisitorCounterBadge(_visitorCount),
+                        _buildLiveClockBadge(hours, minutes, seconds),
+                      ],
+                    ),
                   ],
                 ),
               ],
@@ -264,6 +287,57 @@ class _FooterState extends State<Footer> {
               color: AppColors.textPrimary,
               fontSize: 12,
               fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildVisitorCounterBadge(int count) {
+    final countText = _formatNumber(count);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppColors.background,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: const Color(0xFFE2E8F0),
+          width: 1.0,
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(
+            Icons.remove_red_eye_rounded,
+            size: 15,
+            color: Color(0xFF0284C7),
+          ),
+          const SizedBox(width: 7),
+          Text(
+            '$countText Kunjungan',
+            style: AppTypography.code.copyWith(
+              color: AppColors.textPrimary,
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(width: 6),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+            decoration: BoxDecoration(
+              color: const Color(0xFF0284C7).withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              'LIVE',
+              style: AppTypography.code.copyWith(
+                color: const Color(0xFF0284C7),
+                fontSize: 9.5,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 0.6,
+              ),
             ),
           ),
         ],
