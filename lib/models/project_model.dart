@@ -37,143 +37,113 @@ class ProjectModel {
 
   static List<ProjectModel> get sampleProjects => [
     const ProjectModel(
-      id: 'iot-smart-agriculture',
-      title: 'AgroSense IoT & Mobile Platform',
-      subtitle: 'Real-time telemetry & automated crop health monitoring',
+      id: 'starzar-smart-home-iot-skripsi',
+      title: 'STARZAR - Smart Exclusive Home IoT & AI',
+      subtitle: 'Proyek Skripsi: Penerapan 7 Lapisan Model OSI & AI Rule-Based System',
       description:
-          'Comprehensive IoT-driven precision agriculture app with MQTT protocols, sensor dashboards, and predictive yield analytics.',
+          'Sistem siber-fisik (Cyber-Physical System) smart home terpadu berbasis mikrokontroler ESP32, broker HiveMQ Cloud, dan aplikasi Android Flutter STARZAR dengan penerapan lengkap 7 Lapisan OSI Layer.',
       fullDescription:
-          'AgroSense connects thousands of ESP32 sensor nodes deployed in agricultural fields. Built with Flutter Clean Architecture and Bloc state management, the application provides micro-climate tracking, automated drip irrigation triggering, and real-time alerts. It includes interactive charting, offline SQLite syncing, and WebSocket-driven sensor telemetry.',
+          'Proyek Skripsi Sarjana Terapan (S.Tr.Kom) TRKJ Jurusan TIK Politeknik Negeri Lhokseumawe (2026) oleh Nazarul Qudri.\n\n'
+          'Sistem ini mengintegrasikan mikrokontroler ESP32 multi-zona (Dapur, Ruang Tamu, dan Kamar Mandi) dengan sensor DHT22, MQ-2, MQ-135, Flame IR, dan HC-SR04 untuk mitigasi kebakaran, stabilitas suhu, dan manajemen air otomatis.\n\n'
+          '■ IMPLEMENTASI 7 LAPISAN MODEL OSI:\n'
+          '• Layer 7 (Application Layer): Aplikasi Android Flutter STARZAR & protokol MQTT dengan kontrol manual (manual override), autentikasi biometrik sidik jari, monitoring grafik real-time, notifikasi pop-up mode senyap, dan ekspor data XLSX.\n'
+          '• Layer 6 (Presentation Layer): Enkapsulasi data telemetri berformat JSON String dan serialisasi basis data lokal Hive.\n'
+          '• Layer 5 (Session Layer): Manajemen sesi komunikasi nirkabel Publish/Subscribe antara publisher ESP32 dan subscriber Flutter via HiveMQ Cloud.\n'
+          '• Layer 4 (Transport Layer): Protokol Transmission Control Protocol (TCP) yang menjamin keandalan pengiriman dengan Packet Loss 0%.\n'
+          '• Layer 3 (Network Layer): Internet Protocol (IP) untuk pengalamatan perangkat dan routing jaringan antar-node.\n'
+          '• Layer 2 (Data Link Layer): Standar IEEE 802.11 (Wi-Fi Protocol) untuk manajemen frame dan verifikasi MAC address.\n'
+          '• Layer 1 (Physical Layer): Modul radio Wi-Fi ESP32, antena pemancar, modul sensor lingkungan, dan modul relay 4-channel & 2-channel.\n\n'
+          '■ METRIK UJI ILMIAH:\n'
+          '• Tingkat Keberhasilan Keputusan AI (Rule-Based): 100% pada 10 skenario pengujian darurat.\n'
+          '• Rata-rata System Response Time: 180 ms (Jauh di bawah batas toleransi ITU-T Y.1010 < 2000 ms).\n'
+          '• Kinerja QoS (ITU-T Y.1010/G.1010): Throughput 4.8 kbps, Delay 180 ms, Packet Loss 0%, Jitter 12 ms.\n'
+          '• Akurasi pembacaan sensor rata-rata: Di atas 96%.',
       category: ProjectCategory.iot,
-      tags: ['Flutter', 'Dart', 'MQTT', 'ESP32', 'Firebase', 'Clean Arch'],
+      tags: ['Flutter', 'ESP32', '7 OSI Layer', 'MQTT HiveMQ', 'AI Rule-Based', 'Hive DB', 'Smart Home'],
       keyFeatures: [
-        'Real-time WebSocket & MQTT telemetry streams with 50ms latency',
-        'Interactive dynamic charts powered by custom painters',
-        'Automated edge-trigger rules for climate control and valve actuators',
-        'Offline-first synchronization with conflict resolution',
+        'Penerapan Arsitektur 7 Lapisan Model OSI secara penuh (Layer 1 s/d Layer 7)',
+        'Inference Engine AI Rule-Based Decision System (Forward Chaining) dengan 100% akurasi',
+        'Response Time sangat cepat 180 ms & QoS standar ITU-T Y.1010/G.1010 (Packet Loss 0%)',
+        'Fitur aplikasi STARZAR: Biometrik Sidik Jari, Notifikasi Pop-up Mode Senyap, & Ekspor Excel (.xlsx)',
       ],
-      githubUrl: 'https://github.com/nazarulqudri/agrosense-iot-mobile',
-      liveUrl: 'https://agrosense.demo.app',
-      icon: Icons.sensors_rounded,
+      githubUrl: 'https://github.com/nazarulqudritrkj/portofolionazarulqudri',
+      liveUrl: 'https://nazarulqudritrkj.github.io/portofolionazarulqudri/',
+      icon: Icons.home_repair_service_rounded,
       primaryColor: Color(0xFF0284C7),
       accentColor: Color(0xFF38BDF8),
-      metric: '500+ Active Nodes',
+      metric: '100% AI • 180ms Latency',
     ),
     const ProjectModel(
-      id: 'fintech-payflow',
-      title: 'PayFlow - Digital Wealth & Banking',
-      subtitle: 'Enterprise-grade financial dashboard & payment app',
+      id: 'si-kuliah-umum-tik-pnl',
+      title: 'Sistem Informasi & Pendaftaran Kuliah Umum TIK PNL',
+      subtitle: 'Website Pendaftaran & Manajemen Kuliah Umum Jurusan TIK 2025 - 2026',
       description:
-          'Ultra-secure mobile banking application featuring biometric security, multi-currency wallets, and instant QRIS payments.',
+          'Portal web pendaftaran, registrasi peserta, absensi kehadiran digital, dan pengelolaan agenda kuliah tamu / seminar akademik Jurusan Teknologi Informasi dan Komputer Politeknik Negeri Lhokseumawe.',
       fullDescription:
-          'PayFlow is a high-volume financial management suite engineered for modern digital banking. Implemented with strict domain-driven modular architecture, End-to-End encrypted local storage, custom virtual cards with 3D tilt effects, and real-time transaction categorizations with budget forecasting.',
-      category: ProjectCategory.mobile,
-      tags: ['Flutter', 'Clean Arch', 'Bloc', 'REST API', 'Biometrics', 'Figma'],
+          'Platform web terpadu yang dirancang untuk mengotomasi alur pendaftaran dan pelaksanaan kuliah umum tahun akademik 2025 - 2026 di Jurusan TIK Politeknik Negeri Lhokseumawe.\n\n'
+          'Sistem ini menghubungkan mahasiswa dari berbagai program studi (termasuk TRKJ, Teknik Informatika, dan lainnya) untuk melakukan pendaftaran online, verifikasi kuota otomatis, sistem absensi digital dengan QR Code, serta distribusi sertifikat kehadiran dan materi kuliah tamu secara terpusat.',
+      category: ProjectCategory.fullstack,
+      tags: ['Web Portal', 'PHP / Laravel', 'MySQL', 'REST API', 'QR Absensi', 'TIK PNL'],
       keyFeatures: [
-        'High-security biometric auth with encrypted keychain token storage',
-        'Custom interactive virtual card with gyroscope/pointer tilt visual',
-        'Instant multi-bank transfer and QRIS payment scanner',
-        'Automated monthly budgeting with predictive expense insights',
+        'Form pendaftaran online mandiri dengan validasi NIM dan Prodi mahasiswa PNL',
+        'Sistem verifikasi kuota peserta dan pencatatan presensi kehadiran digital',
+        'Distribusi modul narasumber dan integrasi penerbitan e-sertifikat kegiatan',
+        'Dashboard administrasi Jurusan TIK untuk rekapitulasi data pendaftar & laporan kegiatan',
       ],
-      githubUrl: 'https://github.com/nazarulqudri/payflow-mobile-app',
-      liveUrl: 'https://payflow.demo.app',
-      icon: Icons.account_balance_wallet_rounded,
+      githubUrl: 'https://github.com/nazarulqudritrkj',
+      liveUrl: 'https://pnl.ac.id',
+      icon: Icons.school_rounded,
       primaryColor: Color(0xFF2563EB),
       accentColor: Color(0xFF60A5FA),
-      metric: '50K+ Monthly Txns',
+      metric: '1.000+ Mahasiswa TIK',
     ),
     const ProjectModel(
-      id: 'fleet-telematics',
-      title: 'PulseFleet - Logistics Tracker',
-      subtitle: 'Live fleet dispatching & route optimization system',
+      id: 'si-sertifikat-dosen-pnl',
+      title: 'Sistem Informasi Sertifikat Dosen PNL',
+      subtitle: 'Repositori & Manajemen Kredensial Sertifikasi Dosen Politeknik Negeri Lhokseumawe',
       description:
-          'High-performance logistics mobile platform with background geolocation, driver telematics, and digital proof-of-delivery.',
+          'Sistem informasi repositori digital terpusat untuk pengarsipan, pencarian, dan verifikasi sertifikat kompetensi, keahlian, penelitian, dan pengabdian dosen Politeknik Negeri Lhokseumawe.',
       fullDescription:
-          'PulseFleet was built to empower enterprise freight fleets. Features smooth 60fps vector map rendering, turn-by-turn route optimization, fuel consumption telemetry, and instant barcode/signature capture for seamless cargo handovers in low-connectivity areas.',
+          'Sistem informasi berbasis web yang memfasilitasi pengelolaan berkas sertifikat dosen di lingkungan Politeknik Negeri Lhokseumawe periode 2025 - 2026.\n\n'
+          'Sistem ini menyediakan repositori digital aman untuk mengarsipkan SK dan sertifikasi kompetensi dosen, verifikasi keabsahan dokumen melalui nomor seri unik, serta mempermudah penyusunan portofolio akreditasi jurusan dan laporan Beban Kerja Dosen (BKD).',
       category: ProjectCategory.fullstack,
-      tags: ['Flutter', 'Google Maps', 'WebSockets', 'Node.js', 'PostgreSQL'],
+      tags: ['Web System', 'Document Repository', 'Security Auth', 'RBAC', 'Audit Trail', 'PNL'],
       keyFeatures: [
-        'Smooth background GPS tracking with battery optimization algorithm',
-        'Interactive map overlays with custom vehicle heading markers',
-        'Digital signature pad and barcode scanner for instant proof of delivery',
-        'Driver behavior scoring (harsh braking, rapid acceleration detection)',
+        'Repositori digital terenkripsi untuk pengarsipan SK dan sertifikat kompetensi dosen PNL',
+        'Fitur verifikasi keaslian dokumen sertifikat dengan nomor identifikasi unik & QR verification',
+        'Pelaporan otomatis untuk kebutuhan akreditasi jurusan dan evaluasi institusi',
+        'Hak akses bertingkat (Role-Based Access Control) untuk Dosen, Jurusan, dan Pimpinan Kampus',
       ],
-      githubUrl: 'https://github.com/nazarulqudri/pulsefleet-driver',
-      liveUrl: 'https://pulsefleet.demo.app',
-      icon: Icons.local_shipping_rounded,
-      primaryColor: Color(0xFF0EA5E9),
-      accentColor: Color(0xFF7DD3FC),
-      metric: '99.9% Uptime',
+      githubUrl: 'https://github.com/nazarulqudritrkj',
+      liveUrl: 'https://pnl.ac.id',
+      icon: Icons.workspace_premium_rounded,
+      primaryColor: Color(0xFF0D9488),
+      accentColor: Color(0xFF2DD4BF),
+      metric: 'Seluruh Dosen PNL',
     ),
     const ProjectModel(
-      id: 'ai-skin-diagnostics',
-      title: 'DermaScan AI Assistant',
-      subtitle: 'On-device computer vision skin lesion analyzer',
+      id: 'si-sertifikat-mahasiswa-tik-pnl',
+      title: 'Sistem Informasi Sertifikat Mahasiswa/i TIK PNL',
+      subtitle: 'Portal Penerbitan & Validasi E-Sertifikat Digital Mahasiswa TIK PNL',
       description:
-          'Healthcare mobile app integrating TensorFlow Lite for offline skin screening, doctor consultation booking, and recovery journals.',
+          'Sistem manajemen sertifikat digital terpadu untuk menerbitkan, menyimpan, dan memvalidasi keaslian e-sertifikat kegiatan akademik, workshop, kepanitiaan, dan perlombaan mahasiswa Jurusan TIK PNL.',
       fullDescription:
-          'DermaScan bridges clinical dermatology and mobile AI. Utilizing an optimized on-device TensorFlow Lite neural network, users can capture high-resolution photos of skin anomalies and receive preliminary risk stratifications within seconds, complete with doctor chat and clinical history logs.',
-      category: ProjectCategory.ai,
-      tags: ['Flutter', 'TensorFlow Lite', 'Camera API', 'Python', 'FastAPI'],
+          'Portal web resmi yang memfasilitasi penerbitan e-sertifikat digital bagi seluruh mahasiswa/i Jurusan Teknologi Informasi dan Komputer Politeknik Negeri Lhokseumawe.\n\n'
+          'Platform ini mengintegrasikan database mahasiswa dengan generator e-sertifikat otomatis, validasi keabsahan dokumen menggunakan QR Code anti-pemalsuan, serta pencatatan riwayat prestasi untuk mendukung Surat Keterangan Pendamping Ijazah (SKPI).',
+      category: ProjectCategory.fullstack,
+      tags: ['E-Certificate', 'QR Validation', 'SKPI Integration', 'Web Platform', 'TIK PNL'],
       keyFeatures: [
-        'On-device machine learning inference with zero latency and privacy',
-        'Custom camera viewfinder with guide overlays and lighting detection',
-        'Interactive medical history timeline and lesion healing progression',
-        'Telemedicine consultation scheduling and PDF report generation',
+        'Generator e-sertifikat dinamis otomatis dengan nomor registrasi unik kampus',
+        'Fitur verifikasi keabsahan dokumen instan via scan QR code anti-pemalsuan',
+        'Akses mandiri bagi mahasiswa untuk mengunduh riwayat portofolio sertifikat kegiatan',
+        'Dashboard monitoring rekapitulasi capaian prestasi mahasiswa bagi pengelola program studi',
       ],
-      githubUrl: 'https://github.com/nazarulqudri/dermascan-ai-flutter',
-      liveUrl: 'https://dermascan.demo.app',
-      icon: Icons.medical_services_rounded,
-      primaryColor: Color(0xFF8B5CF6),
+      githubUrl: 'https://github.com/nazarulqudritrkj',
+      liveUrl: 'https://pnl.ac.id',
+      icon: Icons.card_membership_rounded,
+      primaryColor: Color(0xFF7C3AED),
       accentColor: Color(0xFFA78BFA),
-      metric: '94.2% AI Accuracy',
-    ),
-    const ProjectModel(
-      id: 'nexus-smart-home',
-      title: 'Nexus Home OS',
-      subtitle: 'Modern glassmorphic smart home controller',
-      description:
-          'Sleek unified dashboard for controlling smart appliances, lighting scenes, energy metrics, and voice-activated automation.',
-      fullDescription:
-          'Nexus Home OS is an ambient computing interface designed for tablets, foldables, and smart wall panels. Built using custom glassmorphic canvas rendering, dynamic lighting gradient shifts based on room ambiance, and low-latency MQTT/Zigbee bridging.',
-      category: ProjectCategory.iot,
-      tags: ['Flutter Web/Tablet', 'MQTT', 'Glassmorphism', 'Custom Painter'],
-      keyFeatures: [
-        'Fluid ambient lighting controls with real-time RGB color wheel',
-        'Room-by-room energy consumption breakdown and cost projections',
-        'Automation routine builder with drag-and-drop triggers and actions',
-        'Adaptive responsive layout scaling from phone to 24-inch smart screens',
-      ],
-      githubUrl: 'https://github.com/nazarulqudri/nexus-smart-home',
-      liveUrl: 'https://nexus.demo.app',
-      icon: Icons.home_max_rounded,
-      primaryColor: Color(0xFF0284C7),
-      accentColor: Color(0xFF06B6D4),
-      metric: '30+ Connected Devices',
-    ),
-    const ProjectModel(
-      id: 'zenith-task-manager',
-      title: 'Zenith Collaborative Workspace',
-      subtitle: 'Productivity suite with real-time markdown docs & kanban',
-      description:
-          'Minimalist cross-platform workspace blending task boards, markdown knowledge bases, and real-time team collaboration.',
-      fullDescription:
-          'Zenith combines the speed of desktop applications with the flexibility of mobile. Built completely in Flutter with riverpod state management, CRDT-based offline collaborative documents, smooth drag-and-drop kanban columns, and keyboard shortcut navigation.',
-      category: ProjectCategory.mobile,
-      tags: ['Flutter Desktop/Web', 'Riverpod', 'SQLite', 'Clean Arch'],
-      keyFeatures: [
-        'Rich text and Markdown live editor with syntax highlighting',
-        'Smooth drag-and-drop Kanban board with custom velocity physics',
-        'Instant multi-device synchronization via conflict-free data types',
-        'Desktop-optimized shortcuts and command palette (Cmd+K)',
-      ],
-      githubUrl: 'https://github.com/nazarulqudri/zenith-workspace',
-      liveUrl: 'https://zenith.demo.app',
-      icon: Icons.dashboard_customize_rounded,
-      primaryColor: Color(0xFF2563EB),
-      accentColor: Color(0xFF38BDF8),
-      metric: '4.9/5 User Rating',
+      metric: 'Mahasiswa/i TIK PNL',
     ),
   ];
 }
-

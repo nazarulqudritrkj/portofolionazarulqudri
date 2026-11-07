@@ -23,49 +23,49 @@ class ExperienceModel {
 
   static List<ExperienceModel> get timelineList => [
     const ExperienceModel(
-      period: '2023 - Present',
-      role: 'Senior Flutter & Mobile Solutions Engineer',
-      company: 'Tech Innovations Studio',
-      location: 'Remote / Banda Aceh',
+      period: '2022 - 2026',
+      role: 'Sarjana Terapan (S.Tr.Kom) • Teknologi Rekayasa Komputer Jaringan',
+      company: 'Politeknik Negeri Lhokseumawe (PNL)',
+      location: 'Lhokseumawe, Aceh, Indonesia',
       description:
-          'Leading cross-platform client architectures, mentoring engineers, and implementing high-reliability IoT & fintech products.',
+          'Menempuh dan menyelesaikan pendidikan Sarjana Terapan di Jurusan Teknologi Informasi dan Komputer (TIK) dengan konsentrasi pada rekayasa siber-fisik (CPS), arsitektur jaringan komputer, dan sistem otomasi cerdas.',
       highlights: [
-        'Architected clean modular state systems reducing regression bugs by 40%',
-        'Integrated real-time IoT telemetry pipelines for enterprise clients',
-        'Spearheaded Flutter Web & Mobile performance optimization achieving 60fps across low-end devices',
-      ],
-      isEducation: false,
-      icon: Icons.rocket_launch_rounded,
-    ),
-    const ExperienceModel(
-      period: '2021 - 2023',
-      role: 'Mobile Application Developer (Flutter & IoT)',
-      company: 'Digital Nexus Labs',
-      location: 'Indonesia',
-      description:
-          'Engineered commercial mobile apps integrated with hardware sensor networks, RESTful backends, and cloud microservices.',
-      highlights: [
-        'Developed 12+ production applications deployed to Google Play & App Store',
-        'Implemented MQTT communication layer for sensor monitoring systems',
-        'Crafted custom fluid animations and modern design-system UI components',
-      ],
-      isEducation: false,
-      icon: Icons.devices_other_rounded,
-    ),
-    const ExperienceModel(
-      period: 'Graduate • TRKJ',
-      role: 'Teknologi Rekayasa Komputer Jaringan (TRKJ)',
-      company: 'Pendidikan Tinggi / Politeknik',
-      location: 'Banda Aceh / Lhokseumawe, Indonesia',
-      description:
-          'Lulusan program studi Teknologi Rekayasa Komputer Jaringan (TRKJ) dengan capaian akademik unggul. Memiliki kompetensi mendalam dalam arsitektur perangkat lunak modern, jaringan komputer, dan sistem terdistribusi.',
-      highlights: [
-        'Ijazah Resmi & Transkrip Nilai Akademik Lengkap (Versi Indonesia & Inggris)',
-        'Fokus Keahlian: Mobile Computing, Cloud Infrastructure & IoT Sensor Telemetry',
+        'Skripsi: "Rancang Bangun IoT pada Prototype Smart Home dengan Penerapan Rule-Based Decision System sebagai Artificial Intelligence" (Lulus Sidang 29 Juli 2026)',
+        'Membangun Aplikasi Android Flutter "STARZAR" berbasis model 7 Lapisan OSI Layer, protokol MQTT HiveMQ Cloud, dan Hive DB dengan respon 180 ms',
+        'Dibimbing oleh: Husaini, S.Si., M.I.T. & Atthariq, S.S.T., M.T. (Ketua Jurusan: Salahuddin, S.T., M.Cs., Kaprodi: Nanda Saputri, S.S.T., M.T.)',
       ],
       isEducation: true,
       icon: Icons.school_rounded,
     ),
+    const ExperienceModel(
+      period: '2025 - 2026',
+      role: 'Full-Stack Web & Academic Information Systems Developer',
+      company: 'Jurusan Teknologi Informasi dan Komputer (TIK) PNL',
+      location: 'Lhokseumawe, Aceh',
+      description:
+          'Merancang, membangun, dan mengelola ekosistem sistem informasi berbasis web untuk tata kelola akademik, pendaftaran seminar, dan verifikasi sertifikat institusi kampus.',
+      highlights: [
+        'Website Sistem Informasi & Pendaftaran Kuliah Umum Jurusan TIK PNL (2025 - 2026)',
+        'Website Sistem Informasi Sertifikat Dosen Politeknik Negeri Lhokseumawe (2025 - 2026)',
+        'Website Sistem Informasi Sertifikat Mahasiswa/i Jurusan TIK Politeknik Negeri Lhokseumawe',
+      ],
+      isEducation: false,
+      icon: Icons.web_rounded,
+    ),
+    const ExperienceModel(
+      period: '2024 - 2025',
+      role: 'IoT Researcher & National Competition Delegate',
+      company: 'Laboratorium Jaringan & Sistem Cerdas TIK PNL',
+      location: 'Aceh / Nasional',
+      description:
+          'Melakukan riset terapan sensor cerdas, komunikasi data nirkabel hemat daya, serta mewakili kampus dalam ajang kompetisi informatika dan olimpiade keilmuan nasional.',
+      highlights: [
+        'Delegasi KMIPN VI 2025 (Kompetisi Mahasiswa Bidang Informatika Politeknik Nasional) bidang Inovasi Perangkat Lunak',
+        'Meraih Penghargaan Nasional: NSO 5 (Bahasa Inggris), OSPN (Akuntansi & Logika Kuantitatif), dan OSH 2025 (Bahasa Indonesia)',
+        'Menyelesaikan 11 Pelatihan Kompetensi Profesional Digital Talent Scholarship Kementerian Kominfo RI',
+      ],
+      isEducation: false,
+      icon: Icons.emoji_events_rounded,
+    ),
   ];
 }
-

@@ -88,13 +88,15 @@ class _ProjectsSectionState extends State<ProjectsSection> {
                       children: [
                         _buildCategoryPill(strings.allWorks, ProjectCategory.all),
                         const SizedBox(width: 8),
-                        _buildCategoryPill(strings.mobileApps, ProjectCategory.mobile),
+                        _buildCategoryPill(
+                          strings.isId ? 'IoT & Smart Home (Skripsi)' : 'IoT & Smart Home (Thesis)',
+                          ProjectCategory.iot,
+                        ),
                         const SizedBox(width: 8),
-                        _buildCategoryPill(strings.iotHardware, ProjectCategory.iot),
-                        const SizedBox(width: 8),
-                        _buildCategoryPill(strings.fullStack, ProjectCategory.fullstack),
-                        const SizedBox(width: 8),
-                        _buildCategoryPill(strings.aiVision, ProjectCategory.ai),
+                        _buildCategoryPill(
+                          strings.isId ? 'Sistem Informasi Kampus PNL' : 'Academic Systems PNL',
+                          ProjectCategory.fullstack,
+                        ),
                       ],
                     ),
                   ),
