@@ -451,13 +451,13 @@ class CvPdfGenerator {
               margin: const pw.EdgeInsets.only(bottom: 10)),
           // Chips
           pw.Row(children: [
-            _chip('Cum Laude Graduate', _green, m),
-            pw.SizedBox(width: 6),
-            _chip('Tersedia untuk Kolaborasi', _cyan, m),
-            pw.SizedBox(width: 6),
-            _chip('4+ Tahun Pengalaman', _blue, m),
-            pw.SizedBox(width: 6),
-            _chip('11 Sertifikasi Kominfo DTS', _orange, m),
+            _chip('Cum Laude Graduate', _green, b),
+            pw.SizedBox(width: 8),
+            _chip('Tersedia untuk Kolaborasi', _cyan, b),
+            pw.SizedBox(width: 8),
+            _chip('4+ Tahun Pengalaman', _blueD, b),
+            pw.SizedBox(width: 8),
+            _chip('11 Sertifikasi Kominfo DTS', _orange, b),
           ]),
         ],
       ),
@@ -482,16 +482,22 @@ class CvPdfGenerator {
     ]);
   }
 
-  static pw.Widget _chip(String t, PdfColor c, pw.Font m) =>
+  static pw.Widget _chip(String t, PdfColor c, pw.Font b) =>
       pw.Container(
-        padding: const pw.EdgeInsets.symmetric(horizontal: 9, vertical: 4),
+        padding: const pw.EdgeInsets.symmetric(horizontal: 14, vertical: 6),
         decoration: pw.BoxDecoration(
-          color: c.shade(0.2),
-          borderRadius: pw.BorderRadius.circular(20),
-          border: pw.Border.all(color: c, width: 0.7),
+          color: c,
+          borderRadius: pw.BorderRadius.circular(5),
+          border: pw.Border.all(
+              color: PdfColor.fromInt(0x55FFFFFF), width: 0.8),
         ),
         child: pw.Text(t,
-            style: pw.TextStyle(font: m, fontSize: 8, color: c)),
+            style: pw.TextStyle(
+              font: b,
+              fontSize: 9,
+              color: _white,
+              letterSpacing: 0.5,
+            )),
       );
 
   // ════════════════════════════════════════════════════════════
@@ -578,7 +584,7 @@ class CvPdfGenerator {
               _infoRow('Tanggal Lulus', '29 Juli 2026', b, r),
               pw.SizedBox(height: 5),
               _infoRow('Pembimbing I',
-                  'Husaini, S.Si., M.I.T.', b, r),
+                  'Husaini, S.Si., M.T.', b, r),
             ])),
           ]),
           pw.SizedBox(height: 10),
