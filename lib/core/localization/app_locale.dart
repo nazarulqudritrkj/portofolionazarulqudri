@@ -34,12 +34,24 @@ class AppStrings {
   // Navigation
   String get navHome => isId ? 'Beranda' : 'Home';
   String get navAbout => isId ? 'Tentang' : 'About';
+  String get navAcademic => isId ? 'Ijazah' : 'Degree';
   String get navProjects => isId ? 'Proyek' : 'Projects';
-  String get navCertificates => isId ? 'Sertifikasi' : 'Certifications';
+  String get navCompetitions => isId ? 'Prestasi' : 'Awards';
+  String get navCertificates => isId ? 'Pelatihan' : 'Training';
   String get navSkills => isId ? 'Keahlian' : 'Skills';
   String get navContact => isId ? 'Kontak' : 'Contact';
   String get letsTalk => isId ? 'Hubungi Saya' : "Let's Talk";
   String get portfolioTitle => isId ? 'Portofolio Profesional' : 'Professional Portfolio';
+
+  // Navigation Tooltips
+  String get navHomeTooltip => isId ? 'Beranda & Ringkasan' : 'Home & Highlights';
+  String get navAboutTooltip => isId ? 'Tentang & Rekam Jejak' : 'About Me & Journey';
+  String get navAcademicTooltip => isId ? 'Ijazah & Transkrip Nilai TRKJ PNL' : 'Official Academic Degree & Records';
+  String get navProjectsTooltip => isId ? 'Proyek Rekayasa (STARZAR & Sistem PNL)' : 'Featured Engineering Projects';
+  String get navCompetitionsTooltip => isId ? 'Prestasi & Kejuaraan Nasional' : 'Honors & National Competitions';
+  String get navCertificatesTooltip => isId ? 'Sertifikasi Pelatihan Kominfo DTS' : 'Professional DTS Certifications';
+  String get navSkillsTooltip => isId ? 'Keahlian Teknis & Tools' : 'Technical Skills & Tools';
+  String get navContactTooltip => isId ? 'Kontak & Diskusi Kerjasama' : 'Contact & Collaboration';
 
   // Hero Section
   String get statusAvailable =>

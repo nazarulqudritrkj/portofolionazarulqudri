@@ -29,15 +29,15 @@ class FloatingNavbar extends StatelessWidget {
         final isScrolled = navController.isScrolled;
         final strings = AppStrings(LocaleController.instance.currentLanguage);
 
-        final navLabels = [
-          strings.navHome,
-          strings.navAbout,
-          strings.isId ? 'Ijazah & Transkrip' : 'Degree & Records',
-          strings.navProjects,
-          strings.isId ? 'Prestasi Lomba' : 'Awards',
-          strings.navCertificates,
-          strings.navSkills,
-          strings.navContact,
+        final navItems = [
+          (label: strings.navHome, tooltip: strings.navHomeTooltip),
+          (label: strings.navAbout, tooltip: strings.navAboutTooltip),
+          (label: strings.navAcademic, tooltip: strings.navAcademicTooltip),
+          (label: strings.navProjects, tooltip: strings.navProjectsTooltip),
+          (label: strings.navCompetitions, tooltip: strings.navCompetitionsTooltip),
+          (label: strings.navCertificates, tooltip: strings.navCertificatesTooltip),
+          (label: strings.navSkills, tooltip: strings.navSkillsTooltip),
+          (label: strings.navContact, tooltip: strings.navContactTooltip),
         ];
 
         return Center(
@@ -45,16 +45,16 @@ class FloatingNavbar extends StatelessWidget {
             duration: const Duration(milliseconds: 250),
             curve: Curves.easeOutCubic,
             margin: EdgeInsets.only(
-              top: isMobile ? 12 : (isScrolled ? 12 : 24),
-              left: isMobile ? 16 : 32,
-              right: isMobile ? 16 : 32,
+              top: isMobile ? 12 : (isScrolled ? 10 : 20),
+              left: isMobile ? 16 : 24,
+              right: isMobile ? 16 : 24,
             ),
-            constraints: const BoxConstraints(maxWidth: 1240),
-            height: isMobile ? 64 : 70,
+            constraints: const BoxConstraints(maxWidth: 1320),
+            height: isMobile ? 62 : 68,
             decoration: BoxDecoration(
               color: isScrolled
-                  ? Colors.white.withValues(alpha: 0.92)
-                  : Colors.white.withValues(alpha: 0.80),
+                  ? Colors.white.withValues(alpha: 0.94)
+                  : Colors.white.withValues(alpha: 0.82),
               borderRadius: BorderRadius.circular(22),
               border: Border.all(
                 color: isScrolled
@@ -77,7 +77,7 @@ class FloatingNavbar extends StatelessWidget {
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 18),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -93,9 +93,10 @@ class FloatingNavbar extends StatelessWidget {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: List.generate(
-                                navLabels.length,
+                                navItems.length,
                                 (index) => _buildNavItem(
-                                  label: navLabels[index],
+                                  label: navItems[index].label,
+                                  tooltip: navItems[index].tooltip,
                                   isSelected: navController.currentIndex == index,
                                   onTap: () => navController.scrollToSection(index),
                                 ),
@@ -117,13 +118,13 @@ class FloatingNavbar extends StatelessWidget {
                               text: strings.letsTalk,
                               icon: Icons.chat_bubble_outline_rounded,
                               variant: CleanButtonVariant.primary,
-                              height: 44,
+                              height: 40,
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 10,
+                                horizontal: 15,
+                                vertical: 9,
                               ),
                               onPressed: () =>
-                                  navController.scrollToSection(5), // Contact
+                                  navController.scrollToSection(7), // Contact
                             ),
                           ],
                         ),
@@ -267,11 +268,13 @@ class FloatingNavbar extends StatelessWidget {
 
   Widget _buildNavItem({
     required String label,
+    required String tooltip,
     required bool isSelected,
     required VoidCallback onTap,
   }) {
     return _HoverNavItem(
       label: label,
+      tooltip: tooltip,
       isSelected: isSelected,
       onTap: onTap,
     );
@@ -280,11 +283,13 @@ class FloatingNavbar extends StatelessWidget {
 
 class _HoverNavItem extends StatefulWidget {
   final String label;
+  final String tooltip;
   final bool isSelected;
   final VoidCallback onTap;
 
   const _HoverNavItem({
     required this.label,
+    required this.tooltip,
     required this.isSelected,
     required this.onTap,
   });
@@ -298,28 +303,55 @@ class _HoverNavItemState extends State<_HoverNavItem> {
 
   @override
   Widget build(BuildContext context) {
-    final active = widget.isSelected || _isHovered;
-
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      onEnter: (_) => setState(() => _isHovered = true),
-      onExit: (_) => setState(() => _isHovered = false),
-      child: GestureDetector(
-        onTap: widget.onTap,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 180),
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-          margin: const EdgeInsets.symmetric(horizontal: 2),
-          decoration: BoxDecoration(
-            color: active ? AppColors.iceBlue : Colors.transparent,
-            borderRadius: BorderRadius.circular(12),
+    return Tooltip(
+      message: widget.tooltip,
+      waitDuration: const Duration(milliseconds: 300),
+      margin: const EdgeInsets.only(top: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0F172A),
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.18),
+            blurRadius: 8,
+            offset: const Offset(0, 3),
           ),
-          child: Text(
-            widget.label,
-            style: AppTypography.button.copyWith(
-              color: active ? AppColors.primary : AppColors.textSecondary,
-              fontWeight: active ? FontWeight.w700 : FontWeight.w500,
-              fontSize: 13.5,
+        ],
+      ),
+      textStyle: const TextStyle(
+        color: Colors.white,
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        letterSpacing: 0.2,
+      ),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        onEnter: (_) => setState(() => _isHovered = true),
+        onExit: (_) => setState(() => _isHovered = false),
+        child: GestureDetector(
+          onTap: widget.onTap,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 180),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6.5),
+            margin: const EdgeInsets.symmetric(horizontal: 1.5),
+            decoration: BoxDecoration(
+              color: widget.isSelected
+                  ? AppColors.iceBlue
+                  : (_isHovered
+                      ? AppColors.iceBlue.withValues(alpha: 0.5)
+                      : Colors.transparent),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Text(
+              widget.label,
+              style: AppTypography.button.copyWith(
+                color: widget.isSelected
+                    ? AppColors.primaryDark
+                    : (_isHovered ? AppColors.primary : AppColors.textSecondary),
+                fontWeight: widget.isSelected ? FontWeight.w700 : FontWeight.w500,
+                fontSize: 13,
+              ),
             ),
           ),
         ),

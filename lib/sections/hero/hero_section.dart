@@ -184,7 +184,7 @@ class HeroSection extends StatelessWidget {
               variant: CleanButtonVariant.primary,
               height: 52,
               padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 14),
-              onPressed: () => navController.scrollToSection(2), // Projects
+              onPressed: () => navController.scrollToSection(3), // Projects
             ),
             CleanButton(
               text: strings.downloadCv,

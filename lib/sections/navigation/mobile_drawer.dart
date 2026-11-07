@@ -24,8 +24,8 @@ class MobileDrawer extends StatelessWidget {
           strings.navAbout,
           strings.isId ? 'Ijazah & Transkrip' : 'Degree & Records',
           strings.navProjects,
-          strings.isId ? 'Prestasi Lomba' : 'Awards',
-          strings.navCertificates,
+          strings.isId ? 'Prestasi Lomba' : 'Awards & Honors',
+          strings.isId ? 'Pelatihan Kominfo' : 'DTS Training',
           strings.navSkills,
           strings.navContact,
         ];
@@ -226,7 +226,7 @@ class MobileDrawer extends StatelessWidget {
                         height: 50,
                         onPressed: () {
                           Navigator.of(context).pop();
-                          navController.scrollToSection(5);
+                          navController.scrollToSection(7);
                         },
                       ),
                     ],
@@ -247,12 +247,16 @@ class MobileDrawer extends StatelessWidget {
       case 1:
         return Icons.person_rounded;
       case 2:
-        return Icons.folder_special_rounded;
+        return Icons.school_rounded;
       case 3:
-        return Icons.workspace_premium_rounded;
+        return Icons.terminal_rounded;
       case 4:
-        return Icons.auto_awesome_rounded;
+        return Icons.emoji_events_rounded;
       case 5:
+        return Icons.workspace_premium_rounded;
+      case 6:
+        return Icons.psychology_rounded;
+      case 7:
         return Icons.mail_rounded;
       default:
         return Icons.circle;
