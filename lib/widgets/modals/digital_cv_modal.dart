@@ -647,9 +647,9 @@ class _EducationContent extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           _infoRow('Gelar', 'Sarjana Terapan Teknik (S.Tr.T.)'),
-          _infoRow('Predikat', 'Sangat Memuaskan / Pujian'),
+          _infoRow('Predikat', 'Cum Laude'),
           _infoRow('Lulus Sidang', '29 Juli 2026'),
-          _infoRow('Pembimbing I', 'Husaini, S.Si., M.I.T.'),
+          _infoRow('Pembimbing I', 'Husaini, S.Si., M.T.'),
           _infoRow('Pembimbing II', 'Atthariq, S.S.T., M.T.'),
           const SizedBox(height: 8),
           Container(
