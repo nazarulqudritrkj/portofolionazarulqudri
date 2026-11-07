@@ -391,7 +391,7 @@ class CvPdfGenerator {
           end: pw.Alignment.centerRight,
         ),
       ),
-      padding: const pw.EdgeInsets.fromLTRB(28, 22, 28, 18),
+      padding: const pw.EdgeInsets.fromLTRB(28, 18, 28, 14),
       child: pw.Column(
         crossAxisAlignment: pw.CrossAxisAlignment.start,
         children: [
@@ -400,30 +400,32 @@ class CvPdfGenerator {
             mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
             crossAxisAlignment: pw.CrossAxisAlignment.center,
             children: [
-              pw.Column(
-                crossAxisAlignment: pw.CrossAxisAlignment.start,
-                children: [
-                  pw.Text('NAZARUL QUDRI, S.Tr.T.',
-                      style: pw.TextStyle(font: eb, fontSize: 24,
-                          color: _white, letterSpacing: 1.5)),
-                  pw.SizedBox(height: 4),
-                  pw.Text(
-                      'Flutter Developer  •  IoT CPS Specialist  •  AI Engineer',
-                      style: pw.TextStyle(font: m, fontSize: 10.5,
-                          color: PdfColor.fromInt(0xFFBAE6FD))),
-                  pw.SizedBox(height: 2),
-                  pw.Text(
-                      'D4 Teknologi Rekayasa Komputer Jaringan — Politeknik Negeri Lhokseumawe',
-                      style: pw.TextStyle(font: r, fontSize: 9,
-                          color: PdfColor.fromInt(0xFF93C5FD))),
-                ],
+              pw.Expanded(
+                child: pw.Column(
+                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                  children: [
+                    pw.Text('NAZARUL QUDRI, S.Tr.T.',
+                        style: pw.TextStyle(font: eb, fontSize: 22,
+                            color: _white, letterSpacing: 1.2)),
+                    pw.SizedBox(height: 3),
+                    pw.Text(
+                        'Flutter Developer  •  IoT CPS Specialist  •  AI Engineer',
+                        style: pw.TextStyle(font: m, fontSize: 9.5,
+                            color: PdfColor.fromInt(0xFFBAE6FD))),
+                    pw.SizedBox(height: 2),
+                    pw.Text(
+                        'D4 TRKJ — Politeknik Negeri Lhokseumawe',
+                        style: pw.TextStyle(font: r, fontSize: 8.5,
+                            color: PdfColor.fromInt(0xFF93C5FD))),
+                  ],
+                ),
               ),
-              pw.SizedBox(width: 24),
+              pw.SizedBox(width: 16),
               pw.Container(
-                padding: const pw.EdgeInsets.all(12),
+                padding: const pw.EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 decoration: pw.BoxDecoration(
                   color: PdfColor.fromInt(0x22FFFFFF),
-                  borderRadius: pw.BorderRadius.circular(10),
+                  borderRadius: pw.BorderRadius.circular(8),
                   border: pw.Border.all(
                       color: PdfColor.fromInt(0x44FFFFFF), width: 0.8),
                 ),
@@ -431,34 +433,35 @@ class CvPdfGenerator {
                   crossAxisAlignment: pw.CrossAxisAlignment.start,
                   children: [
                     _contactRow('Email', 'zarqud@gmail.com', r, m),
-                    pw.SizedBox(height: 4),
+                    pw.SizedBox(height: 3),
                     _contactRow('GitHub', 'github.com/nazarulqudritrkj', r, m),
-                    pw.SizedBox(height: 4),
+                    pw.SizedBox(height: 3),
                     _contactRow('LinkedIn',
-                        'linkedin.com/in/nazarul-qudri-62178824a', r, m),
-                    pw.SizedBox(height: 4),
+                        'in/nazarul-qudri-62178824a', r, m),
+                    pw.SizedBox(height: 3),
                     _contactRow('Lokasi',
-                        'Lhokseumawe, Aceh, Indonesia', r, m),
+                        'Lhokseumawe, Aceh, ID', r, m),
                   ],
                 ),
               ),
             ],
           ),
-          pw.SizedBox(height: 14),
+          pw.SizedBox(height: 10),
           pw.Container(
               height: 0.8,
               color: PdfColor.fromInt(0x44FFFFFF),
-              margin: const pw.EdgeInsets.only(bottom: 10)),
-          // Chips
-          pw.Row(children: [
-            _chip('Cum Laude Graduate', _green, b),
-            pw.SizedBox(width: 8),
-            _chip('Tersedia untuk Kolaborasi', _cyan, b),
-            pw.SizedBox(width: 8),
-            _chip('4+ Tahun Pengalaman', _blueD, b),
-            pw.SizedBox(width: 8),
-            _chip('11 Sertifikasi Kominfo DTS', _orange, b),
-          ]),
+              margin: const pw.EdgeInsets.only(bottom: 8)),
+          // Chips (Wrap prevents cutoff at edge)
+          pw.Wrap(
+            spacing: 6,
+            runSpacing: 5,
+            children: [
+              _chip('Cum Laude Graduate', _green, b),
+              _chip('Tersedia untuk Kolaborasi', _cyan, b),
+              _chip('4+ Tahun Pengalaman', _blueD, b),
+              _chip('11 Sertifikasi Kominfo DTS', _orange, b),
+            ],
+          ),
         ],
       ),
     );
@@ -466,37 +469,40 @@ class CvPdfGenerator {
 
   static pw.Widget _contactRow(
       String label, String value, pw.Font r, pw.Font m) {
-    return pw.Row(children: [
-      pw.SizedBox(
-        width: 52,
-        child: pw.Text(label,
-            style: pw.TextStyle(font: m, fontSize: 8,
+    return pw.Row(
+      mainAxisSize: pw.MainAxisSize.min,
+      children: [
+        pw.SizedBox(
+          width: 44,
+          child: pw.Text(label,
+              style: pw.TextStyle(font: m, fontSize: 7.5,
+                  color: PdfColor.fromInt(0xFF7DD3FC))),
+        ),
+        pw.Text(': ',
+            style: pw.TextStyle(font: r, fontSize: 7.5,
                 color: PdfColor.fromInt(0xFF7DD3FC))),
-      ),
-      pw.Text(':  ',
-          style: pw.TextStyle(font: r, fontSize: 8,
-              color: PdfColor.fromInt(0xFF7DD3FC))),
-      pw.Text(value,
-          style: pw.TextStyle(font: r, fontSize: 8,
-              color: PdfColor.fromInt(0xFFCBD5E1))),
-    ]);
+        pw.Text(value,
+            style: pw.TextStyle(font: r, fontSize: 7.5,
+                color: PdfColor.fromInt(0xFFCBD5E1))),
+      ],
+    );
   }
 
   static pw.Widget _chip(String t, PdfColor c, pw.Font b) =>
       pw.Container(
-        padding: const pw.EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+        padding: const pw.EdgeInsets.symmetric(horizontal: 10, vertical: 4),
         decoration: pw.BoxDecoration(
           color: c,
-          borderRadius: pw.BorderRadius.circular(5),
+          borderRadius: pw.BorderRadius.circular(4),
           border: pw.Border.all(
               color: PdfColor.fromInt(0x55FFFFFF), width: 0.8),
         ),
         child: pw.Text(t,
             style: pw.TextStyle(
               font: b,
-              fontSize: 9,
+              fontSize: 8,
               color: _white,
-              letterSpacing: 0.5,
+              letterSpacing: 0.3,
             )),
       );
 
@@ -554,12 +560,12 @@ class CvPdfGenerator {
               pw.SizedBox(width: 10),
               pw.Container(
                 padding: const pw.EdgeInsets.symmetric(
-                    horizontal: 10, vertical: 4),
+                    horizontal: 9, vertical: 3.5),
                 decoration: pw.BoxDecoration(
                   gradient: const pw.LinearGradient(
                       colors: [_purple,
                         PdfColor.fromInt(0xFF9333EA)]),
-                  borderRadius: pw.BorderRadius.circular(12),
+                  borderRadius: pw.BorderRadius.circular(4),
                 ),
                 child: pw.Text('2022 – 2026',
                     style: pw.TextStyle(
@@ -651,7 +657,7 @@ class CvPdfGenerator {
               padding: const pw.EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: pw.BoxDecoration(
                 color: color.shade(0.15),
-                borderRadius: pw.BorderRadius.circular(10),
+                borderRadius: pw.BorderRadius.circular(3),
               ),
               child: pw.Text('${(pct * 100).toInt()}%',
                   style: pw.TextStyle(font: m, fontSize: 8, color: color)),
@@ -783,19 +789,17 @@ class CvPdfGenerator {
               style: pw.TextStyle(font: fontR, fontSize: 8.5,
                   color: _gray500, lineSpacing: 1.4)),
           pw.SizedBox(height: 6),
-          pw.Wrap(spacing: 4, runSpacing: 3,
+          pw.Wrap(spacing: 5, runSpacing: 4,
             children: tags.map((t) => pw.Container(
               padding: const pw.EdgeInsets.symmetric(
-                  horizontal: 7, vertical: 2.5),
+                  horizontal: 7, vertical: 3),
               decoration: pw.BoxDecoration(
-                color: color.shade(0.1),
-                borderRadius: pw.BorderRadius.circular(10),
-                border: pw.Border.all(
-                    color: color.shade(0.4), width: 0.6),
+                color: color,
+                borderRadius: pw.BorderRadius.circular(3),
               ),
               child: pw.Text(t,
                   style: pw.TextStyle(
-                      font: fontM, fontSize: 8, color: color)),
+                      font: fontB, fontSize: 7.5, color: _white, letterSpacing: 0.2)),
             )).toList(),
           ),
         ],
