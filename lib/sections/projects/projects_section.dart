@@ -85,19 +85,13 @@ class _ProjectsSectionState extends State<ProjectsSection> {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
-                      children: [
-                        _buildCategoryPill(strings.allWorks, ProjectCategory.all),
-                        const SizedBox(width: 8),
-                        _buildCategoryPill(
-                          strings.isId ? 'IoT & Smart Home (Skripsi)' : 'IoT & Smart Home (Thesis)',
-                          ProjectCategory.iot,
-                        ),
-                        const SizedBox(width: 8),
-                        _buildCategoryPill(
-                          strings.isId ? 'Sistem Informasi Kampus PNL' : 'Academic Systems PNL',
-                          ProjectCategory.fullstack,
-                        ),
-                      ],
+                      children: ProjectCategory.values.map((cat) {
+                        final label = strings.isId ? cat.labelId : cat.labelEn;
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: _buildCategoryPill(label, cat),
+                        );
+                      }).toList(),
                     ),
                   ),
 

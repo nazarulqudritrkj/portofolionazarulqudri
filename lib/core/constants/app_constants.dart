@@ -2,7 +2,7 @@ class AppConstants {
   AppConstants._();
 
   // Personal Info
-  static const String fullName = 'Nazarul Qudri';
+  static const String fullName = 'Nazarul Qudri, S.Tr.T.';
   static const String initials = 'NQ';
   static const String shortBio =
       'Crafting High-Performance Digital Experiences & Clean Modern Solutions.';

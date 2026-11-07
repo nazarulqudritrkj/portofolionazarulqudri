@@ -225,7 +225,10 @@ class HeroSection extends StatelessWidget {
                 Icons.code_rounded, 'Dart', const Color(0xFF2563EB)),
             const SizedBox(width: 8),
             _buildMiniTechIcon(
-                Icons.memory_rounded, 'IoT', const Color(0xFF06B6D4)),
+                Icons.memory_rounded, 'IoT (CPS)', const Color(0xFF06B6D4)),
+            const SizedBox(width: 8),
+            _buildMiniTechIcon(
+                Icons.psychology_rounded, 'AI (Rule-Based)', const Color(0xFF7C3AED)),
             const SizedBox(width: 8),
             _buildMiniTechIcon(
                 Icons.layers_rounded, 'Clean Arch', const Color(0xFF10B981)),

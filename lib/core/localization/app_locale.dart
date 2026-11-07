@@ -80,14 +80,14 @@ class AppStrings {
       ? 'Membangun dengan Tujuan & Ketelitian Tinggi'
       : 'Engineering With Purpose & Precision';
   String get aboutSubtitle => isId
-      ? 'Menerjemahkan logika bisnis yang kompleks dan protokol perangkat keras menjadi antarmuka digital yang intuitif, elegan, dan berkinerja tinggi.'
-      : 'Transforming complex business logic and hardware protocols into intuitive, elegant, and high-performance digital solutions.';
+      ? 'Menerjemahkan logika bisnis yang kompleks, arsitektur kecerdasan buatan, dan protokol perangkat keras menjadi antarmuka digital yang intuitif, elegan, dan berkinerja tinggi.'
+      : 'Transforming complex business logic, artificial intelligence architectures, and hardware protocols into intuitive, elegant, and high-performance digital solutions.';
   String get aboutBioP1 => isId
-      ? 'Halo! Saya Nazarul Qudri, Sarjana Terapan Teknologi Rekayasa Komputer Jaringan (TRKJ) Jurusan Teknologi Informasi dan Komputer Politeknik Negeri Lhokseumawe. Saya berfokus pada rekayasa sistem siber-fisik (IoT CPS), arsitektur 7 OSI Layer, pengembangan web akademik, dan aplikasi Flutter berkinerja tinggi.'
-      : 'Hello! I am Nazarul Qudri, a Computer Network Engineering Technology graduate from Politeknik Negeri Lhokseumawe. I specialize in Cyber-Physical Systems (IoT CPS), 7 OSI Layer architecture, academic web systems, and high-performance cross-platform Flutter applications.';
+      ? 'Halo! Saya Nazarul Qudri, S.Tr.T., lulusan Sarjana Terapan Teknik dari Program Studi D4 Teknologi Rekayasa Komputer Jaringan (TRKJ), Jurusan Teknologi Informasi dan Komputer (TIK) Politeknik Negeri Lhokseumawe (PNL). Saya berfokus pada rekayasa sistem siber-fisik (IoT CPS), arsitektur 7 Lapisan OSI Model, kecerdasan buatan (Rule-Based Decision Systems & AI Studio), serta aplikasi Flutter cross-platform berkinerja tinggi.'
+      : 'Hello! I am Nazarul Qudri, S.Tr.T., a Bachelor of Applied Engineering graduate in Computer Network Engineering Technology (TRKJ) from the Information Technology and Computer Department at Politeknik Negeri Lhokseumawe (PNL). I specialize in Cyber-Physical Systems (IoT CPS), 7 OSI Layer architecture, Artificial Intelligence (Rule-Based Decision Systems & AI Studio), and high-performance cross-platform Flutter applications.';
   String get aboutBioP2 => isId
-      ? 'Dalam skripsi dan karya rekayasa saya, saya mengimplementasikan sistem otomasi cerdas seperti Rule-Based Decision System (RBDS), protokol komunikasi MQTT HiveMQ Cloud, arsitektur database terdistribusi, serta standar komunikasi data internasional ITU-T Y.1010/G.1010.'
-      : 'Across my thesis and engineering endeavors, I implement intelligent automation including Rule-Based Decision Systems (RBDS), MQTT HiveMQ Cloud protocols, distributed local databases, and ITU-T Y.1010/G.1010 international data quality standards.';
+      ? 'Dalam skripsi dan rekayasa teknologi saya, saya membangun ekosistem otomasi cerdas seperti Rule-Based Decision System (RBDS), telemetri MQTT HiveMQ Cloud, arsitektur basis data lokal Hive terdistribusi, serta pengujian QoS berstandar telekomunikasi internasional ITU-T Y.1010/G.1010.'
+      : 'Across my engineering endeavors, I build intelligent automation ecosystems including Rule-Based Decision Systems (RBDS), MQTT HiveMQ Cloud telemetry, distributed Hive local databases, and telecommunications QoS benchmarks following ITU-T Y.1010/G.1010 international standards.';
   String get downloadFullResume => isId ? 'Unduh Resume Lengkap' : 'Download Complete Resume';
   String get pillar1Title => isId ? 'Clean Architecture Utama' : 'Clean Architecture First';
   String get pillar1Desc => isId

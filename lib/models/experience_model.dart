@@ -24,11 +24,11 @@ class ExperienceModel {
   static List<ExperienceModel> get timelineList => [
     const ExperienceModel(
       period: '2022 - 2026',
-      role: 'Sarjana Terapan (S.Tr.Kom) • Teknologi Rekayasa Komputer Jaringan',
+      role: 'Sarjana Terapan Teknik (S.Tr.T.) • Teknologi Rekayasa Komputer Jaringan',
       company: 'Politeknik Negeri Lhokseumawe (PNL)',
       location: 'Lhokseumawe, Aceh, Indonesia',
       description:
-          'Menempuh dan menyelesaikan pendidikan Sarjana Terapan di Jurusan Teknologi Informasi dan Komputer (TIK) dengan konsentrasi pada rekayasa siber-fisik (CPS), arsitektur jaringan komputer, dan sistem otomasi cerdas.',
+          'Menempuh dan menyelesaikan pendidikan Sarjana Terapan Teknik di Program Studi D4 Teknologi Rekayasa Komputer Jaringan (TRKJ), Jurusan Teknologi Informasi dan Komputer (TIK) dengan konsentrasi pada rekayasa siber-fisik (CPS), arsitektur 7 OSI Layer, dan sistem kecerdasan buatan (Rule-Based Decision Systems).',
       highlights: [
         'Skripsi: "Rancang Bangun IoT pada Prototype Smart Home dengan Penerapan Rule-Based Decision System sebagai Artificial Intelligence" (Lulus Sidang 29 Juli 2026)',
         'Membangun Aplikasi Android Flutter "STARZAR" berbasis model 7 Lapisan OSI Layer, protokol MQTT HiveMQ Cloud, dan Hive DB dengan respon 180 ms',

@@ -2,10 +2,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_typography.dart';
-import '../../core/utils/url_helper.dart';
 import '../../models/project_model.dart';
 import '../../widgets/badges/tech_badge.dart';
-import '../../widgets/common/clean_button.dart';
 
 class ProjectDetailModal extends StatelessWidget {
   final ProjectModel project;
@@ -221,34 +219,7 @@ class ProjectDetailModal extends StatelessWidget {
                           );
                         }).toList(),
                       ),
-                      const SizedBox(height: 32),
-
-                      // Action Links: GitHub & Live App
-                      Wrap(
-                        spacing: 14,
-                        runSpacing: 12,
-                        children: [
-                          if (project.liveUrl != null)
-                            CleanButton(
-                              text: 'Launch Live Demo',
-                              icon: Icons.open_in_new_rounded,
-                              isTrailingIcon: true,
-                              variant: CleanButtonVariant.primary,
-                              height: 48,
-                              onPressed: () =>
-                                  UrlHelper.openUrl(project.liveUrl!, context: context),
-                            ),
-                          if (project.githubUrl != null)
-                            CleanButton(
-                              text: 'Explore Repository',
-                              icon: Icons.code_rounded,
-                              variant: CleanButtonVariant.outline,
-                              height: 48,
-                              onPressed: () =>
-                                  UrlHelper.openUrl(project.githubUrl!, context: context),
-                            ),
-                        ],
-                      ),
+                      const SizedBox(height: 12),
                     ],
                   ),
                 ),
