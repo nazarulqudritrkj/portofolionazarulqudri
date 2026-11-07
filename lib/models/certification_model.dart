@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 enum CertificationCategory {
   all('Semua', 'All'),
+  competitions('Prestasi & Lomba', 'Competitions & Awards'),
   aiTech('AI & Komputasi', 'AI & Computing'),
   cloudSecurity('Cloud & Security', 'Cloud & Security'),
   digitalProduct('Produk & Desain', 'Product & Design'),
@@ -44,6 +45,82 @@ class CertificationModel {
   });
 
   static List<CertificationModel> get allCertifications => [
+    const CertificationModel(
+      id: 'cert-kmipn-2025',
+      titleId: 'KMIPN VI - Kompetisi Mahasiswa Informatika Politeknik Nasional',
+      titleEn: 'KMIPN VI - National Polytechnic Informatics Competition',
+      issuer: 'Baklma Kemendikbudristek & Forum Direktur Politeknik',
+      year: '2025',
+      category: CertificationCategory.competitions,
+      frontImage:
+          'lib/images/sertifikasi_perlombaan/lombakmipn2025/sertifikat_lomba_kmipn.jpg',
+      backImage:
+          'lib/images/sertifikasi_perlombaan/lombakmipn2025/sertifikat_lomba_kmipn.jpg',
+      skills: ['Informatics', 'Problem Solving', 'Competitive Tech', 'Software Innovation'],
+      descriptionId:
+          'Partisipasi dan prestasi dalam ajang bergengsi kompetisi nasional informatika antarmahasiswa politeknik se-Indonesia di bidang inovasi perangkat lunak dan teknologi terapan.',
+      descriptionEn:
+          'Participation and prestigious achievement in the Indonesian National Polytechnic Student Informatics Competition in applied technology and software innovation.',
+      icon: Icons.emoji_events_rounded,
+      accentColor: Color(0xFFF59E0B),
+    ),
+    const CertificationModel(
+      id: 'cert-nso5-english',
+      titleId: 'NSO 5 - National Science Olympiad Bidang Bahasa Inggris',
+      titleEn: 'NSO 5 - National Science Olympiad in English',
+      issuer: 'Pusat Prestasi Nasional / Penyelenggara NSO',
+      year: '2025',
+      category: CertificationCategory.competitions,
+      frontImage:
+          'lib/images/sertifikasi_perlombaan/lombaenglish/sertifikat_lomba_english.jpg',
+      backImage:
+          'lib/images/sertifikasi_perlombaan/lombaenglish/sertifikat_lomba_english.jpg',
+      skills: ['English Proficiency', 'Critical Reading', 'Analytical Thinking', 'National Olympiad'],
+      descriptionId:
+          'Sertifikat penghargaan atas partisipasi dan keunggulan kompetitif dalam Olimpiade Sains Nasional ke-5 bidang kemampuan Bahasa Inggris.',
+      descriptionEn:
+          'Certificate of recognition for outstanding competitive performance and English language proficiency in the 5th National Science Olympiad.',
+      icon: Icons.military_tech_rounded,
+      accentColor: Color(0xFF3B82F6),
+    ),
+    const CertificationModel(
+      id: 'cert-ospn-akuntansi',
+      titleId: 'OSPN - Olimpiade Sains Pemuda Nasional Bidang Akuntansi',
+      titleEn: 'OSPN - National Youth Science Olympiad in Accounting',
+      issuer: 'Lembaga Prestasi Pemuda Nasional',
+      year: '2025',
+      category: CertificationCategory.competitions,
+      frontImage:
+          'lib/images/sertifikasi_perlombaan/lombaakuntansi/sertifikat_lomba_akuntansi.jpg',
+      backImage:
+          'lib/images/sertifikasi_perlombaan/lombaakuntansi/sertifikat_lomba_akuntansi.jpg',
+      skills: ['Financial Logic', 'Quantitative Analysis', 'Accounting System', 'National Olympiad'],
+      descriptionId:
+          'Piagam prestasi nasional bidang akuntansi dan analisis finansial yang membuktikan ketajaman logika kuantitatif dan penalaran analitis berstandar nasional.',
+      descriptionEn:
+          'National achievement certificate in accounting and financial analysis, demonstrating strong quantitative reasoning and analytical logic.',
+      icon: Icons.account_balance_rounded,
+      accentColor: Color(0xFF10B981),
+    ),
+    const CertificationModel(
+      id: 'cert-osh-bahasaindonesia',
+      titleId: 'Piagam Penghargaan OSH 2025 - Bidang Bahasa Indonesia',
+      titleEn: 'OSH 2025 Award of Honor - Indonesian Language',
+      issuer: 'Panitia Olimpiade Sains & Humaniora (OSH)',
+      year: '2025',
+      category: CertificationCategory.competitions,
+      frontImage:
+          'lib/images/sertifikasi_perlombaan/lombabahasaindonesia/sertifikat_lomba_bahasaindonesia.png',
+      backImage:
+          'lib/images/sertifikasi_perlombaan/lombabahasaindonesia/sertifikat_lomba_bahasaindonesia.png',
+      skills: ['Komunikasi Formal', 'Linguistik', 'Penulisan Kritis', 'Prestasi Akademik'],
+      descriptionId:
+          'Piagam penghargaan atas pencapaian dan keikutsertaan berprestasi dalam kompetisi Olimpiade Humaniora Nasional bidang Bahasa Indonesia.',
+      descriptionEn:
+          'Honorary award certificate for distinguished academic performance and linguistic mastery in the National Humanities Olympiad.',
+      icon: Icons.auto_stories_rounded,
+      accentColor: Color(0xFF8B5CF6),
+    ),
     const CertificationModel(
       id: 'cert-ai-engineer',
       titleId: 'AI Engineer For Milenial',

@@ -178,43 +178,70 @@ class _CertificationDetailModalState extends State<CertificationDetailModal> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            // Page Segmented Switcher (Page 1 vs Page 2)
-                            Center(
-                              child: Container(
-                                padding: const EdgeInsets.all(4),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFFF1F5F9),
-                                  borderRadius: BorderRadius.circular(16),
-                                  border: Border.all(
-                                    color: const Color(0xFFCBD5E1),
+                            // Page Segmented Switcher (Shown only if certificate has 2 distinct pages)
+                            if (cert.frontImage != cert.backImage && cert.backImage.isNotEmpty)
+                              Center(
+                                child: Container(
+                                  padding: const EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                    color: const Color(0xFFF1F5F9),
+                                    borderRadius: BorderRadius.circular(16),
+                                    border: Border.all(
+                                      color: const Color(0xFFCBD5E1),
+                                    ),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      _buildPageTab(
+                                        label: strings.page1Front,
+                                        icon: Icons.workspace_premium_rounded,
+                                        isSelected: _activePage == 0,
+                                        onTap: () {
+                                          setState(() => _activePage = 0);
+                                          _resetZoom();
+                                        },
+                                      ),
+                                      const SizedBox(width: 6),
+                                      _buildPageTab(
+                                        label: strings.page2Back,
+                                        icon: Icons.menu_book_rounded,
+                                        isSelected: _activePage == 1,
+                                        onTap: () {
+                                          setState(() => _activePage = 1);
+                                          _resetZoom();
+                                        },
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    _buildPageTab(
-                                      label: strings.page1Front,
-                                      icon: Icons.workspace_premium_rounded,
-                                      isSelected: _activePage == 0,
-                                      onTap: () {
-                                        setState(() => _activePage = 0);
-                                        _resetZoom();
-                                      },
-                                    ),
-                                    const SizedBox(width: 6),
-                                    _buildPageTab(
-                                      label: strings.page2Back,
-                                      icon: Icons.menu_book_rounded,
-                                      isSelected: _activePage == 1,
-                                      onTap: () {
-                                        setState(() => _activePage = 1);
-                                        _resetZoom();
-                                      },
-                                    ),
-                                  ],
+                              )
+                            else
+                              Center(
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.softCyan.withValues(alpha: 0.5),
+                                    borderRadius: BorderRadius.circular(16),
+                                    border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      const Icon(Icons.verified_rounded, size: 16, color: AppColors.primary),
+                                      const SizedBox(width: 6),
+                                      Text(
+                                        strings.isId ? 'Piagam Resmi • Full Resolution' : 'Official Document • Full Resolution',
+                                        style: AppTypography.bodySmall.copyWith(
+                                          color: AppColors.primary,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 12,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
                             const SizedBox(height: 18),
 
                             // Interactive Zoomable Certificate Viewer
