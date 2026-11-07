@@ -19,7 +19,7 @@ class Footer extends StatefulWidget {
 class _FooterState extends State<Footer> {
   late Timer _timer;
   late DateTime _currentTime;
-  int _visitorCount = 1420;
+  int _visitorCount = 1;
 
   @override
   void initState() {
