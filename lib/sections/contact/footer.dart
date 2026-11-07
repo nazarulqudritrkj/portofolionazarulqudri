@@ -1,0 +1,250 @@
+import 'dart:async';
+import 'package:flutter/material.dart';
+import '../../core/constants/app_colors.dart';
+import '../../core/constants/app_constants.dart';
+import '../../core/constants/app_typography.dart';
+import '../../core/localization/app_locale.dart';
+import '../../core/utils/responsive.dart';
+
+class Footer extends StatefulWidget {
+  final VoidCallback onScrollToTop;
+
+  const Footer({super.key, required this.onScrollToTop});
+
+  @override
+  State<Footer> createState() => _FooterState();
+}
+
+class _FooterState extends State<Footer> {
+  late Timer _timer;
+  late DateTime _currentTime;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentTime = DateTime.now().toUtc().add(const Duration(hours: 7));
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (mounted) {
+        setState(() {
+          _currentTime = DateTime.now().toUtc().add(const Duration(hours: 7));
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  String _formatTwoDigits(int n) => n.toString().padLeft(2, '0');
+
+  @override
+  Widget build(BuildContext context) {
+    final isMobile = Responsive.isMobile(context);
+    final hours = _formatTwoDigits(_currentTime.hour);
+    final minutes = _formatTwoDigits(_currentTime.minute);
+    final seconds = _formatTwoDigits(_currentTime.second);
+
+    return ListenableBuilder(
+      listenable: LocaleController.instance,
+      builder: (context, _) {
+        final strings = AppStrings(LocaleController.instance.currentLanguage);
+
+        return Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.white.withValues(alpha: 0.9),
+            border: const Border(
+              top: BorderSide(color: Color(0xFFE2E8F0), width: 1.2),
+            ),
+          ),
+          padding: EdgeInsets.symmetric(
+            horizontal: isMobile ? 20 : 40,
+            vertical: 36,
+          ),
+          child: ContentConstrainedBox(
+            padding: EdgeInsets.zero,
+            child: Column(
+              children: [
+                // Top Row
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // Brandmark & Name
+                    Row(
+                      children: [
+                        Container(
+                          width: 36,
+                          height: 36,
+                          decoration: BoxDecoration(
+                            gradient: AppColors.primaryGradient,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          alignment: Alignment.center,
+                          child: Text(
+                            AppConstants.initials,
+                            style: AppTypography.headingSmall.copyWith(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              AppConstants.fullName,
+                              style: AppTypography.headingSmall.copyWith(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            Text(
+                              'Clean Island Architecture',
+                              style: AppTypography.bodySmall.copyWith(
+                                color: AppColors.primary,
+                                fontSize: 11,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+
+                    // Back To Top Button
+                    MouseRegion(
+                      cursor: SystemMouseCursors.click,
+                      child: GestureDetector(
+                        onTap: widget.onScrollToTop,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 14,
+                            vertical: 8,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.iceBlue,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: const Color(0xFFBAE6FD),
+                              width: 1.0,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                strings.backToTop,
+                                style: AppTypography.button.copyWith(
+                                  color: AppColors.primary,
+                                  fontSize: 12,
+                                ),
+                              ),
+                              const SizedBox(width: 6),
+                              const Icon(
+                                Icons.arrow_upward_rounded,
+                                size: 14,
+                                color: AppColors.primary,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 28),
+                const Divider(color: Color(0xFFE2E8F0)),
+                const SizedBox(height: 24),
+
+                // Bottom Info Row
+                Wrap(
+                  alignment: WrapAlignment.spaceBetween,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  runSpacing: 18,
+                  spacing: 20,
+                  children: [
+                    _buildCopyrightText(strings),
+                    _buildLiveClockBadge(hours, minutes, seconds),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildCopyrightText(AppStrings strings) {
+    return Column(
+      crossAxisAlignment: Responsive.isMobile(context)
+          ? CrossAxisAlignment.center
+          : CrossAxisAlignment.start,
+      children: [
+        Text(
+          '© 2026 ${AppConstants.fullName}. All rights reserved.',
+          style: AppTypography.bodySmall.copyWith(
+            color: AppColors.textSecondary,
+            fontSize: 12.5,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          strings.copyrightNote,
+          style: AppTypography.bodySmall.copyWith(
+            color: AppColors.textMuted,
+            fontSize: 11,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildLiveClockBadge(String hours, String minutes, String seconds) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppColors.background,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: const Color(0xFFE2E8F0),
+          width: 1.0,
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 8,
+            height: 8,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.onlineGreen,
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.onlineGreen.withValues(alpha: 0.6),
+                  blurRadius: 6,
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 8),
+          Text(
+            '${AppConstants.location} • $hours:$minutes:$seconds',
+            style: AppTypography.code.copyWith(
+              color: AppColors.textPrimary,
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
