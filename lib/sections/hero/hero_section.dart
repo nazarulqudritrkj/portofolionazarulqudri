@@ -210,10 +210,13 @@ class HeroSection extends StatelessWidget {
         const SizedBox(height: 36),
 
         // 6. Fast Trust Bar / Tech Stack Badges
-        Row(
-          mainAxisAlignment: isMobile
-              ? MainAxisAlignment.center
-              : MainAxisAlignment.start,
+        Wrap(
+          alignment: isMobile
+              ? WrapAlignment.center
+              : WrapAlignment.start,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          spacing: 8,
+          runSpacing: 8,
           children: [
             Text(
               strings.specializedIn,
@@ -223,19 +226,15 @@ class HeroSection extends StatelessWidget {
                 fontSize: 11,
               ),
             ),
-            const SizedBox(width: 14),
+            const SizedBox(width: 6),
             _buildMiniTechIcon(
                 Icons.flutter_dash, 'Flutter', const Color(0xFF0284C7)),
-            const SizedBox(width: 8),
             _buildMiniTechIcon(
                 Icons.code_rounded, 'Dart', const Color(0xFF2563EB)),
-            const SizedBox(width: 8),
             _buildMiniTechIcon(
                 Icons.memory_rounded, 'IoT (CPS)', const Color(0xFF06B6D4)),
-            const SizedBox(width: 8),
             _buildMiniTechIcon(
                 Icons.psychology_rounded, 'AI (Rule-Based)', const Color(0xFF7C3AED)),
-            const SizedBox(width: 8),
             _buildMiniTechIcon(
                 Icons.lan_rounded, 'Networking (TRKJ)', const Color(0xFF10B981)),
           ],

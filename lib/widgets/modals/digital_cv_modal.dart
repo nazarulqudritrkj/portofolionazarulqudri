@@ -1030,36 +1030,74 @@ class _CvDownloadFooter extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(
-        children: [
-          // Info text
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final isCompact = constraints.maxWidth < 440;
+          if (isCompact) {
+            return Column(
               mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
-                  'Unduh CV Resmi Format PDF',
-                  style: AppTypography.bodyMedium.copyWith(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 13.5,
-                    color: const Color(0xFF0F172A),
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Unduh CV Resmi Format PDF',
+                      textAlign: TextAlign.center,
+                      style: AppTypography.bodyMedium.copyWith(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 13,
+                        color: const Color(0xFF0F172A),
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      'Berkas resmi Nazarul Qudri, S.Tr.T.',
+                      textAlign: TextAlign.center,
+                      style: AppTypography.bodySmall.copyWith(
+                        fontSize: 11,
+                        color: const Color(0xFF64748B),
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  'Berkas CV profesional resmi Nazarul Qudri, S.Tr.T.',
-                  style: AppTypography.bodySmall.copyWith(
-                    fontSize: 11.5,
-                    color: const Color(0xFF64748B),
-                  ),
-                ),
+                const SizedBox(height: 12),
+                Center(child: _DownloadButton()),
               ],
-            ),
-          ),
-          const SizedBox(width: 16),
-          // Download button
-          _DownloadButton(),
-        ],
+            );
+          }
+          return Row(
+            children: [
+              // Info text
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'Unduh CV Resmi Format PDF',
+                      style: AppTypography.bodyMedium.copyWith(
+                        fontWeight: FontWeight.w700,
+                        fontSize: 13.5,
+                        color: const Color(0xFF0F172A),
+                      ),
+                    ),
+                    Text(
+                      'Berkas CV profesional resmi Nazarul Qudri, S.Tr.T.',
+                      style: AppTypography.bodySmall.copyWith(
+                        fontSize: 11.5,
+                        color: const Color(0xFF64748B),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 16),
+              // Download button
+              _DownloadButton(),
+            ],
+          );
+        },
       ),
     );
   }
