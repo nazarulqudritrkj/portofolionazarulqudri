@@ -70,7 +70,7 @@ class AppStrings {
   String get downloadCv => isId ? 'Unduh CV / Resume' : 'Download CV';
   String get specializedIn => isId ? 'KEAHLIAN UTAMA:' : 'SPECIALIZED IN:';
   String get expYearsLabel => isId ? 'Pengalaman' : 'Experience';
-  String get projectsDoneLabel => isId ? 'Proyek Selesai' : 'Projects Done';
+  String get projectsDoneLabel => isId ? 'Proyek Unggulan' : 'Featured Projects';
   String get certsLabel => isId ? 'Sertifikasi Resmi' : 'Certifications';
   String get codeQualityLabel => isId ? 'Kualitas Kode' : 'Code Quality';
 

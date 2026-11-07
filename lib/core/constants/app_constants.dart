@@ -20,7 +20,7 @@ class AppConstants {
 
   // Metrics
   static const String yearsExperience = '4+';
-  static const String completedProjects = '25+';
+  static const String completedProjects = '4';
   static const String happyClients = '15+';
   static const String codeQualityRating = '99.8%';
 
