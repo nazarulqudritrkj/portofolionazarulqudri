@@ -92,7 +92,7 @@ class _HeroVisualCardState extends State<HeroVisualCard>
                                 ),
                               ),
                             ),
-                            // Inner circle with gradient avatar
+                            // Inner circle with profile photo or gradient avatar
                             Container(
                               width: 108,
                               height: 108,
@@ -120,10 +120,19 @@ class _HeroVisualCardState extends State<HeroVisualCard>
                                 ],
                               ),
                               alignment: Alignment.center,
-                              child: const Icon(
-                                Icons.terminal_rounded,
-                                color: Colors.white,
-                                size: 50,
+                              child: ClipOval(
+                                child: Image.asset(
+                                  'lib/images/fotoprofil/fotoNazarulQudri.jpeg',
+                                  width: 108,
+                                  height: 108,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      const Icon(
+                                    Icons.terminal_rounded,
+                                    color: Colors.white,
+                                    size: 50,
+                                  ),
+                                ),
                               ),
                             ),
                             // Floating online status indicator

@@ -1,17 +1,14 @@
-# portofolio
+# Nazarul Qudri - Portofolio Digital & Engineering Showcase
 
-A new Flutter project.
+> **Clean Island / Airy Minimalist Portfolio** dibangun menggunakan Flutter Web & Clean Architecture.
 
-## Getting Started
+🔗 **Live Website:** [https://nazarulqudritrkj.github.io/portofolionazarulqudri/](https://nazarulqudritrkj.github.io/portofolionazarulqudri/)
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### ✨ Fitur Utama
+- **Aesthetic:** Clean Island (Putih bersih, aksen Biru Laut & Soft Cyan, Dark Charcoal).
+- **Interactive Visuals:** 3D Card Tilt, Pulsing Status Indicator, Floating Glassmorphism Cards.
+- **Bilingual:** Dukungan penuh Bahasa Indonesia (ID 🇮🇩) dan English (EN 🇬🇧).
+- **11 Sertifikasi Asli:** Disertai preview interaktif halaman depan dan belakang (Page 1 & 2) dengan zoom controller.
+- **Multi-platform:** Responsif untuk Desktop, Tablet, dan Mobile.
