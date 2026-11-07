@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:printing/printing.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_constants.dart';
 import '../../core/constants/app_typography.dart';
-import '../../core/utils/url_helper.dart';
+import '../../core/utils/cv_pdf_generator.dart';
 
 class DigitalCvModal extends StatelessWidget {
   const DigitalCvModal({super.key});
@@ -1069,6 +1070,29 @@ class _DownloadButton extends StatefulWidget {
 
 class _DownloadButtonState extends State<_DownloadButton> {
   bool _isHovered = false;
+  bool _isLoading = false;
+
+  Future<void> _generateAndDownload() async {
+    setState(() => _isLoading = true);
+    try {
+      final pdfBytes = await CvPdfGenerator.generate();
+      await Printing.sharePdf(
+        bytes: pdfBytes,
+        filename: 'CV_Nazarul_Qudri_STRT.pdf',
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Gagal generate PDF: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -1077,7 +1101,7 @@ class _DownloadButtonState extends State<_DownloadButton> {
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       child: GestureDetector(
-        onTap: () => UrlHelper.downloadCv(context: context),
+        onTap: _isLoading ? null : _generateAndDownload,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 160),
           padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 13),
@@ -1101,10 +1125,20 @@ class _DownloadButtonState extends State<_DownloadButton> {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.file_download_rounded, color: Colors.white, size: 18),
+              if (_isLoading)
+                const SizedBox(
+                  width: 18,
+                  height: 18,
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                    strokeWidth: 2,
+                  ),
+                )
+              else
+                const Icon(Icons.file_download_rounded, color: Colors.white, size: 18),
               const SizedBox(width: 8),
               Text(
-                'Unduh CV (PDF)',
+                _isLoading ? 'Membuat PDF...' : 'Unduh CV (PDF)',
                 style: AppTypography.button.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
