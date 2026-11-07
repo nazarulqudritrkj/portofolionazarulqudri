@@ -160,8 +160,9 @@ class DigitalCvModal extends StatelessWidget {
                                         children: [
                                           _buildContactChip(Icons.school_rounded, 'Politeknik Negeri Lhokseumawe'),
                                           _buildContactChip(Icons.location_on_rounded, 'Lhokseumawe, Aceh, Indonesia'),
-                                          _buildContactChip(Icons.email_rounded, 'nazarulqudri@gmail.com'),
+                                          _buildContactChip(Icons.email_rounded, AppConstants.email),
                                           _buildContactChip(Icons.code_rounded, 'github.com/nazarulqudritrkj'),
+                                          _buildContactChip(Icons.link_rounded, 'linkedin.com/in/nazarul-qudri'),
                                         ],
                                       ),
                                     ],

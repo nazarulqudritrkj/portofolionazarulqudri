@@ -13,9 +13,10 @@ class AppConstants {
   static const String availabilityStatus = 'Terbuka untuk Peluang Baru & Proyek Rekayasa';
 
   // Contact & Socials
-  static const String email = 'nazarulqudri@gmail.com';
+  static const String email = 'zarqud@gmail.com';
   static const String githubUrl = 'https://github.com/nazarulqudritrkj';
-  static const String linkedinUrl = 'https://linkedin.com/in/nazarulqudri';
+  static const String linkedinUrl =
+      'https://www.linkedin.com/in/nazarul-qudri-62178824a?utm_source=share_via&utm_content=profile&utm_medium=member_android';
   static const String resumeUrl = 'CV_Nazarul_Qudri_STRT.pdf';
 
   // Metrics
