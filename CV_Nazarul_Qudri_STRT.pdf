@@ -1,0 +1,128 @@
+%PDF-1.4
+1 0 obj
+<<
+  /Type /Catalog
+  /Pages 2 0 R
+>>
+endobj
+2 0 obj
+<<
+  /Type /Pages
+  /Kids [3 0 R]
+  /Count 1
+>>
+endobj
+3 0 obj
+<<
+  /Type /Page
+  /Parent 2 0 R
+  /MediaBox [0 0 595 842]
+  /Resources <<
+    /Font <<
+      /F1 4 0 R
+    >>
+  >>
+  /Contents 5 0 R
+>>
+endobj
+4 0 obj
+<<
+  /Type /Font
+  /Subtype /Type1
+  /BaseFont /Helvetica-Bold
+>>
+endobj
+5 0 obj
+<<
+  /Length 2911
+>>
+stream
+BT
+/F1 18 Tf
+50 780 Td
+(NAZARUL QUDRI, S.Tr.T.) Tj
+/F1 10 Tf
+0 -18 Td
+(Sarjana Terapan Teknik - D4 Teknologi Rekayasa Komputer Jaringan | Politeknik Negeri Lhokseumawe) Tj
+0 -14 Td
+(Email: nazarulqudri@gmail.com | Lokasi: Lhokseumawe, Aceh | GitHub: github.com/nazarulqudritrkj) Tj
+0 -24 Td
+/F1 12 Tf
+(RINGKASAN PROFIL EKSEKUTIF) Tj
+/F1 9 Tf
+0 -14 Td
+(Software Engineer dan Sarjana Terapan Teknik (S.Tr.T.) lulusan Jurusan TIK Politeknik Negeri Lhokseumawe.) Tj
+0 -12 Td
+(Spesialis dalam arsitektur aplikasi mobile Flutter (BLoC, Clean Architecture), rekayasa siber-fisik (IoT CPS),) Tj
+0 -12 Td
+(penerapan 7 Lapisan Model OSI, sistem kecerdasan buatan (Rule-Based Decision Systems), dan telemetri MQTT/TLS.) Tj
+0 -20 Td
+/F1 12 Tf
+(PENDIDIKAN FORMAL) Tj
+/F1 10 Tf
+0 -14 Td
+(D4 Teknologi Rekayasa Komputer Jaringan (TRKJ) - Politeknik Negeri Lhokseumawe (2022 - 2026)) Tj
+/F1 9 Tf
+0 -12 Td
+(Gelar Akademis: Sarjana Terapan Teknik (S.Tr.T.) - Predikat Sangat Memuaskan / Pujian) Tj
+0 -12 Td
+(Skripsi: Rancang Bangun IoT pada Prototype Smart Home dengan Penerapan Rule-Based Decision System) Tj
+0 -12 Td
+(sebagai Artificial Intelligence (Aplikasi STARZAR - Implementasi Lengkap 7 OSI Layer & MQTT HiveMQ)) Tj
+0 -20 Td
+/F1 12 Tf
+(KEAHLIAN UTAMA & SPESIALISASI) Tj
+/F1 9 Tf
+0 -14 Td
+(* Mobile Development: Flutter Cross-Platform, Dart Language, Clean Architecture, Reactive BLoC Pattern.) Tj
+0 -12 Td
+(* Artificial Intelligence (AI): Rule-Based Decision Systems (Forward Chaining), Generative AI (AI Studio).) Tj
+0 -12 Td
+(* IoT & Networking: Cyber-Physical Systems (CPS), Telemetri Real-time MQTT/TLS, ESP32, ESP8266, VLAN.) Tj
+0 -12 Td
+(* Technical & Admin Tools: Microsoft Office (Word, Excel, PowerPoint), Figma UI/UX, VS Code, Git/GitHub.) Tj
+0 -20 Td
+/F1 12 Tf
+(PROYEK REKAYASA UNGGULAN) Tj
+/F1 9 Tf
+0 -14 Td
+(1. STARZAR - Smart Exclusive Home IoT & AI (Skripsi S.Tr.T. TRKJ PNL - 7 OSI Layer, Latensi 180ms, 0% Packet Loss)) Tj
+0 -12 Td
+(2. Website Sistem Informasi & Pendaftaran Kuliah Umum Jurusan TIK PNL (2025 - 2026) (Portal Seminar & QR Absensi)) Tj
+0 -12 Td
+(3. Website Sistem Informasi Sertifikat Dosen PNL (2025 - 2026) (Repositori Kredensial, BKD, Akreditasi Jurusan)) Tj
+0 -12 Td
+(4. Website Sistem Informasi Sertifikat Mahasiswa/i TIK PNL (Penerbitan E-Sertifikat Digital & Validasi SKPI)) Tj
+0 -20 Td
+/F1 12 Tf
+(PRESTASI & KEJUARAAN NASIONAL) Tj
+/F1 9 Tf
+0 -14 Td
+(* Finalis Inovasi Perangkat Lunak - KMIPN VI 2025 (Kompetisi Mahasiswa Informatika Politeknik Nasional)) Tj
+0 -12 Td
+(* Juara / Medali Nasional: NSO 5 (English), OSPN (Akuntansi & Logika Kuantitatif), OSH 2025 (Bahasa Indonesia)) Tj
+0 -20 Td
+/F1 12 Tf
+(SERTIFIKASI RESMI KOMINFO DIGITAL TALENT SCHOLARSHIP (11 SERTIFIKAT)) Tj
+/F1 9 Tf
+0 -14 Td
+(* 11 Sertifikasi Kompetensi Profesional Terverifikasi Kementerian Komunikasi dan Informatika RI (2024 - 2025)) Tj
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000266 00000 n 
+0000000347 00000 n 
+trailer
+<<
+  /Size 6
+  /Root 1 0 R
+>>
+startxref
+3321
+%%EOF

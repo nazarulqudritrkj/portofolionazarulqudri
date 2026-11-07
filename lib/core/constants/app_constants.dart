@@ -16,7 +16,7 @@ class AppConstants {
   static const String email = 'nazarulqudri@gmail.com';
   static const String githubUrl = 'https://github.com/nazarulqudritrkj';
   static const String linkedinUrl = 'https://linkedin.com/in/nazarulqudri';
-  static const String resumeUrl = 'assets/resume/CV_Nazarul_Qudri_STRT.pdf';
+  static const String resumeUrl = 'CV_Nazarul_Qudri_STRT.pdf';
 
   // Metrics
   static const String yearsExperience = '4+';

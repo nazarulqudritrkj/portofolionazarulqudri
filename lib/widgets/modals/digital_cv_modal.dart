@@ -263,7 +263,7 @@ class DigitalCvModal extends StatelessWidget {
                             height: 44,
                             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                             onPressed: () {
-                              UrlHelper.openUrl('assets/resume/CV_Nazarul_Qudri_STRT.pdf', context: context);
+                              UrlHelper.downloadCv(context: context);
                             },
                           ),
                           CleanButton(

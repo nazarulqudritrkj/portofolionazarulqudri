@@ -64,8 +64,8 @@ class AppStrings {
       ? 'Rekayasa Aplikasi Flutter, Sistem Siber-Fisik IoT & Solusi Kecerdasan Buatan'
       : 'Engineering Flutter Apps, Cyber-Physical IoT Systems & Artificial Intelligence';
   String get heroBio => isId
-      ? 'Sarjana Terapan Teknik (S.Tr.T.) bidang TRKJ PNL & Software Engineer. Berpengalaman dalam arsitektur mobile Flutter cross-platform (Clean Architecture & BLoC), rekayasa sistem siber-fisik (IoT CPS 7 OSI Layer & MQTT/TLS), kecerdasan buatan (Rule-Based Decision Systems & AI Studio), serta pengembangan sistem informasi web institusi.'
-      : 'Bachelor of Applied Engineering (S.Tr.T.) in TRKJ from PNL & Software Engineer. Experienced in Flutter cross-platform architecture (Clean Architecture & BLoC), Cyber-Physical Systems (IoT CPS 7 OSI Layer & MQTT/TLS), Artificial Intelligence (Rule-Based Decision Systems & AI Studio), and institutional web systems.';
+      ? 'Sarjana Terapan Teknik (S.Tr.T.) bidang TRKJ PNL & Software Engineer. Berpengalaman dalam rekayasa aplikasi mobile Flutter cross-platform (Dart & BLoC), rekayasa sistem siber-fisik (IoT CPS 7 OSI Layer & MQTT/TLS), kecerdasan buatan (Rule-Based Decision Systems & AI Studio), serta pengembangan sistem informasi web institusi.'
+      : 'Bachelor of Applied Engineering (S.Tr.T.) in TRKJ from PNL & Software Engineer. Experienced in Flutter cross-platform mobile development (Dart & BLoC), Cyber-Physical Systems (IoT CPS 7 OSI Layer & MQTT/TLS), Artificial Intelligence (Rule-Based Decision Systems & AI Studio), and institutional web systems.';
   String get viewWorks => isId ? 'Lihat Portofolio' : 'View My Works';
   String get downloadCv => isId ? 'Unduh CV / Resume' : 'Download CV';
   String get specializedIn => isId ? 'KEAHLIAN UTAMA:' : 'SPECIALIZED IN:';
