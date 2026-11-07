@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -25,24 +25,13 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-
-      - name: Install Dependencies
-        run: flutter pub get
-
-      - name: Build Flutter Web
-        run: |
-          flutter build web --release --base-href "/portofolionazarulqudri/"
-          touch build/web/.nojekyll
-          cp build/web/index.html build/web/404.html
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./build/web
+          path: ./docs
 
       - name: Deploy to GitHub Pages
         id: deployment

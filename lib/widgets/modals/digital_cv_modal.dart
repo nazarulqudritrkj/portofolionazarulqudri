@@ -159,7 +159,7 @@ class DigitalCvModal extends StatelessWidget {
                                         runSpacing: 6,
                                         children: [
                                           _buildContactChip(Icons.school_rounded, 'Politeknik Negeri Lhokseumawe'),
-                                          _buildContactChip(Icons.location_on_rounded, 'Lhokseumawe / Banda Aceh'),
+                                          _buildContactChip(Icons.location_on_rounded, 'Lhokseumawe, Aceh, Indonesia'),
                                           _buildContactChip(Icons.email_rounded, 'nazarulqudri@gmail.com'),
                                           _buildContactChip(Icons.code_rounded, 'github.com/nazarulqudritrkj'),
                                         ],

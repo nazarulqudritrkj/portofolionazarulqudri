@@ -9,7 +9,7 @@ class AppConstants {
   static const String detailedBio =
       'Software Engineer dan Sarjana Terapan Teknik (S.Tr.T.) dari Program Studi D4 Teknologi Rekayasa Komputer Jaringan (TRKJ), Jurusan Teknologi Informasi dan Komputer (TIK) Politeknik Negeri Lhokseumawe. Berfokus pada pengembangan aplikasi Flutter multi-platform berkinerja tinggi, rekayasa siber-fisik (IoT CPS) berbasis 7 Lapisan OSI Layer, implementasi kecerdasan buatan (Rule-Based Decision Systems & AI Studio), serta sistem informasi web akademik terintegrasi.';
   
-  static const String location = 'Lhokseumawe / Banda Aceh, ID • UTC+7';
+  static const String location = 'Lhokseumawe, Aceh, ID';
   static const String availabilityStatus = 'Terbuka untuk Peluang Baru & Proyek Rekayasa';
 
   // Contact & Socials

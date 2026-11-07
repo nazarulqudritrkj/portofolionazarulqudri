@@ -17,82 +17,78 @@ class _ArchitectureTerminalState extends State<ArchitectureTerminal> {
 
   final List<_CodeSnippet> _snippets = [
     const _CodeSnippet(
-      filename: 'sensor_telemetry_bloc.dart',
-      language: 'Dart (Clean BLoC)',
+      filename: 'starzar_telemetry_bloc.dart',
+      language: 'Flutter BLoC (Layer 7)',
       code: '''
-class SensorTelemetryBloc extends Bloc<SensorEvent, SensorState> {
-  final MqttTelemetryRepository _repository;
-  StreamSubscription<SensorReading>? _streamSub;
+class StarzarTelemetryBloc extends Bloc<StarzarEvent, StarzarState> {
+  final MqttHiveMqRepository _mqttRepository;
+  StreamSubscription<SensorTelemetry>? _telemetrySub;
 
-  SensorTelemetryBloc(this._repository) : super(SensorInitial()) {
-    on<SubscribeToEdgeNodes>(_onSubscribe);
-    on<TelemetryReceived>(_onTelemetryReceived);
+  StarzarTelemetryBloc(this._mqttRepository) : super(StarzarInitial()) {
+    on<ConnectToHiveMqBroker>(_onConnect);
+    on<TelemetryStreamUpdated>(_onTelemetryUpdated);
+    on<ExecuteActuatorOverride>(_onActuatorOverride);
   }
 
-  Future<void> _onSubscribe(
-    SubscribeToEdgeNodes event,
-    Emitter<SensorState> emit,
+  Future<void> _onConnect(
+    ConnectToHiveMqBroker event,
+    Emitter<StarzarState> emit,
   ) async {
-    emit(SensorConnecting());
-    await _streamSub?.cancel();
-    _streamSub = _repository.streamSensorNodes(event.nodeIds).listen(
-      (reading) => add(TelemetryReceived(reading)),
-      onError: (err) => emit(SensorError(err.toString())),
+    emit(StarzarConnecting());
+    await _telemetrySub?.cancel();
+    _telemetrySub = _mqttRepository.subscribeZones(event.zoneTopics).listen(
+      (telemetry) => add(TelemetryStreamUpdated(telemetry)),
+      onError: (err) => emit(StarzarError(err.toString())),
     );
   }
 }''',
     ),
     const _CodeSnippet(
-      filename: 'clean_domain_usecase.dart',
-      language: 'Domain Layer',
+      filename: 'starzar_rule_based_ai.dart',
+      language: 'AI Forward Chaining',
       code: '''
-abstract class UseCase<Type, Params> {
-  Future<Either<Failure, Type>> call(Params params);
-}
-
-class DispatchEmergencyActuator 
-    implements UseCase<ActuatorResult, ActuatorParams> {
-  final IIoTDeviceRepository repository;
-
-  DispatchEmergencyActuator(this.repository);
-
-  @override
-  Future<Either<Failure, ActuatorResult>> call(
-    ActuatorParams params,
-  ) async {
-    // Edge validation and low-latency MQTT command dispatch
-    return await repository.triggerValve(
-      valveId: params.valveId,
-      pressureKPa: params.targetPressure,
-    );
+class RuleBasedDecisionSystem {
+  // Autonomous Emergency Mitigation Inference Engine
+  static DecisionResult evaluateEmergencyState({
+    required double gasPpm,
+    required double smokeIndex,
+    required bool flameDetected,
+    required double roomTempCelsius,
+  }) {
+    if (flameDetected || (gasPpm > 400 && smokeIndex > 250)) {
+      return DecisionResult(
+        level: HazardLevel.critical,
+        actions: [
+          ActuatorAction.triggerAlarmSirine(),
+          ActuatorAction.activateExhaustFanMax(),
+          ActuatorAction.cutMainPowerRelay(),
+          ActuatorAction.sendPriorityPopupNotification(),
+        ],
+        responseTimeMs: 180,
+      );
+    }
+    return DecisionResult.normal();
   }
 }''',
     ),
     const _CodeSnippet(
-      filename: 'clean_island_theme.dart',
-      language: 'Design System',
+      filename: 'osi_mqtt_hivemq_client.dart',
+      language: '7 OSI Layer (Transport & Session)',
       code: '''
-class CleanIslandTokens {
-  static const Color pureCanvas = Color(0xFFF8FAFC);
-  static const Color skyAccent = Color(0xFF0284C7);
-  static const Color oceanDeep = Color(0xFF2563EB);
-  static const Color textCharcoal = Color(0xFF0F172A);
+class OsiMqttHiveMqClient {
+  // Implementation of Layer 4 (Transport TCP) & Layer 5 (Session MQTT)
+  static final MqttServerClient client = MqttServerClient.withPort(
+    'broker.hivemq.com',
+    'starzar_flutter_client_v1',
+    8883, // TLS Encrypted Port
+  )..secure = true
+   ..keepAlivePeriod = 20
+   ..logging(on: false);
 
-  static BoxDecoration glassSurface({double blur = 16.0}) => BoxDecoration(
-    color: Colors.white.withValues(alpha: 0.85),
-    borderRadius: BorderRadius.circular(24),
-    border: Border.all(
-      color: Colors.white.withValues(alpha: 0.8),
-      width: 1.2,
-    ),
-    boxShadow: [
-      BoxShadow(
-        color: textCharcoal.withValues(alpha: 0.04),
-        blurRadius: blur,
-        offset: const Offset(0, 8),
-      ),
-    ],
-  );
+  static Future<bool> establishSecureSession() async {
+    final status = await client.connect();
+    return status?.state == MqttConnectionState.connected;
+  }
 }''',
     ),
   ];

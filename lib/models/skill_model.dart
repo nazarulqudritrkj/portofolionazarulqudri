@@ -55,24 +55,24 @@ class SkillModel {
       description: 'Asynchronous programming (Streams, Futures), Isolate multi-threading, Sound Null Safety, dan object-oriented architecture.',
     ),
     const SkillModel(
-      name: 'Clean Architecture & BLoC',
+      name: 'Mobile Architecture & BLoC',
       level: 'Expert',
       proficiency: 0.93,
       category: SkillCategory.mobile,
       icon: Icons.layers_rounded,
       accentColor: Color(0xFF0EA5E9),
       experienceYears: '3+ Years',
-      description: 'Pemisahan Domain/Data/Presentation layer yang kokoh, Reactive BLoC & Riverpod, repository pattern, dan high-maintainability code.',
+      description: 'Pemisahan layer yang kokoh (Domain, Data, Presentation), Reactive BLoC & Riverpod, repository pattern, dan high-maintainability code.',
     ),
     const SkillModel(
-      name: 'Responsive & Glass UI',
+      name: 'Responsive & Modern UI',
       level: 'Master',
       proficiency: 0.95,
       category: SkillCategory.mobile,
       icon: Icons.palette_rounded,
       accentColor: Color(0xFF06B6D4),
       experienceYears: '4+ Years',
-      description: 'Clean Island & Glassmorphism visual design, custom painters, micro-interactions, adaptabilitas tablet/desktop/mobile.',
+      description: 'Desain antarmuka modern & responsif, custom painters, micro-interactions, adaptabilitas tablet/desktop/mobile.',
     ),
 
     // 2. Artificial Intelligence (AI)

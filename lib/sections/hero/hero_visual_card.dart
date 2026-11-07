@@ -277,7 +277,7 @@ class _HeroVisualCardState extends State<HeroVisualCard>
                               const SizedBox(width: 8),
                               Flexible(
                                 child: Text(
-                                  'Clean Architecture • Reactive BLoC',
+                                  'Mobile Flutter • IoT CPS (7 OSI Layer) • Artificial Intelligence',
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: AppTypography.code.copyWith(

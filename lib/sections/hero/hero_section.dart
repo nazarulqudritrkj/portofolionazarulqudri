@@ -230,7 +230,7 @@ class HeroSection extends StatelessWidget {
                 Icons.psychology_rounded, 'AI (Rule-Based)', const Color(0xFF7C3AED)),
             const SizedBox(width: 8),
             _buildMiniTechIcon(
-                Icons.layers_rounded, 'Clean Arch', const Color(0xFF10B981)),
+                Icons.lan_rounded, 'Networking (TRKJ)', const Color(0xFF10B981)),
           ],
         )
             .animate()

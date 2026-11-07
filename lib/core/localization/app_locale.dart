@@ -89,18 +89,18 @@ class AppStrings {
       ? 'Dalam skripsi dan rekayasa teknologi saya, saya membangun ekosistem otomasi cerdas seperti Rule-Based Decision System (RBDS), telemetri MQTT HiveMQ Cloud, arsitektur basis data lokal Hive terdistribusi, serta pengujian QoS berstandar telekomunikasi internasional ITU-T Y.1010/G.1010.'
       : 'Across my engineering endeavors, I build intelligent automation ecosystems including Rule-Based Decision Systems (RBDS), MQTT HiveMQ Cloud telemetry, distributed Hive local databases, and telecommunications QoS benchmarks following ITU-T Y.1010/G.1010 international standards.';
   String get downloadFullResume => isId ? 'Unduh Resume Lengkap' : 'Download Complete Resume';
-  String get pillar1Title => isId ? 'Clean Architecture Utama' : 'Clean Architecture First';
+  String get pillar1Title => isId ? 'Mobile Flutter Cross-Platform' : 'Mobile Flutter Cross-Platform';
   String get pillar1Desc => isId
-      ? 'Pemisahan domain layer, BLoC / Riverpod state management yang kokoh, dan pola repository untuk keterawatan maksimal.'
-      : 'Decoupled domain layers, robust BLoC / Riverpod state handlers, and repository patterns that guarantee high maintainability.';
-  String get pillar2Title => isId ? 'Integrasi Hardware & IoT' : 'Hardware & IoT Symphony';
+      ? 'Pengembangan aplikasi multi-platform (Android, Web, Desktop) berkinerja tinggi menggunakan Dart, arsitektur modular terstruktur, dan reactive BLoC state management.'
+      : 'High-performance multi-platform application engineering with Dart, structured modular architecture, and reactive BLoC state handlers.';
+  String get pillar2Title => isId ? 'IoT & Cyber-Physical Systems (CPS)' : 'IoT & Cyber-Physical Systems (CPS)';
   String get pillar2Desc => isId
-      ? 'Menghubungkan mikrokontroler (ESP32, Arduino) dengan pipa data telemetri MQTT dan WebSocket berkecepatan tinggi.'
-      : 'Bridging physical sensor devices (ESP32, Arduino) with real-time MQTT and WebSocket telemetry pipelines.';
-  String get pillar3Title => isId ? 'Antarmuka Halus 60/120 FPS' : 'Fluid 60 / 120 FPS Experience';
+      ? 'Penerapan penuh 7 Lapisan Model OSI, integrasi mikrokontroler ESP32/ESP8266, dan pipa data telemetri MQTT/TLS HiveMQ Cloud berlatensi rendah.'
+      : 'Comprehensive 7 OSI Layer architecture, ESP32/ESP8266 microcontroller integration, and low-latency MQTT/TLS HiveMQ Cloud telemetry.';
+  String get pillar3Title => isId ? 'Artificial Intelligence & Smart Logic' : 'Artificial Intelligence & Smart Logic';
   String get pillar3Desc => isId
-      ? 'Optimasi siklus render widget, efek glassmorphism, dan mikro-interaksi untuk kelancaran visual tingkat tinggi.'
-      : 'Tuned widget rebuild cycles, custom painter shaders, and micro-interactions delivering native desktop and mobile fluidity.';
+      ? 'Pengambilan keputusan otonom berbasis Rule-Based Decision Systems (Forward Chaining) serta integrasi modern Google AI Studio & Gemini API.'
+      : 'Autonomous decision-making via Rule-Based Decision Systems (Forward Chaining) and modern Google AI Studio & Gemini API integration.';
   String get timelineTitle => isId ? 'TIMELINE PENGALAMAN & PENDIDIKAN' : 'EXPERIENCE & EDUCATION TIMELINE';
 
   // Academic Credentials Section (Ijazah & Transkrip)
@@ -194,7 +194,7 @@ class AppStrings {
   // Footer
   String get backToTop => isId ? 'Kembali ke Atas' : 'Back to Top';
   String get copyrightNote => isId
-      ? 'Dirancang dengan Arsitektur Clean Island • Flutter Web Responsif'
-      : 'Architected with Flutter Web • Clean Island Design System';
+      ? 'Dirancang secara profesional & Terlindungi UU ITE • Portofolio Resmi Sarjana Terapan Teknik (S.Tr.T.)'
+      : 'Professionally Engineered & Protected under UU ITE • Official Engineering Portfolio of Nazarul Qudri, S.Tr.T.';
 }
 

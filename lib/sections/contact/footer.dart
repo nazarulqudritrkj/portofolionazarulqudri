@@ -77,19 +77,41 @@ class _FooterState extends State<Footer> {
                     Row(
                       children: [
                         Container(
-                          width: 36,
-                          height: 36,
+                          width: 38,
+                          height: 38,
                           decoration: BoxDecoration(
-                            gradient: AppColors.primaryGradient,
-                            borderRadius: BorderRadius.circular(10),
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: AppColors.primary,
+                              width: 1.8,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColors.primary.withValues(alpha: 0.25),
+                                blurRadius: 8,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
                           ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            AppConstants.initials,
-                            style: AppTypography.headingSmall.copyWith(
-                              color: Colors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
+                          child: ClipOval(
+                            child: Image.asset(
+                              'lib/images/fotoprofil/fotoNazarulQudri_profile.jpg',
+                              width: 38,
+                              height: 38,
+                              fit: BoxFit.cover,
+                              filterQuality: FilterQuality.high,
+                              errorBuilder: (context, error, stackTrace) => Container(
+                                color: AppColors.primary,
+                                alignment: Alignment.center,
+                                child: Text(
+                                  AppConstants.initials,
+                                  style: AppTypography.headingSmall.copyWith(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -105,10 +127,11 @@ class _FooterState extends State<Footer> {
                               ),
                             ),
                             Text(
-                              'Clean Island Architecture',
+                              'Dirancang secara profesional & Terlindungi UU ITE',
                               style: AppTypography.bodySmall.copyWith(
                                 color: AppColors.primary,
                                 fontSize: 11,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ],
@@ -188,7 +211,7 @@ class _FooterState extends State<Footer> {
           : CrossAxisAlignment.start,
       children: [
         Text(
-          '© 2026 ${AppConstants.fullName}. All rights reserved.',
+          '© 2026 ${AppConstants.fullName} All rights reserved.',
           style: AppTypography.bodySmall.copyWith(
             color: AppColors.textSecondary,
             fontSize: 12.5,

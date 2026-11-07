@@ -57,15 +57,37 @@ class MobileDrawer extends StatelessWidget {
                                 width: 38,
                                 height: 38,
                                 decoration: BoxDecoration(
-                                  gradient: AppColors.primaryGradient,
-                                  borderRadius: BorderRadius.circular(10),
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: AppColors.primary,
+                                    width: 1.8,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColors.primary.withValues(alpha: 0.25),
+                                      blurRadius: 8,
+                                      offset: const Offset(0, 2),
+                                    ),
+                                  ],
                                 ),
-                                alignment: Alignment.center,
-                                child: Text(
-                                  AppConstants.initials,
-                                  style: AppTypography.headingSmall.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
+                                child: ClipOval(
+                                  child: Image.asset(
+                                    'lib/images/fotoprofil/fotoNazarulQudri_profile.jpg',
+                                    width: 38,
+                                    height: 38,
+                                    fit: BoxFit.cover,
+                                    filterQuality: FilterQuality.high,
+                                    errorBuilder: (context, error, stackTrace) => Container(
+                                      color: AppColors.primary,
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        AppConstants.initials,
+                                        style: AppTypography.headingSmall.copyWith(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),

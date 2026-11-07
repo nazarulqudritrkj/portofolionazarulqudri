@@ -165,27 +165,41 @@ class FloatingNavbar extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              width: 40,
-              height: 40,
+              width: 38,
+              height: 38,
               decoration: BoxDecoration(
-                gradient: AppColors.primaryGradient,
-                borderRadius: BorderRadius.circular(12),
+                shape: BoxShape.circle,
+                border: Border.all(
+                  color: AppColors.primary,
+                  width: 1.8,
+                ),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.primary.withValues(alpha: 0.35),
-                    blurRadius: 12,
-                    offset: const Offset(0, 4),
+                    color: AppColors.primary.withValues(alpha: 0.25),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
                   ),
                 ],
               ),
-              alignment: Alignment.center,
-              child: Text(
-                AppConstants.initials,
-                style: AppTypography.headingSmall.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 15,
-                  letterSpacing: 0.5,
+              child: ClipOval(
+                child: Image.asset(
+                  'lib/images/fotoprofil/fotoNazarulQudri_profile.jpg',
+                  width: 38,
+                  height: 38,
+                  fit: BoxFit.cover,
+                  filterQuality: FilterQuality.high,
+                  errorBuilder: (context, error, stackTrace) => Container(
+                    color: AppColors.primary,
+                    alignment: Alignment.center,
+                    child: Text(
+                      AppConstants.initials,
+                      style: AppTypography.headingSmall.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),

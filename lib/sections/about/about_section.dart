@@ -143,7 +143,7 @@ class AboutSection extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Banda Aceh, Indonesia • UTC+7',
+                        'Lhokseumawe, Aceh, Indonesia • UTC+7',
                         style: AppTypography.bodySmall.copyWith(
                           color: AppColors.textMuted,
                         ),

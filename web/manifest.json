@@ -1,11 +1,11 @@
 {
-    "name": "Nazarul Qudri - Flutter & IoT Solutions Engineer",
-    "short_name": "NQ Portfolio",
+    "name": "Nazarul Qudri, S.Tr.T. - Sarjana Terapan Teknik TRKJ PNL",
+    "short_name": "Nazarul Qudri",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#F8FAFC",
     "theme_color": "#0284C7",
-    "description": "Clean Island Portfolio of Nazarul Qudri - High-Performance Flutter, IoT, and Clean Architecture Solutions.",
+    "description": "Portofolio Resmi Nazarul Qudri, S.Tr.T. - Sarjana Terapan Teknik TRKJ Politeknik Negeri Lhokseumawe. Spesialisasi Mobile Flutter, IoT CPS (7 OSI Layer), dan Artificial Intelligence. Terlindungi UU ITE.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
