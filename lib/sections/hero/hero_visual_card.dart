@@ -74,28 +74,28 @@ class _HeroVisualCardState extends State<HeroVisualCard>
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // Avatar / Branding Circle
+                        // Avatar / Branding Circle with Nazarul's Photo
                         Stack(
                           alignment: Alignment.center,
                           children: [
                             // Soft pulsing ring
                             Container(
-                              width: 130,
-                              height: 130,
+                              width: 165,
+                              height: 165,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 gradient: RadialGradient(
                                   colors: [
-                                    AppColors.primaryLight.withValues(alpha: 0.4),
+                                    AppColors.primaryLight.withValues(alpha: 0.45),
                                     Colors.transparent,
                                   ],
                                 ),
                               ),
                             ),
-                            // Inner circle with profile photo or gradient avatar
+                            // Inner circle with high-resolution profile photo
                             Container(
-                              width: 108,
-                              height: 108,
+                              width: 135,
+                              height: 135,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 gradient: const LinearGradient(
@@ -114,38 +114,48 @@ class _HeroVisualCardState extends State<HeroVisualCard>
                                 boxShadow: [
                                   BoxShadow(
                                     color: AppColors.primary.withValues(alpha: 0.35),
-                                    blurRadius: 20,
-                                    offset: const Offset(0, 8),
+                                    blurRadius: 24,
+                                    offset: const Offset(0, 10),
                                   ),
                                 ],
                               ),
                               alignment: Alignment.center,
                               child: ClipOval(
                                 child: Image.asset(
-                                  'lib/images/fotoprofil/fotoNazarulQudri.jpeg',
-                                  width: 108,
-                                  height: 108,
+                                  'lib/images/fotoprofil/fotoNazarulQudri_profile.jpg',
+                                  width: 135,
+                                  height: 135,
                                   fit: BoxFit.cover,
+                                  filterQuality: FilterQuality.high,
                                   errorBuilder: (context, error, stackTrace) =>
-                                      const Icon(
-                                    Icons.terminal_rounded,
-                                    color: Colors.white,
-                                    size: 50,
+                                      Image.asset(
+                                    'lib/images/fotoprofil/fotoNazarulQudri.jpeg',
+                                    width: 135,
+                                    height: 135,
+                                    fit: BoxFit.cover,
+                                    alignment: const Alignment(0, -0.6),
+                                    filterQuality: FilterQuality.high,
+                                    errorBuilder: (context, error, stackTrace) =>
+                                        const Icon(
+                                      Icons.person_rounded,
+                                      color: Colors.white,
+                                      size: 60,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                             // Floating online status indicator
                             Positioned(
-                              bottom: 4,
-                              right: 8,
+                              bottom: 6,
+                              right: 12,
                               child: Container(
-                                width: 22,
-                                height: 22,
+                                width: 24,
+                                height: 24,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: AppColors.onlineGreen,
-                                  border: Border.all(color: Colors.white, width: 3),
+                                  border: Border.all(color: Colors.white, width: 3.5),
                                   boxShadow: [
                                     BoxShadow(
                                       color: AppColors.onlineGreen.withValues(alpha: 0.5),

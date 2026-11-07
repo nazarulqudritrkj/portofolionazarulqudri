@@ -90,19 +90,48 @@ class AboutSection extends StatelessWidget {
               Row(
                 children: [
                   Container(
-                    width: 40,
-                    height: 40,
+                    width: 52,
+                    height: 52,
                     decoration: BoxDecoration(
-                      color: AppColors.softCyan,
-                      borderRadius: BorderRadius.circular(12),
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: AppColors.primary,
+                        width: 2.5,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.primary.withValues(alpha: 0.25),
+                          blurRadius: 12,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
                     ),
-                    child: const Icon(
-                      Icons.person_pin_rounded,
-                      color: AppColors.primary,
-                      size: 24,
+                    child: ClipOval(
+                      child: Image.asset(
+                        'lib/images/fotoprofil/fotoNazarulQudri_profile.jpg',
+                        width: 52,
+                        height: 52,
+                        fit: BoxFit.cover,
+                        filterQuality: FilterQuality.high,
+                        errorBuilder: (context, error, stackTrace) =>
+                            Image.asset(
+                          'lib/images/fotoprofil/fotoNazarulQudri.jpeg',
+                          width: 52,
+                          height: 52,
+                          fit: BoxFit.cover,
+                          alignment: const Alignment(0, -0.6),
+                          filterQuality: FilterQuality.high,
+                          errorBuilder: (context, error, stackTrace) =>
+                              const Icon(
+                            Icons.person_pin_rounded,
+                            color: AppColors.primary,
+                            size: 28,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                  const SizedBox(width: 14),
+                  const SizedBox(width: 16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
