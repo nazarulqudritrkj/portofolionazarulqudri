@@ -82,16 +82,39 @@ class UrlHelper {
   }
 
   static Future<void> sendEmail(String email, {String subject = '', String body = ''}) async {
+    final queryParams = <String, String>{};
+    if (subject.isNotEmpty) queryParams['subject'] = subject;
+    if (body.isNotEmpty) queryParams['body'] = body;
+
     final Uri emailLaunchUri = Uri(
       scheme: 'mailto',
       path: email,
-      queryParameters: {
-        if (subject.isNotEmpty) 'subject': subject,
-        if (body.isNotEmpty) 'body': body,
-      },
+      queryParameters: queryParams.isNotEmpty ? queryParams : null,
     );
+
     try {
-      await launchUrl(emailLaunchUri);
+      if (await canLaunchUrl(emailLaunchUri)) {
+        await launchUrl(emailLaunchUri, mode: LaunchMode.externalApplication);
+        return;
+      }
+    } catch (_) {}
+
+    // Web fallback: Direct Gmail Web compose in new tab
+    if (kIsWeb) {
+      try {
+        final gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=$email'
+            '${subject.isNotEmpty ? '&su=${Uri.encodeComponent(subject)}' : ''}'
+            '${body.isNotEmpty ? '&body=${Uri.encodeComponent(body)}' : ''}';
+        final gmailUri = Uri.parse(gmailUrl);
+        await launchUrl(gmailUri, mode: LaunchMode.externalApplication);
+        return;
+      } catch (e) {
+        debugPrint('Gmail web compose error: $e');
+      }
+    }
+
+    try {
+      await launchUrl(emailLaunchUri, mode: LaunchMode.externalApplication);
     } catch (e) {
       debugPrint('Error sending email: $e');
     }
