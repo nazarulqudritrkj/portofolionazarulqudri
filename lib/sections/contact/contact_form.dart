@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
+import '../../core/constants/app_constants.dart';
 import '../../core/constants/app_typography.dart';
 import '../../core/localization/app_locale.dart';
+import '../../core/utils/url_helper.dart';
 import '../../widgets/cards/glass_card.dart';
 import '../../widgets/common/clean_button.dart';
 
@@ -36,8 +38,35 @@ class _ContactFormState extends State<ContactForm> {
 
     setState(() => _isSubmitting = true);
 
-    // Simulate sending network request
-    await Future.delayed(const Duration(milliseconds: 1400));
+    final senderName = _nameController.text.trim();
+    final senderEmail = _emailController.text.trim();
+    final subjectTopic = _subjectController.text.trim();
+    final messageBody = _messageController.text.trim();
+
+    final emailSubject = subjectTopic.isNotEmpty
+        ? '[Portofolio] $subjectTopic - $senderName'
+        : '[Portofolio] Pesan Baru dari $senderName';
+
+    final emailContent = '''
+Halo Nazarul Qudri, S.Tr.T.,
+
+Pesan baru dari pengunjung portofolio Anda:
+
+• Nama Pengirim: $senderName
+• Email Pengirim: $senderEmail
+• Topik Proyek / Keperluan: $subjectTopic
+
+Detail Pesan:
+--------------------------------------------------
+$messageBody
+--------------------------------------------------
+''';
+
+    await UrlHelper.sendEmail(
+      AppConstants.email,
+      subject: emailSubject,
+      body: emailContent,
+    );
 
     if (mounted) {
       setState(() {
@@ -53,7 +82,7 @@ class _ContactFormState extends State<ContactForm> {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  strings.messageSuccess,
+                  'Membuka aplikasi email untuk mengirim ke ${AppConstants.email}...',
                   style: AppTypography.bodyMedium.copyWith(color: Colors.white),
                 ),
               ),
