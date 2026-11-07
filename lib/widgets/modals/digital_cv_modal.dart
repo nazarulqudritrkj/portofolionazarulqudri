@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:printing/printing.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_constants.dart';
 import '../../core/constants/app_typography.dart';
 import '../../core/utils/cv_pdf_generator.dart';
+import '../../core/utils/pdf_downloader_stub.dart'
+    // ignore: uri_does_not_exist
+    if (dart.library.html) '../../core/utils/pdf_downloader_web.dart';
 
 class DigitalCvModal extends StatelessWidget {
   const DigitalCvModal({super.key});
@@ -1076,10 +1078,7 @@ class _DownloadButtonState extends State<_DownloadButton> {
     setState(() => _isLoading = true);
     try {
       final pdfBytes = await CvPdfGenerator.generate();
-      await Printing.sharePdf(
-        bytes: pdfBytes,
-        filename: 'CV_Nazarul_Qudri_STRT.pdf',
-      );
+      await downloadPdfBytes(pdfBytes, 'CV_Nazarul_Qudri_STRT.pdf');
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
