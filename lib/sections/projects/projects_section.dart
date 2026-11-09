@@ -1,9 +1,14 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_typography.dart';
 import '../../core/localization/app_locale.dart';
 import '../../core/utils/responsive.dart';
+import '../../core/utils/portfolio_pdf_generator.dart';
+import '../../core/utils/pdf_downloader_stub.dart'
+    // ignore: uri_does_not_exist
+    if (dart.library.html) '../../core/utils/pdf_downloader_web.dart';
 import '../../models/project_model.dart';
 import '../../widgets/common/section_title.dart';
 import 'project_card.dart';
@@ -20,6 +25,26 @@ class _ProjectsSectionState extends State<ProjectsSection> {
   bool _isCarouselView = false;
   late final PageController _pageController;
   int _currentCarouselIndex = 0;
+  bool _isDownloadingDossier = false;
+
+  Future<void> _downloadPortfolioDossier() async {
+    setState(() => _isDownloadingDossier = true);
+    try {
+      final pdfBytes = await PortfolioPdfGenerator.generate();
+      await downloadPdfBytes(pdfBytes, 'Portofolio_Lengkap_Nazarul_Qudri_STRT.pdf');
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Gagal generate Portofolio: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isDownloadingDossier = false);
+    }
+  }
 
   @override
   void initState() {
@@ -140,10 +165,186 @@ class _ProjectsSectionState extends State<ProjectsSection> {
               _isCarouselView
                   ? _buildCarouselView(filteredProjects, viewportFraction)
                   : _buildGridView(filteredProjects, crossAxisCount, isMobile),
+
+              const SizedBox(height: 48),
+
+              // Download Dossier PDF Banner
+              _buildDownloadDossierBanner(context, strings, isMobile),
             ],
           ),
         );
       },
+    );
+  }
+
+  Widget _buildDownloadDossierBanner(
+    BuildContext context,
+    AppStrings strings,
+    bool isMobile,
+  ) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(
+        horizontal: isMobile ? 18 : 28,
+        vertical: isMobile ? 20 : 24,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: const Color(0xFFE2E8F0),
+          width: 1.2,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF0F172A).withValues(alpha: 0.04),
+            blurRadius: 16,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: isMobile
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF7C3AED).withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Icon(
+                        Icons.menu_book_rounded,
+                        color: Color(0xFF7C3AED),
+                        size: 22,
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Berkas Portofolio Lengkap (PDF)',
+                            style: AppTypography.headingSmall.copyWith(
+                              fontSize: 14.5,
+                              fontWeight: FontWeight.w700,
+                              color: const Color(0xFF0F172A),
+                            ),
+                          ),
+                          Text(
+                            'Format Dokumen Rekayasa 5 Halaman Dossier',
+                            style: AppTypography.bodySmall.copyWith(
+                              fontSize: 11.5,
+                              color: const Color(0xFF64748B),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                _buildDossierButton(),
+              ],
+            )
+          : Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF7C3AED).withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  child: const Icon(
+                    Icons.menu_book_rounded,
+                    color: Color(0xFF7C3AED),
+                    size: 26,
+                  ),
+                ),
+                const SizedBox(width: 18),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Dokumen Portofolio Rekayasa Resmi (5 Halaman Dossier PDF)',
+                        style: AppTypography.headingSmall.copyWith(
+                          fontSize: 15.5,
+                          fontWeight: FontWeight.w700,
+                          color: const Color(0xFF0F172A),
+                        ),
+                      ),
+                      const SizedBox(height: 3),
+                      Text(
+                        'Memuat studi kasus STARZAR (7 OSI Layer), 3 sistem informasi web TIK PNL, skripsi & 11 sertifikasi Kominfo DTS.',
+                        style: AppTypography.bodySmall.copyWith(
+                          fontSize: 12,
+                          color: const Color(0xFF64748B),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 20),
+                _buildDossierButton(),
+              ],
+            ),
+    ).animate().fadeIn(duration: 600.ms).slideY(begin: 0.1, end: 0);
+  }
+
+  Widget _buildDossierButton() {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: _isDownloadingDossier ? null : _downloadPortfolioDossier,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 160),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFF7C3AED), Color(0xFFA855F7)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(14),
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0xFF7C3AED).withValues(alpha: 0.3),
+                blurRadius: 12,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (_isDownloadingDossier)
+                const SizedBox(
+                  width: 16,
+                  height: 16,
+                  child: CircularProgressIndicator(
+                    color: Colors.white,
+                    strokeWidth: 2,
+                  ),
+                )
+              else
+                const Icon(Icons.file_download_rounded, color: Colors.white, size: 18),
+              const SizedBox(width: 8),
+              Text(
+                _isDownloadingDossier ? 'Membuat Dossier...' : 'Unduh Portofolio (PDF)',
+                style: AppTypography.button.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 13,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 

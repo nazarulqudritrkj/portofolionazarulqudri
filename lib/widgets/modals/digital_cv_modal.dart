@@ -1,8 +1,10 @@
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_constants.dart';
 import '../../core/constants/app_typography.dart';
 import '../../core/utils/cv_pdf_generator.dart';
+import '../../core/utils/portfolio_pdf_generator.dart';
 import '../../core/utils/pdf_downloader_stub.dart'
     // ignore: uri_does_not_exist
     if (dart.library.html) '../../core/utils/pdf_downloader_web.dart';
@@ -1032,7 +1034,7 @@ class _CvDownloadFooter extends StatelessWidget {
       ),
       child: LayoutBuilder(
         builder: (context, constraints) {
-          final isCompact = constraints.maxWidth < 440;
+          final isCompact = constraints.maxWidth < 640;
           if (isCompact) {
             return Column(
               mainAxisSize: MainAxisSize.min,
@@ -1042,7 +1044,7 @@ class _CvDownloadFooter extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Unduh CV Resmi Format PDF',
+                      'Unduh Berkas Resmi (Format PDF)',
                       textAlign: TextAlign.center,
                       style: AppTypography.bodyMedium.copyWith(
                         fontWeight: FontWeight.w700,
@@ -1052,7 +1054,7 @@ class _CvDownloadFooter extends StatelessWidget {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      'Berkas resmi Nazarul Qudri, S.Tr.T.',
+                      'Pilih CV Ringkas (2 Hal) atau Dokumen Portofolio Lengkap (5 Hal Dossier)',
                       textAlign: TextAlign.center,
                       style: AppTypography.bodySmall.copyWith(
                         fontSize: 11,
@@ -1062,7 +1064,31 @@ class _CvDownloadFooter extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 12),
-                Center(child: _DownloadButton()),
+                Wrap(
+                  alignment: WrapAlignment.center,
+                  spacing: 10,
+                  runSpacing: 10,
+                  children: [
+                    _DownloadActionButton(
+                      label: 'Unduh CV (PDF)',
+                      loadingLabel: 'Membuat CV...',
+                      icon: Icons.file_download_rounded,
+                      gradientColors: const [Color(0xFF0284C7), Color(0xFF38BDF8)],
+                      hoverColors: const [Color(0xFF0C4A6E), Color(0xFF0284C7)],
+                      onGenerate: CvPdfGenerator.generate,
+                      filename: 'CV_Nazarul_Qudri_STRT.pdf',
+                    ),
+                    _DownloadActionButton(
+                      label: 'Unduh Portofolio (PDF)',
+                      loadingLabel: 'Membuat Dossier...',
+                      icon: Icons.menu_book_rounded,
+                      gradientColors: const [Color(0xFF7C3AED), Color(0xFFA855F7)],
+                      hoverColors: const [Color(0xFF581C87), Color(0xFF7C3AED)],
+                      onGenerate: PortfolioPdfGenerator.generate,
+                      filename: 'Portofolio_Lengkap_Nazarul_Qudri_STRT.pdf',
+                    ),
+                  ],
+                ),
               ],
             );
           }
@@ -1075,7 +1101,7 @@ class _CvDownloadFooter extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      'Unduh CV Resmi Format PDF',
+                      'Unduh Berkas Resmi (Format PDF)',
                       style: AppTypography.bodyMedium.copyWith(
                         fontWeight: FontWeight.w700,
                         fontSize: 13.5,
@@ -1083,7 +1109,7 @@ class _CvDownloadFooter extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Berkas CV profesional resmi Nazarul Qudri, S.Tr.T.',
+                      'Pilih CV Ringkas (2 Halaman) atau Dokumen Portofolio Lengkap (5 Halaman Dossier)',
                       style: AppTypography.bodySmall.copyWith(
                         fontSize: 11.5,
                         color: const Color(0xFF64748B),
@@ -1092,9 +1118,26 @@ class _CvDownloadFooter extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(width: 16),
-              // Download button
-              _DownloadButton(),
+              const SizedBox(width: 14),
+              _DownloadActionButton(
+                label: 'Unduh CV (PDF)',
+                loadingLabel: 'Membuat CV...',
+                icon: Icons.file_download_rounded,
+                gradientColors: const [Color(0xFF0284C7), Color(0xFF38BDF8)],
+                hoverColors: const [Color(0xFF0C4A6E), Color(0xFF0284C7)],
+                onGenerate: CvPdfGenerator.generate,
+                filename: 'CV_Nazarul_Qudri_STRT.pdf',
+              ),
+              const SizedBox(width: 10),
+              _DownloadActionButton(
+                label: 'Unduh Portofolio (PDF)',
+                loadingLabel: 'Membuat Dossier...',
+                icon: Icons.menu_book_rounded,
+                gradientColors: const [Color(0xFF7C3AED), Color(0xFFA855F7)],
+                hoverColors: const [Color(0xFF581C87), Color(0xFF7C3AED)],
+                onGenerate: PortfolioPdfGenerator.generate,
+                filename: 'Portofolio_Lengkap_Nazarul_Qudri_STRT.pdf',
+              ),
             ],
           );
         },
@@ -1103,20 +1146,38 @@ class _CvDownloadFooter extends StatelessWidget {
   }
 }
 
-class _DownloadButton extends StatefulWidget {
+class _DownloadActionButton extends StatefulWidget {
+  final String label;
+  final String loadingLabel;
+  final IconData icon;
+  final List<Color> gradientColors;
+  final List<Color> hoverColors;
+  final Future<Uint8List> Function() onGenerate;
+  final String filename;
+
+  const _DownloadActionButton({
+    required this.label,
+    required this.loadingLabel,
+    required this.icon,
+    required this.gradientColors,
+    required this.hoverColors,
+    required this.onGenerate,
+    required this.filename,
+  });
+
   @override
-  State<_DownloadButton> createState() => _DownloadButtonState();
+  State<_DownloadActionButton> createState() => _DownloadActionButtonState();
 }
 
-class _DownloadButtonState extends State<_DownloadButton> {
+class _DownloadActionButtonState extends State<_DownloadActionButton> {
   bool _isHovered = false;
   bool _isLoading = false;
 
-  Future<void> _generateAndDownload() async {
+  Future<void> _handleDownload() async {
     setState(() => _isLoading = true);
     try {
-      final pdfBytes = await CvPdfGenerator.generate();
-      await downloadPdfBytes(pdfBytes, 'CV_Nazarul_Qudri_STRT.pdf');
+      final pdfBytes = await widget.onGenerate();
+      await downloadPdfBytes(pdfBytes, widget.filename);
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -1138,23 +1199,21 @@ class _DownloadButtonState extends State<_DownloadButton> {
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       child: GestureDetector(
-        onTap: _isLoading ? null : _generateAndDownload,
+        onTap: _isLoading ? null : _handleDownload,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 160),
-          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 13),
+          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: _isHovered
-                  ? [const Color(0xFF0C4A6E), const Color(0xFF0284C7)]
-                  : [const Color(0xFF0284C7), const Color(0xFF38BDF8)],
+              colors: _isHovered ? widget.hoverColors : widget.gradientColors,
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(14),
             boxShadow: [
               BoxShadow(
-                color: AppColors.primary.withValues(alpha: _isHovered ? 0.45 : 0.3),
-                blurRadius: _isHovered ? 20 : 12,
+                color: widget.gradientColors.first.withValues(alpha: _isHovered ? 0.45 : 0.28),
+                blurRadius: _isHovered ? 18 : 10,
                 offset: const Offset(0, 4),
               ),
             ],
@@ -1164,22 +1223,22 @@ class _DownloadButtonState extends State<_DownloadButton> {
             children: [
               if (_isLoading)
                 const SizedBox(
-                  width: 18,
-                  height: 18,
+                  width: 16,
+                  height: 16,
                   child: CircularProgressIndicator(
                     color: Colors.white,
                     strokeWidth: 2,
                   ),
                 )
               else
-                const Icon(Icons.file_download_rounded, color: Colors.white, size: 18),
-              const SizedBox(width: 8),
+                Icon(widget.icon, color: Colors.white, size: 17),
+              const SizedBox(width: 7),
               Text(
-                _isLoading ? 'Membuat PDF...' : 'Unduh CV (PDF)',
+                _isLoading ? widget.loadingLabel : widget.label,
                 style: AppTypography.button.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
-                  fontSize: 13.5,
+                  fontSize: 13,
                 ),
               ),
             ],
