@@ -24,8 +24,22 @@ class _CertificationsSectionState extends State<CertificationsSection> {
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
     final isTablet = Responsive.isTablet(context);
-    final strings = AppStrings(LocaleController.instance.currentLanguage);
 
+    return ListenableBuilder(
+      listenable: LocaleController.instance,
+      builder: (context, _) {
+        final strings = AppStrings(LocaleController.instance.currentLanguage);
+        return _buildContent(context, strings, isMobile, isTablet);
+      },
+    );
+  }
+
+  Widget _buildContent(
+    BuildContext context,
+    AppStrings strings,
+    bool isMobile,
+    bool isTablet,
+  ) {
     final allCerts = CertificationModel.trainingCertifications;
     final trainingCategories = [
       CertificationCategory.all,

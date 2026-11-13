@@ -16,13 +16,29 @@ class AcademicCredentialsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
     final isDesktop = Responsive.isDesktop(context);
-    final strings = AppStrings(LocaleController.instance.currentLanguage);
     final docs = CertificationModel.academicDocuments;
 
     if (docs.length < 2) return const SizedBox.shrink();
     final ijazah = docs[0];
     final transkrip = docs[1];
 
+    return ListenableBuilder(
+      listenable: LocaleController.instance,
+      builder: (context, _) {
+        final strings = AppStrings(LocaleController.instance.currentLanguage);
+        return _buildContent(context, strings, isMobile, isDesktop, ijazah, transkrip);
+      },
+    );
+  }
+
+  Widget _buildContent(
+    BuildContext context,
+    AppStrings strings,
+    bool isMobile,
+    bool isDesktop,
+    CertificationModel ijazah,
+    CertificationModel transkrip,
+  ) {
     return ContentConstrainedBox(
       padding: EdgeInsets.symmetric(
         horizontal: isMobile ? 20 : 32,

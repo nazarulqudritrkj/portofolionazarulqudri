@@ -56,11 +56,27 @@ class _CertificationDetailModalState extends State<CertificationDetailModal> {
   @override
   Widget build(BuildContext context) {
     final cert = widget.cert;
-    final strings = AppStrings(LocaleController.instance.currentLanguage);
-    final title = strings.isId ? cert.titleId : cert.titleEn;
-    final desc = strings.isId ? cert.descriptionId : cert.descriptionEn;
-    final currentImage = _activePage == 0 ? cert.frontImage : cert.backImage;
 
+    return ListenableBuilder(
+      listenable: LocaleController.instance,
+      builder: (context, _) {
+        final strings = AppStrings(LocaleController.instance.currentLanguage);
+        final title = strings.isId ? cert.titleId : cert.titleEn;
+        final desc = strings.isId ? cert.descriptionId : cert.descriptionEn;
+        final currentImage = _activePage == 0 ? cert.frontImage : cert.backImage;
+        return _buildModal(context, cert, strings, title, desc, currentImage);
+      },
+    );
+  }
+
+  Widget _buildModal(
+    BuildContext context,
+    CertificationModel cert,
+    AppStrings strings,
+    String title,
+    String desc,
+    String currentImage,
+  ) {
     return Center(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 880, maxHeight: 900),

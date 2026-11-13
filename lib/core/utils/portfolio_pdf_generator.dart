@@ -1,5 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 import 'dart:typed_data';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -45,6 +46,17 @@ class PortfolioPdfGenerator {
     final fontB  = await PdfGoogleFonts.interBold();
     final fontEB = await PdfGoogleFonts.interExtraBold();
 
+    pw.ImageProvider? profileImage;
+    try {
+      final bytes = await rootBundle.load('lib/images/fotoprofil/fotoNazarulQudri_profile.jpg');
+      profileImage = pw.MemoryImage(bytes.buffer.asUint8List());
+    } catch (_) {
+      try {
+        final bytes = await rootBundle.load('assets/lib/images/fotoprofil/fotoNazarulQudri_profile.jpg');
+        profileImage = pw.MemoryImage(bytes.buffer.asUint8List());
+      } catch (_) {}
+    }
+
     // ═══════════════════════════════════════════════════════════
     // HALAMAN 1: EXECUTIVE COVER & PROFIL REKAYASA
     // ═══════════════════════════════════════════════════════════
@@ -54,7 +66,7 @@ class PortfolioPdfGenerator {
       theme: pw.ThemeData.withFont(base: fontR, bold: fontB),
       build: (ctx) => pw.Column(
         children: [
-          _buildCoverHeader(fontEB, fontB, fontM, fontR, isEnglish),
+          _buildCoverHeader(fontEB, fontB, fontM, fontR, isEnglish, profileImage),
           pw.Expanded(
             child: pw.Container(
               color: _gray100,
@@ -645,7 +657,8 @@ class PortfolioPdfGenerator {
   // ════════════════════════════════════════════════════════════
   // HEADER KOMPONEN COVER (HALAMAN 1)
   // ════════════════════════════════════════════════════════════
-  static pw.Widget _buildCoverHeader(pw.Font eb, pw.Font b, pw.Font m, pw.Font r, bool isEnglish) {
+  static pw.Widget _buildCoverHeader(
+      pw.Font eb, pw.Font b, pw.Font m, pw.Font r, bool isEnglish, pw.ImageProvider? profileImage) {
     return pw.Container(
       decoration: const pw.BoxDecoration(
         gradient: pw.LinearGradient(
@@ -663,36 +676,62 @@ class PortfolioPdfGenerator {
             crossAxisAlignment: pw.CrossAxisAlignment.center,
             children: [
               pw.Expanded(
-                child: pw.Column(
-                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                child: pw.Row(
+                  crossAxisAlignment: pw.CrossAxisAlignment.center,
                   children: [
-                    pw.Container(
-                      padding: const pw.EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                      decoration: pw.BoxDecoration(
-                        color: PdfColor.fromInt(0x33FFFFFF),
-                        borderRadius: pw.BorderRadius.circular(4),
+                    if (profileImage != null) ...[
+                      pw.Container(
+                        width: 54,
+                        height: 54,
+                        decoration: pw.BoxDecoration(
+                          shape: pw.BoxShape.circle,
+                          border: pw.Border.all(color: _white, width: 2),
+                        ),
+                        child: pw.ClipOval(
+                          child: pw.Image(
+                            profileImage,
+                            width: 54,
+                            height: 54,
+                            fit: pw.BoxFit.cover,
+                          ),
+                        ),
                       ),
-                      child: pw.Text(
-                        isEnglish
-                            ? 'OFFICIAL ENGINEERING PORTFOLIO DOSSIER (A4 PRINT / DIGITAL)'
-                            : 'DOKUMEN PORTOFOLIO REKAYASA RESMI (ENGINEERING DOSSIER)',
-                        style: pw.TextStyle(font: b, fontSize: 7.5, color: PdfColor.fromInt(0xFFBAE6FD), letterSpacing: 0.8),
+                      pw.SizedBox(width: 12),
+                    ],
+                    pw.Expanded(
+                      child: pw.Column(
+                        crossAxisAlignment: pw.CrossAxisAlignment.start,
+                        children: [
+                          pw.Container(
+                            padding: const pw.EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                            decoration: pw.BoxDecoration(
+                              color: PdfColor.fromInt(0x33FFFFFF),
+                              borderRadius: pw.BorderRadius.circular(4),
+                            ),
+                            child: pw.Text(
+                              isEnglish
+                                  ? 'OFFICIAL ENGINEERING PORTFOLIO DOSSIER (A4 PRINT / DIGITAL)'
+                                  : 'DOKUMEN PORTOFOLIO REKAYASA RESMI (ENGINEERING DOSSIER)',
+                              style: pw.TextStyle(font: b, fontSize: 7, color: PdfColor.fromInt(0xFFBAE6FD), letterSpacing: 0.8),
+                            ),
+                          ),
+                          pw.SizedBox(height: 4),
+                          pw.Text('NAZARUL QUDRI, S.Tr.T.',
+                              style: pw.TextStyle(font: eb, fontSize: 18.5, color: _white, letterSpacing: 1.1)),
+                          pw.SizedBox(height: 2.5),
+                          pw.Text(
+                            'Software Engineer  •  IoT CPS Specialist  •  AI Solutions Architect',
+                            style: pw.TextStyle(font: m, fontSize: 8.8, color: PdfColor.fromInt(0xFFBAE6FD)),
+                          ),
+                          pw.SizedBox(height: 1.5),
+                          pw.Text(
+                            isEnglish
+                                ? 'D4 Computer Network Engineering Technology — Politeknik Negeri Lhokseumawe'
+                                : 'D4 Teknologi Rekayasa Komputer Jaringan — Politeknik Negeri Lhokseumawe',
+                            style: pw.TextStyle(font: r, fontSize: 8, color: PdfColor.fromInt(0xFF93C5FD)),
+                          ),
+                        ],
                       ),
-                    ),
-                    pw.SizedBox(height: 5),
-                    pw.Text('NAZARUL QUDRI, S.Tr.T.',
-                        style: pw.TextStyle(font: eb, fontSize: 21, color: _white, letterSpacing: 1.2)),
-                    pw.SizedBox(height: 3),
-                    pw.Text(
-                      'Software Engineer  •  IoT CPS Specialist  •  AI Solutions Architect',
-                      style: pw.TextStyle(font: m, fontSize: 9.5, color: PdfColor.fromInt(0xFFBAE6FD)),
-                    ),
-                    pw.SizedBox(height: 2),
-                    pw.Text(
-                      isEnglish
-                          ? 'D4 Computer Network Engineering Technology — Department of ICT Politeknik Negeri Lhokseumawe'
-                          : 'D4 Teknologi Rekayasa Komputer Jaringan — Jurusan TIK Politeknik Negeri Lhokseumawe',
-                      style: pw.TextStyle(font: r, fontSize: 8.5, color: PdfColor.fromInt(0xFF93C5FD)),
                     ),
                   ],
                 ),

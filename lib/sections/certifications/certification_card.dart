@@ -22,9 +22,23 @@ class _CertificationCardState extends State<CertificationCard> {
   @override
   Widget build(BuildContext context) {
     final cert = widget.cert;
-    final strings = AppStrings(LocaleController.instance.currentLanguage);
-    final title = strings.isId ? cert.titleId : cert.titleEn;
 
+    return ListenableBuilder(
+      listenable: LocaleController.instance,
+      builder: (context, _) {
+        final strings = AppStrings(LocaleController.instance.currentLanguage);
+        final title = strings.isId ? cert.titleId : cert.titleEn;
+        return _buildCard(context, cert, strings, title);
+      },
+    );
+  }
+
+  Widget _buildCard(
+    BuildContext context,
+    CertificationModel cert,
+    AppStrings strings,
+    String title,
+  ) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _isHovered = true),
@@ -81,7 +95,7 @@ class _CertificationCardState extends State<CertificationCard> {
                                       ),
                                       const SizedBox(height: 8),
                                       Text(
-                                        'Preview Sertifikat',
+                                        strings.isId ? 'Preview Sertifikat' : 'Certificate Preview',
                                         style: AppTypography.bodySmall,
                                       ),
                                     ],
@@ -177,7 +191,7 @@ class _CertificationCardState extends State<CertificationCard> {
                                 ),
                                 const SizedBox(width: 5),
                                 Text(
-                                  '2 Pages (Depan & Belakang)',
+                                  strings.isId ? '2 Pages (Depan & Belakang)' : '2 Pages (Front & Back)',
                                   style: AppTypography.code.copyWith(
                                     color: Colors.white,
                                     fontSize: 10.5,

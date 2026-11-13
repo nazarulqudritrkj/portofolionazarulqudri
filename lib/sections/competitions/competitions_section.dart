@@ -15,9 +15,23 @@ class CompetitionsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
-    final strings = AppStrings(LocaleController.instance.currentLanguage);
     final awards = CertificationModel.competitionAwards;
 
+    return ListenableBuilder(
+      listenable: LocaleController.instance,
+      builder: (context, _) {
+        final strings = AppStrings(LocaleController.instance.currentLanguage);
+        return _buildContent(context, strings, isMobile, awards);
+      },
+    );
+  }
+
+  Widget _buildContent(
+    BuildContext context,
+    AppStrings strings,
+    bool isMobile,
+    List<CertificationModel> awards,
+  ) {
     return ContentConstrainedBox(
       padding: EdgeInsets.symmetric(
         horizontal: isMobile ? 20 : 32,
@@ -140,7 +154,7 @@ class _CompetitionAwardCardState extends State<_CompetitionAwardCard> {
                       ),
                       const SizedBox(width: 6),
                       Text(
-                        'TINGKAT NASIONAL',
+                        widget.strings.isId ? 'TINGKAT NASIONAL' : 'NATIONAL LEVEL',
                         style: AppTypography.badge.copyWith(
                           color: award.accentColor,
                           fontWeight: FontWeight.w700,

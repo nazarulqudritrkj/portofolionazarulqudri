@@ -1,5 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages
 import 'dart:typed_data';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -44,6 +45,17 @@ class CvPdfGenerator {
     final fontB  = await PdfGoogleFonts.interBold();
     final fontEB = await PdfGoogleFonts.interExtraBold();
 
+    pw.ImageProvider? profileImage;
+    try {
+      final bytes = await rootBundle.load('lib/images/fotoprofil/fotoNazarulQudri_profile.jpg');
+      profileImage = pw.MemoryImage(bytes.buffer.asUint8List());
+    } catch (_) {
+      try {
+        final bytes = await rootBundle.load('assets/lib/images/fotoprofil/fotoNazarulQudri_profile.jpg');
+        profileImage = pw.MemoryImage(bytes.buffer.asUint8List());
+      } catch (_) {}
+    }
+
     // ═══════════════════════════════════════════════════════════
     // PAGE 1 — Header + Profile + Education + Skills
     // ═══════════════════════════════════════════════════════════
@@ -55,7 +67,7 @@ class CvPdfGenerator {
         crossAxisAlignment: pw.CrossAxisAlignment.start,
         children: [
           // ── HEADER ─────────────────────────────────────────
-          _buildGradientHeader(fontEB, fontB, fontM, fontR, isEnglish),
+          _buildGradientHeader(fontEB, fontB, fontM, fontR, isEnglish, profileImage),
 
           // ── PAGE BODY ──────────────────────────────────────
           pw.Expanded(
@@ -443,7 +455,7 @@ class CvPdfGenerator {
   // GRADIENT HEADER (Page 1)
   // ════════════════════════════════════════════════════════════
   static pw.Widget _buildGradientHeader(
-      pw.Font eb, pw.Font b, pw.Font m, pw.Font r, bool isEnglish) {
+      pw.Font eb, pw.Font b, pw.Font m, pw.Font r, bool isEnglish, pw.ImageProvider? profileImage) {
     return pw.Container(
       decoration: const pw.BoxDecoration(
         gradient: pw.LinearGradient(
@@ -456,28 +468,54 @@ class CvPdfGenerator {
       child: pw.Column(
         crossAxisAlignment: pw.CrossAxisAlignment.start,
         children: [
-          // Name + Contact Row
+          // Photo + Name + Contact Row
           pw.Row(
             mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
             crossAxisAlignment: pw.CrossAxisAlignment.center,
             children: [
               pw.Expanded(
-                child: pw.Column(
-                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+                child: pw.Row(
+                  crossAxisAlignment: pw.CrossAxisAlignment.center,
                   children: [
-                    pw.Text('NAZARUL QUDRI, S.Tr.T.',
-                        style: pw.TextStyle(font: eb, fontSize: 21, color: _white, letterSpacing: 1.2)),
-                    pw.SizedBox(height: 3),
-                    pw.Text(
-                      'Software Engineer  •  Flutter Developer  •  IoT CPS Specialist',
-                      style: pw.TextStyle(font: m, fontSize: 9.5, color: PdfColor.fromInt(0xFFBAE6FD)),
-                    ),
-                    pw.SizedBox(height: 2),
-                    pw.Text(
-                      isEnglish
-                          ? 'D4 Computer Network Engineering Technology — Politeknik Negeri Lhokseumawe'
-                          : 'D4 Teknologi Rekayasa Komputer Jaringan — Politeknik Negeri Lhokseumawe',
-                      style: pw.TextStyle(font: r, fontSize: 8.5, color: PdfColor.fromInt(0xFF93C5FD)),
+                    if (profileImage != null) ...[
+                      pw.Container(
+                        width: 54,
+                        height: 54,
+                        decoration: pw.BoxDecoration(
+                          shape: pw.BoxShape.circle,
+                          border: pw.Border.all(color: _white, width: 2),
+                        ),
+                        child: pw.ClipOval(
+                          child: pw.Image(
+                            profileImage,
+                            width: 54,
+                            height: 54,
+                            fit: pw.BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      pw.SizedBox(width: 12),
+                    ],
+                    pw.Expanded(
+                      child: pw.Column(
+                        crossAxisAlignment: pw.CrossAxisAlignment.start,
+                        children: [
+                          pw.Text('NAZARUL QUDRI, S.Tr.T.',
+                              style: pw.TextStyle(font: eb, fontSize: 18.5, color: _white, letterSpacing: 1.1)),
+                          pw.SizedBox(height: 3),
+                          pw.Text(
+                            'Software Engineer  •  Flutter Developer  •  IoT CPS Specialist',
+                            style: pw.TextStyle(font: m, fontSize: 9, color: PdfColor.fromInt(0xFFBAE6FD)),
+                          ),
+                          pw.SizedBox(height: 2),
+                          pw.Text(
+                            isEnglish
+                                ? 'D4 Computer Network Engineering Technology — Politeknik Negeri Lhokseumawe'
+                                : 'D4 Teknologi Rekayasa Komputer Jaringan — Politeknik Negeri Lhokseumawe',
+                            style: pw.TextStyle(font: r, fontSize: 8, color: PdfColor.fromInt(0xFF93C5FD)),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
