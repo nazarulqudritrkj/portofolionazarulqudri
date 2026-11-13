@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_constants.dart';
 import '../../core/constants/app_typography.dart';
+import '../../core/localization/app_locale.dart';
 import '../../core/utils/cv_pdf_generator.dart';
 import '../../core/utils/portfolio_pdf_generator.dart';
 import '../../core/utils/pdf_downloader_stub.dart'
@@ -35,102 +36,114 @@ class DigitalCvModal extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final isNarrow = size.width < 700;
 
-    return Center(
-      child: ConstrainedBox(
-        constraints: BoxConstraints(
-          maxWidth: isNarrow ? size.width - 24 : 920,
-          maxHeight: size.height * 0.93,
-        ),
-        child: Material(
-          color: Colors.transparent,
-          child: Container(
-            margin: EdgeInsets.symmetric(
-              horizontal: isNarrow ? 12 : 24,
-              vertical: 20,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(32),
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0xFF0F172A).withValues(alpha: 0.28),
-                  blurRadius: 60,
-                  spreadRadius: -4,
-                  offset: const Offset(0, 20),
-                ),
-                BoxShadow(
-                  color: AppColors.primary.withValues(alpha: 0.08),
-                  blurRadius: 40,
-                  offset: const Offset(0, 8),
-                ),
-              ],
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(32),
-              child: Column(
-                children: [
-                  // ─── PREMIUM HEADER BANNER ───────────────────────────────────
-                  _CvHeaderBanner(onClose: () => Navigator.of(context).pop()),
+    return ListenableBuilder(
+      listenable: LocaleController.instance,
+      builder: (context, _) {
+        final isEn = LocaleController.instance.isEnglish;
+        final strings = AppStrings(LocaleController.instance.currentLanguage);
 
-                  // ─── SCROLLABLE BODY ─────────────────────────────────────────
-                  Expanded(
-                    child: SingleChildScrollView(
-                      physics: const BouncingScrollPhysics(),
-                      child: Column(
-                        children: [
-                          // Profile identity strip
-                          _CvProfileStrip(isNarrow: isNarrow),
+        return Center(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxWidth: isNarrow ? size.width - 24 : 920,
+              maxHeight: size.height * 0.93,
+            ),
+            child: Material(
+              color: Colors.transparent,
+              child: Container(
+                margin: EdgeInsets.symmetric(
+                  horizontal: isNarrow ? 12 : 24,
+                  vertical: 20,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(32),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFF0F172A).withValues(alpha: 0.28),
+                      blurRadius: 60,
+                      spreadRadius: -4,
+                      offset: const Offset(0, 20),
+                    ),
+                    BoxShadow(
+                      color: AppColors.primary.withValues(alpha: 0.08),
+                      blurRadius: 40,
+                      offset: const Offset(0, 8),
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(32),
+                  child: Column(
+                    children: [
+                      // ─── PREMIUM HEADER BANNER WITH LANGUAGE SWITCHER ─────
+                      _CvHeaderBanner(
+                        isEn: isEn,
+                        onClose: () => Navigator.of(context).pop(),
+                      ),
 
-                          // Divider with gradient
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 32),
-                            child: Container(
-                              height: 1,
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Colors.transparent,
-                                    AppColors.primary.withValues(alpha: 0.3),
-                                    Colors.transparent,
-                                  ],
+                      // ─── SCROLLABLE BODY ─────────────────────────────────────────
+                      Expanded(
+                        child: SingleChildScrollView(
+                          physics: const BouncingScrollPhysics(),
+                          child: Column(
+                            children: [
+                              // Profile identity strip
+                              _CvProfileStrip(isNarrow: isNarrow, isEn: isEn),
+
+                              // Divider with gradient
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 32),
+                                child: Container(
+                                  height: 1,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Colors.transparent,
+                                        AppColors.primary.withValues(alpha: 0.3),
+                                        Colors.transparent,
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
 
-                          // CV Content Sections
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: isNarrow ? 20 : 36,
-                              vertical: 28,
-                            ),
-                            child: isNarrow
-                                ? _CvSingleColumnContent()
-                                : _CvTwoColumnContent(),
+                              // CV Content Sections
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: isNarrow ? 20 : 36,
+                                  vertical: 28,
+                                ),
+                                child: isNarrow
+                                    ? _CvSingleColumnContent(isEn: isEn)
+                                    : _CvTwoColumnContent(isEn: isEn),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
 
-                  // ─── STICKY DOWNLOAD FOOTER ───────────────────────────────────
-                  _CvDownloadFooter(),
-                ],
+                      // ─── STICKY DOWNLOAD FOOTER (BILINGUAL) ───────────────
+                      _CvDownloadFooter(isEn: isEn, strings: strings),
+                    ],
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// HEADER BANNER
+// HEADER BANNER WITH LANGUAGE TOGGLE
 // ─────────────────────────────────────────────────────────────────────────────
 class _CvHeaderBanner extends StatelessWidget {
+  final bool isEn;
   final VoidCallback onClose;
-  const _CvHeaderBanner({required this.onClose});
+  const _CvHeaderBanner({required this.isEn, required this.onClose});
 
   @override
   Widget build(BuildContext context) {
@@ -163,7 +176,7 @@ class _CvHeaderBanner extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Curriculum Vitae Resmi',
+                  isEn ? 'Official Curriculum Vitae' : 'Curriculum Vitae Resmi',
                   style: AppTypography.headingSmall.copyWith(
                     color: Colors.white,
                     fontSize: 15,
@@ -181,6 +194,23 @@ class _CvHeaderBanner extends StatelessWidget {
               ],
             ),
           ),
+          // Language Switcher Pill inside Modal
+          Container(
+            padding: const EdgeInsets.all(3),
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.14),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.white.withValues(alpha: 0.25)),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _buildLangChip('ID', !isEn, () => LocaleController.instance.setLanguage(AppLanguage.id)),
+                _buildLangChip('EN', isEn, () => LocaleController.instance.setLanguage(AppLanguage.en)),
+              ],
+            ),
+          ),
+          const SizedBox(width: 12),
           // Status chip
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -202,7 +232,7 @@ class _CvHeaderBanner extends StatelessWidget {
                 ),
                 const SizedBox(width: 5),
                 Text(
-                  'Aktif 2026',
+                  isEn ? 'Active 2026' : 'Aktif 2026',
                   style: AppTypography.code.copyWith(
                     color: const Color(0xFF6EE7B7),
                     fontSize: 10.5,
@@ -230,6 +260,27 @@ class _CvHeaderBanner extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildLangChip(String label, bool isSelected, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.white : Colors.transparent,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Text(
+          label,
+          style: AppTypography.code.copyWith(
+            fontSize: 10.5,
+            fontWeight: FontWeight.w800,
+            color: isSelected ? const Color(0xFF0F172A) : Colors.white70,
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -237,7 +288,8 @@ class _CvHeaderBanner extends StatelessWidget {
 // ─────────────────────────────────────────────────────────────────────────────
 class _CvProfileStrip extends StatelessWidget {
   final bool isNarrow;
-  const _CvProfileStrip({required this.isNarrow});
+  final bool isEn;
+  const _CvProfileStrip({required this.isNarrow, required this.isEn});
 
   @override
   Widget build(BuildContext context) {
@@ -257,13 +309,10 @@ class _CvProfileStrip extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // Profile photo
         _buildAvatar(),
         const SizedBox(width: 24),
-        // Name & title block
         Expanded(child: _buildNameBlock()),
         const SizedBox(width: 24),
-        // Right side: contact chips
         _buildContactBlock(),
       ],
     );
@@ -339,7 +388,9 @@ class _CvProfileStrip extends StatelessWidget {
             border: Border.all(color: const Color(0xFFBFDBFE)),
           ),
           child: Text(
-            'Sarjana Terapan Teknik (S.Tr.T.) • D4 TRKJ • Politeknik Negeri Lhokseumawe',
+            isEn
+                ? 'Bachelor of Applied Engineering (S.Tr.T.) • D4 TRKJ • Politeknik Negeri Lhokseumawe'
+                : 'Sarjana Terapan Teknik (S.Tr.T.) • D4 TRKJ • Politeknik Negeri Lhokseumawe',
             textAlign: centered ? TextAlign.center : TextAlign.start,
             style: AppTypography.bodySmall.copyWith(
               color: AppColors.primaryDark,
@@ -354,7 +405,11 @@ class _CvProfileStrip extends StatelessWidget {
           children: [
             _buildBadgePill(Icons.location_on_rounded, 'Lhokseumawe, Aceh', const Color(0xFF7C3AED)),
             const SizedBox(width: 8),
-            _buildBadgePill(Icons.check_circle_rounded, 'Tersedia untuk Kolaborasi', const Color(0xFF10B981)),
+            _buildBadgePill(
+              Icons.check_circle_rounded,
+              isEn ? 'Available for Opportunities' : 'Tersedia untuk Kolaborasi',
+              const Color(0xFF10B981),
+            ),
           ],
         ),
       ],
@@ -422,66 +477,69 @@ class _CvProfileStrip extends StatelessWidget {
 // TWO-COLUMN CONTENT (Desktop)
 // ─────────────────────────────────────────────────────────────────────────────
 class _CvTwoColumnContent extends StatelessWidget {
+  final bool isEn;
+  const _CvTwoColumnContent({required this.isEn});
+
   @override
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // LEFT COLUMN (wider - main content)
+        // LEFT COLUMN
         Expanded(
           flex: 6,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _CvSection(
-                title: 'RINGKASAN PROFIL',
+                title: isEn ? 'PROFILE SUMMARY' : 'RINGKASAN PROFIL',
                 icon: Icons.person_outline_rounded,
                 accentColor: AppColors.primary,
-                child: _SummaryContent(),
+                child: _SummaryContent(isEn: isEn),
               ),
               const SizedBox(height: 20),
               _CvSection(
-                title: 'PENDIDIKAN FORMAL',
+                title: isEn ? 'FORMAL HIGHER EDUCATION' : 'PENDIDIKAN FORMAL',
                 icon: Icons.school_outlined,
                 accentColor: const Color(0xFF7C3AED),
-                child: _EducationContent(),
+                child: _EducationContent(isEn: isEn),
               ),
               const SizedBox(height: 20),
               _CvSection(
-                title: '4 PROYEK REKAYASA UNGGULAN',
+                title: isEn ? 'FEATURED ENGINEERING HIGHLIGHTS' : '4 PROYEK REKAYASA UNGGULAN',
                 icon: Icons.terminal_rounded,
                 accentColor: const Color(0xFF0EA5E9),
-                child: _ProjectsContent(),
+                child: _ProjectsContent(isEn: isEn),
               ),
             ],
           ),
         ),
         const SizedBox(width: 24),
-        // RIGHT COLUMN (narrower - sidebar)
+        // RIGHT COLUMN
         Expanded(
           flex: 4,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _CvSection(
-                title: 'KEAHLIAN UTAMA',
+                title: isEn ? 'TECHNICAL COMPETENCIES' : 'KEAHLIAN UTAMA',
                 icon: Icons.auto_awesome_rounded,
                 accentColor: const Color(0xFF10B981),
-                child: _SkillsContent(),
+                child: _SkillsContent(isEn: isEn),
               ),
               const SizedBox(height: 20),
               _CvSection(
-                title: 'PRESTASI NASIONAL',
+                title: isEn ? 'NATIONAL COMPETITIVE HONORS' : 'PRESTASI NASIONAL',
                 icon: Icons.emoji_events_outlined,
                 accentColor: const Color(0xFFD97706),
-                child: _AchievementsContent(),
+                child: _AchievementsContent(isEn: isEn),
               ),
               const SizedBox(height: 20),
               _CvSection(
-                title: 'SERTIFIKASI KOMINFO DTS',
+                title: isEn ? 'KOMINFO DTS CERTIFICATIONS' : 'SERTIFIKASI KOMINFO DTS',
                 icon: Icons.workspace_premium_outlined,
                 accentColor: AppColors.primary,
-                child: _CertsContent(),
+                child: _CertsContent(isEn: isEn),
               ),
             ],
           ),
@@ -495,22 +553,55 @@ class _CvTwoColumnContent extends StatelessWidget {
 // SINGLE-COLUMN CONTENT (Mobile)
 // ─────────────────────────────────────────────────────────────────────────────
 class _CvSingleColumnContent extends StatelessWidget {
+  final bool isEn;
+  const _CvSingleColumnContent({required this.isEn});
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _CvSection(title: 'RINGKASAN PROFIL', icon: Icons.person_outline_rounded, accentColor: AppColors.primary, child: _SummaryContent()),
+        _CvSection(
+          title: isEn ? 'PROFILE SUMMARY' : 'RINGKASAN PROFIL',
+          icon: Icons.person_outline_rounded,
+          accentColor: AppColors.primary,
+          child: _SummaryContent(isEn: isEn),
+        ),
         const SizedBox(height: 20),
-        _CvSection(title: 'PENDIDIKAN FORMAL', icon: Icons.school_outlined, accentColor: const Color(0xFF7C3AED), child: _EducationContent()),
+        _CvSection(
+          title: isEn ? 'FORMAL HIGHER EDUCATION' : 'PENDIDIKAN FORMAL',
+          icon: Icons.school_outlined,
+          accentColor: const Color(0xFF7C3AED),
+          child: _EducationContent(isEn: isEn),
+        ),
         const SizedBox(height: 20),
-        _CvSection(title: 'KEAHLIAN UTAMA', icon: Icons.auto_awesome_rounded, accentColor: const Color(0xFF10B981), child: _SkillsContent()),
+        _CvSection(
+          title: isEn ? 'TECHNICAL COMPETENCIES' : 'KEAHLIAN UTAMA',
+          icon: Icons.auto_awesome_rounded,
+          accentColor: const Color(0xFF10B981),
+          child: _SkillsContent(isEn: isEn),
+        ),
         const SizedBox(height: 20),
-        _CvSection(title: '4 PROYEK UNGGULAN', icon: Icons.terminal_rounded, accentColor: const Color(0xFF0EA5E9), child: _ProjectsContent()),
+        _CvSection(
+          title: isEn ? 'FEATURED ENGINEERING HIGHLIGHTS' : '4 PROYEK UNGGULAN',
+          icon: Icons.terminal_rounded,
+          accentColor: const Color(0xFF0EA5E9),
+          child: _ProjectsContent(isEn: isEn),
+        ),
         const SizedBox(height: 20),
-        _CvSection(title: 'PRESTASI NASIONAL', icon: Icons.emoji_events_outlined, accentColor: const Color(0xFFD97706), child: _AchievementsContent()),
+        _CvSection(
+          title: isEn ? 'NATIONAL COMPETITIVE HONORS' : 'PRESTASI NASIONAL',
+          icon: Icons.emoji_events_outlined,
+          accentColor: const Color(0xFFD97706),
+          child: _AchievementsContent(isEn: isEn),
+        ),
         const SizedBox(height: 20),
-        _CvSection(title: 'SERTIFIKASI KOMINFO DTS', icon: Icons.workspace_premium_outlined, accentColor: AppColors.primary, child: _CertsContent()),
+        _CvSection(
+          title: isEn ? 'KOMINFO DTS CERTIFICATIONS' : 'SERTIFIKASI KOMINFO DTS',
+          icon: Icons.workspace_premium_outlined,
+          accentColor: AppColors.primary,
+          child: _CertsContent(isEn: isEn),
+        ),
       ],
     );
   }
@@ -537,7 +628,6 @@ class _CvSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Section header
         Row(
           children: [
             Container(
@@ -579,13 +669,18 @@ class _CvSection extends StatelessWidget {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// SECTION CONTENTS
+// SECTION CONTENTS (BILINGUAL)
 // ─────────────────────────────────────────────────────────────────────────────
 class _SummaryContent extends StatelessWidget {
+  final bool isEn;
+  const _SummaryContent({required this.isEn});
+
   @override
   Widget build(BuildContext context) {
     return Text(
-      'Software Engineer dan lulusan Sarjana Terapan Teknik (S.Tr.T.) Program Studi D4 Teknologi Rekayasa Komputer Jaringan (TRKJ), Jurusan Teknologi Informasi dan Komputer (TIK) Politeknik Negeri Lhokseumawe. Spesialis dalam rekayasa aplikasi mobile Flutter cross-platform (Dart & BLoC), sistem siber-fisik IoT 7 Lapisan OSI Model & MQTT/TLS, kecerdasan buatan Rule-Based Decision Systems & AI Studio, serta pengembangan sistem informasi web institusi akademik.',
+      isEn
+          ? 'Software Engineer and Bachelor of Applied Engineering (S.Tr.T.) graduate in Computer Network Engineering Technology (D4 TRKJ), Department of Information and Computer Technology (TIK), Politeknik Negeri Lhokseumawe (Cum Laude). Specialized in cross-platform Flutter mobile applications (Reactive BLoC), cyber-physical systems (IoT CPS) with complete 7-Layer OSI network model & MQTT HiveMQ Cloud, applied artificial intelligence (Rule-Based Decision Systems & Google AI Studio), and integrated enterprise academic web portals.'
+          : 'Software Engineer dan lulusan Sarjana Terapan Teknik (S.Tr.T.) Program Studi D4 Teknologi Rekayasa Komputer Jaringan (TRKJ), Jurusan Teknologi Informasi dan Komputer (TIK) Politeknik Negeri Lhokseumawe. Spesialis dalam rekayasa aplikasi mobile Flutter cross-platform (Dart & BLoC), sistem siber-fisik IoT 7 Lapisan OSI Model & MQTT/TLS, kecerdasan buatan Rule-Based Decision Systems & AI Studio, serta pengembangan sistem informasi web institusi akademik.',
       style: AppTypography.bodySmall.copyWith(
         fontSize: 13,
         height: 1.65,
@@ -596,6 +691,9 @@ class _SummaryContent extends StatelessWidget {
 }
 
 class _EducationContent extends StatelessWidget {
+  final bool isEn;
+  const _EducationContent({required this.isEn});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -613,7 +711,9 @@ class _EducationContent extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  'D4 Teknologi Rekayasa Komputer Jaringan (TRKJ)',
+                  isEn
+                      ? 'D4 Computer Network Engineering Technology (TRKJ)'
+                      : 'D4 Teknologi Rekayasa Komputer Jaringan (TRKJ)',
                   style: AppTypography.bodyMedium.copyWith(
                     fontWeight: FontWeight.w700,
                     fontSize: 13,
@@ -640,7 +740,9 @@ class _EducationContent extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           Text(
-            'Politeknik Negeri Lhokseumawe (PNL) • Jurusan TIK',
+            isEn
+                ? 'Politeknik Negeri Lhokseumawe (PNL) • Department of ICT'
+                : 'Politeknik Negeri Lhokseumawe (PNL) • Jurusan TIK',
             style: AppTypography.bodySmall.copyWith(
               fontSize: 12,
               color: const Color(0xFF7C3AED),
@@ -648,11 +750,11 @@ class _EducationContent extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          _infoRow('Gelar', 'Sarjana Terapan Teknik (S.Tr.T.)'),
-          _infoRow('Predikat', 'Cum Laude'),
-          _infoRow('Lulus Sidang', '29 Juli 2026'),
-          _infoRow('Pembimbing I', 'Husaini, S.Si., M.IT.'),
-          _infoRow('Pembimbing II', 'Atthariq, S.S.T., M.T.'),
+          _infoRow(isEn ? 'Degree' : 'Gelar', 'Sarjana Terapan Teknik (S.Tr.T.)'),
+          _infoRow(isEn ? 'Honors' : 'Predikat', 'Cum Laude (GPA 3.75 / 4.00)'),
+          _infoRow(isEn ? 'Defense Date' : 'Lulus Sidang', '29 Juli 2026'),
+          _infoRow(isEn ? 'Advisor I' : 'Pembimbing I', 'Husaini, S.Si., M.IT.'),
+          _infoRow(isEn ? 'Advisor II' : 'Pembimbing II', 'Atthariq, S.S.T., M.T.'),
           const SizedBox(height: 8),
           Container(
             padding: const EdgeInsets.all(10),
@@ -662,7 +764,9 @@ class _EducationContent extends StatelessWidget {
               border: Border.all(color: const Color(0xFF7C3AED).withValues(alpha: 0.2)),
             ),
             child: Text(
-              '📌 Skripsi: "Rancang Bangun IoT pada Prototype Smart Home dengan Penerapan Rule-Based Decision System sebagai Artificial Intelligence" (Aplikasi STARZAR - 7 OSI Layer & MQTT HiveMQ)',
+              isEn
+                  ? '📌 Thesis: "Design and Construction of IoT Prototype Smart Home with Rule-Based Decision System as Artificial Intelligence" (STARZAR Application - Complete 7-Layer OSI Model & MQTT HiveMQ Cloud)'
+                  : '📌 Skripsi: "Rancang Bangun IoT pada Prototype Smart Home dengan Penerapan Rule-Based Decision System sebagai Artificial Intelligence" (Aplikasi STARZAR - 7 OSI Layer & MQTT HiveMQ)',
               style: AppTypography.bodySmall.copyWith(
                 fontSize: 11.5,
                 height: 1.5,
@@ -683,7 +787,7 @@ class _EducationContent extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: 92,
+            width: 105,
             child: Text(
               '$label:',
               style: AppTypography.bodySmall.copyWith(
@@ -709,13 +813,40 @@ class _EducationContent extends StatelessWidget {
 }
 
 class _SkillsContent extends StatelessWidget {
+  final bool isEn;
+  const _SkillsContent({required this.isEn});
+
   @override
   Widget build(BuildContext context) {
     final skills = [
-      _SkillData('Mobile Dev', 'Flutter • Dart • BLoC • 60 FPS UI', const Color(0xFF0284C7), Icons.phone_android_rounded, 0.95),
-      _SkillData('IoT & Networking', '7 OSI Layer • MQTT/TLS • ESP32 • VLAN', const Color(0xFF10B981), Icons.lan_rounded, 0.92),
-      _SkillData('AI & Decision Sys.', 'Rule-Based • Forward Chain • AI Studio', const Color(0xFF7C3AED), Icons.psychology_rounded, 0.90),
-      _SkillData('Tools & Admin', 'MS Office • Figma • Git • VS Code', const Color(0xFFD97706), Icons.build_rounded, 0.88),
+      _SkillData(
+        'Mobile Dev',
+        isEn ? 'Flutter • Dart • BLoC • 60 FPS UI' : 'Flutter • Dart • BLoC • UI 60 FPS',
+        const Color(0xFF0284C7),
+        Icons.phone_android_rounded,
+        0.95,
+      ),
+      _SkillData(
+        'IoT & Networking',
+        isEn ? '7 OSI Layer • MQTT/TLS • ESP32 • VLAN' : '7 Lapisan OSI • MQTT/TLS • ESP32 • VLAN',
+        const Color(0xFF10B981),
+        Icons.lan_rounded,
+        0.92,
+      ),
+      _SkillData(
+        'AI & Decision Sys.',
+        isEn ? 'Rule-Based • Forward Chain • AI Studio' : 'Rule-Based AI • Forward Chaining • AI Studio',
+        const Color(0xFF7C3AED),
+        Icons.psychology_rounded,
+        0.90,
+      ),
+      _SkillData(
+        'Tools & Admin',
+        isEn ? 'MS Office • Figma • Git • VS Code' : 'MS Office • Figma • Git • VS Code',
+        const Color(0xFFD97706),
+        Icons.build_rounded,
+        0.88,
+      ),
     ];
     return Column(
       children: skills.map((s) => _SkillBar(data: s)).toList(),
@@ -802,34 +933,59 @@ class _SkillBar extends StatelessWidget {
 }
 
 class _ProjectsContent extends StatelessWidget {
+  final bool isEn;
+  const _ProjectsContent({required this.isEn});
+
   @override
   Widget build(BuildContext context) {
     final projects = [
       _ProjectData(
         '1. STARZAR – Smart Exclusive Home IoT & AI',
-        'Skripsi S.Tr.T. TRKJ PNL | Flutter + ESP32 + MQTT HiveMQ',
-        '7 OSI Layer penuh, Rule-Based AI 100% akurasi, latensi 180 ms, 0% Packet Loss, QoS ITU-T Y.1010.',
+        isEn
+            ? 'Bachelor Thesis TRKJ PNL | Flutter + ESP32 + MQTT HiveMQ'
+            : 'Skripsi S.Tr.T. TRKJ PNL | Flutter + ESP32 + MQTT HiveMQ',
+        isEn
+            ? 'Complete 7-Layer OSI Model, 100% Rule-Based AI accuracy, 180 ms latency, 0% Packet Loss.'
+            : '7 OSI Layer penuh, Rule-Based AI 100% akurasi, latensi 180 ms, 0% Packet Loss, QoS ITU-T Y.1010.',
         const Color(0xFF0284C7),
         Icons.home_work_rounded,
       ),
       _ProjectData(
-        '2. Sistem Informasi Kuliah Umum TIK PNL',
-        'Web Portal Pendaftaran Seminar Akademik (2025-2026)',
-        'Registrasi peserta, absensi QR Code digital, kuota otomatis & rekapitulasi data seminar.',
+        isEn
+            ? '2. TIK PNL Public Lecture & Event Registration System'
+            : '2. Sistem Informasi Kuliah Umum TIK PNL',
+        isEn
+            ? 'Academic Seminar Registration Web Platform (2025-2026)'
+            : 'Web Portal Pendaftaran Seminar Akademik (2025-2026)',
+        isEn
+            ? 'Participant registration, encrypted digital QR attendance, quota checks & real-time analytics.'
+            : 'Registrasi peserta, absensi QR Code digital, kuota otomatis & rekapitulasi data seminar.',
         const Color(0xFF7C3AED),
         Icons.school_rounded,
       ),
       _ProjectData(
-        '3. Sistem Informasi Sertifikat Dosen PNL',
-        'Repositori Kredensial Dosen Terpusat (2025-2026)',
-        'Arsip sertifikasi dosen, audit BKD, verifikasi dokumen berbasis QR Code kampus.',
+        isEn
+            ? '3. PNL Faculty Certificate Repository System'
+            : '3. Sistem Informasi Sertifikat Dosen PNL',
+        isEn
+            ? 'Centralized Faculty Credential Vault (2025-2026)'
+            : 'Repositori Kredensial Dosen Terpusat (2025-2026)',
+        isEn
+            ? 'Certification archiving, BKD institutional reporting, and campus QR code verification.'
+            : 'Arsip sertifikasi dosen, audit BKD, verifikasi dokumen berbasis QR Code kampus.',
         const Color(0xFF10B981),
         Icons.workspace_premium_rounded,
       ),
       _ProjectData(
-        '4. Sistem Informasi Sertifikat Mahasiswa/i TIK',
-        'Platform E-Certificate Digital PNL (2025-2026)',
-        'Penerbitan e-sertifikat otomatis, validasi anti-pemalsuan, sinkronisasi SKPI mahasiswa.',
+        isEn
+            ? '4. TIK PNL Student Certificate & SKPI Validation'
+            : '4. Sistem Informasi Sertifikat Mahasiswa/i TIK',
+        isEn
+            ? 'Digital E-Certificate & SKPI Portal (2025-2026)'
+            : 'Platform E-Certificate Digital PNL (2025-2026)',
+        isEn
+            ? 'Automated e-certificate generation, anti-fraud QR verification, and student SKPI linkage.'
+            : 'Penerbitan e-sertifikat otomatis, validasi anti-pemalsuan, sinkronisasi SKPI mahasiswa.',
         const Color(0xFFD97706),
         Icons.card_membership_rounded,
       ),
@@ -913,14 +1069,24 @@ class _ProjectCard extends StatelessWidget {
 }
 
 class _AchievementsContent extends StatelessWidget {
+  final bool isEn;
+  const _AchievementsContent({required this.isEn});
+
   @override
   Widget build(BuildContext context) {
-    final items = [
-      'Finalis Inovasi Perangkat Lunak – KMIPN VI 2025 (Kompetisi Mahasiswa Informatika Politeknik Nasional)',
-      'Medali Nasional – NSO 5 (National Science Olympiad V, Bidang Bahasa Inggris)',
-      'Juara Nasional – OSPN (Olimpiade Sains Pemuda Nusantara, Bidang Akuntansi & Logika)',
-      'Penghargaan Nasional – OSH 2025 (Olimpiade Sains Hardiknas, Bidang Bahasa Indonesia)',
-    ];
+    final items = isEn
+        ? [
+            'Software Innovation Finalist – KMIPN VI 2025 (National Polytechnic Informatics Competition)',
+            'National Medal Winner – NSO 5 (National Science Olympiad V, English Category)',
+            'National Winner – OSPN (National Youth Science Olympiad, Accounting & Logic)',
+            'National Honor – OSH 2025 (Hardiknas Science Olympiad, Indonesian Language)',
+          ]
+        : [
+            'Finalis Inovasi Perangkat Lunak – KMIPN VI 2025 (Kompetisi Mahasiswa Informatika Politeknik Nasional)',
+            'Medali Nasional – NSO 5 (National Science Olympiad V, Bidang Bahasa Inggris)',
+            'Juara Nasional – OSPN (Olimpiade Sains Pemuda Nusantara, Bidang Akuntansi & Logika)',
+            'Penghargaan Nasional – OSH 2025 (Olimpiade Sains Hardiknas, Bidang Bahasa Indonesia)',
+          ];
     return Column(
       children: items.asMap().entries.map((e) {
         return Padding(
@@ -965,6 +1131,9 @@ class _AchievementsContent extends StatelessWidget {
 }
 
 class _CertsContent extends StatelessWidget {
+  final bool isEn;
+  const _CertsContent({required this.isEn});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -986,7 +1155,7 @@ class _CertsContent extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
-                  '11 Sertifikasi Resmi Terverifikasi',
+                  isEn ? '11 Verified Professional Credentials' : '11 Sertifikasi Resmi Terverifikasi',
                   style: AppTypography.bodySmall.copyWith(
                     fontWeight: FontWeight.w700,
                     fontSize: 12.5,
@@ -998,7 +1167,9 @@ class _CertsContent extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            'Kementerian Komunikasi dan Informatika RI (Kominfo) – Digital Talent Scholarship (DTS) 2024–2025. Meliputi: AI & Machine Learning, Cloud Architecture, Cybersecurity, Digital Product Management, dan Media Strategist.',
+            isEn
+                ? 'Ministry of Communication and Informatics RI (Kominfo) – Digital Talent Scholarship (DTS) 2024–2025. Covering: AI & Machine Learning, Cloud Architecture, Cybersecurity, Digital Product Management, and Media Strategy.'
+                : 'Kementerian Komunikasi dan Informatika RI (Kominfo) – Digital Talent Scholarship (DTS) 2024–2025. Meliputi: AI & Machine Learning, Cloud Architecture, Cybersecurity, Digital Product Management, dan Media Strategist.',
             style: AppTypography.bodySmall.copyWith(
               fontSize: 11.5,
               height: 1.5,
@@ -1012,23 +1183,28 @@ class _CertsContent extends StatelessWidget {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// STICKY DOWNLOAD FOOTER
+// STICKY DOWNLOAD FOOTER (BILINGUAL)
 // ─────────────────────────────────────────────────────────────────────────────
 class _CvDownloadFooter extends StatelessWidget {
+  final bool isEn;
+  final AppStrings strings;
+
+  const _CvDownloadFooter({required this.isEn, required this.strings});
+
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 18),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         border: Border(
-          top: BorderSide(color: const Color(0xFFE2E8F0), width: 1.2),
+          top: BorderSide(color: Color(0xFFE2E8F0), width: 1.2),
         ),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF0F172A).withValues(alpha: 0.06),
+            color: Color(0x0F0F172A),
             blurRadius: 12,
-            offset: const Offset(0, -4),
+            offset: Offset(0, -4),
           ),
         ],
       ),
@@ -1044,7 +1220,7 @@ class _CvDownloadFooter extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Unduh Berkas Resmi (Format PDF)',
+                      strings.downloadOfficialDocs,
                       textAlign: TextAlign.center,
                       style: AppTypography.bodyMedium.copyWith(
                         fontWeight: FontWeight.w700,
@@ -1054,7 +1230,7 @@ class _CvDownloadFooter extends StatelessWidget {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      'Pilih CV Ringkas (2 Hal) atau Dokumen Portofolio Lengkap (5 Hal Dossier)',
+                      strings.downloadDocsDesc,
                       textAlign: TextAlign.center,
                       style: AppTypography.bodySmall.copyWith(
                         fontSize: 11,
@@ -1070,22 +1246,22 @@ class _CvDownloadFooter extends StatelessWidget {
                   runSpacing: 10,
                   children: [
                     _DownloadActionButton(
-                      label: 'Unduh CV (PDF)',
-                      loadingLabel: 'Membuat CV...',
+                      label: strings.downloadCvBtn,
+                      loadingLabel: strings.generatingCv,
                       icon: Icons.file_download_rounded,
                       gradientColors: const [Color(0xFF0284C7), Color(0xFF38BDF8)],
                       hoverColors: const [Color(0xFF0C4A6E), Color(0xFF0284C7)],
-                      onGenerate: CvPdfGenerator.generate,
-                      filename: 'CV_Nazarul_Qudri_STRT.pdf',
+                      onGenerate: () => CvPdfGenerator.generate(isEnglish: isEn),
+                      filename: isEn ? 'CV_Nazarul_Qudri_STRT_EN.pdf' : 'CV_Nazarul_Qudri_STRT.pdf',
                     ),
                     _DownloadActionButton(
-                      label: 'Unduh Portofolio (PDF)',
-                      loadingLabel: 'Membuat Dossier...',
+                      label: strings.downloadPortfolioBtn,
+                      loadingLabel: strings.generatingDossier,
                       icon: Icons.menu_book_rounded,
                       gradientColors: const [Color(0xFF7C3AED), Color(0xFFA855F7)],
                       hoverColors: const [Color(0xFF581C87), Color(0xFF7C3AED)],
-                      onGenerate: PortfolioPdfGenerator.generate,
-                      filename: 'Portofolio_Lengkap_Nazarul_Qudri_STRT.pdf',
+                      onGenerate: () => PortfolioPdfGenerator.generate(isEnglish: isEn),
+                      filename: isEn ? 'Portfolio_Dossier_Nazarul_Qudri_STRT_EN.pdf' : 'Portofolio_Lengkap_Nazarul_Qudri_STRT.pdf',
                     ),
                   ],
                 ),
@@ -1101,7 +1277,7 @@ class _CvDownloadFooter extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      'Unduh Berkas Resmi (Format PDF)',
+                      strings.downloadOfficialDocs,
                       style: AppTypography.bodyMedium.copyWith(
                         fontWeight: FontWeight.w700,
                         fontSize: 13.5,
@@ -1109,7 +1285,7 @@ class _CvDownloadFooter extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Pilih CV Ringkas (2 Halaman) atau Dokumen Portofolio Lengkap (5 Halaman Dossier)',
+                      strings.downloadDocsDesc,
                       style: AppTypography.bodySmall.copyWith(
                         fontSize: 11.5,
                         color: const Color(0xFF64748B),
@@ -1120,23 +1296,23 @@ class _CvDownloadFooter extends StatelessWidget {
               ),
               const SizedBox(width: 14),
               _DownloadActionButton(
-                label: 'Unduh CV (PDF)',
-                loadingLabel: 'Membuat CV...',
+                label: strings.downloadCvBtn,
+                loadingLabel: strings.generatingCv,
                 icon: Icons.file_download_rounded,
                 gradientColors: const [Color(0xFF0284C7), Color(0xFF38BDF8)],
                 hoverColors: const [Color(0xFF0C4A6E), Color(0xFF0284C7)],
-                onGenerate: CvPdfGenerator.generate,
-                filename: 'CV_Nazarul_Qudri_STRT.pdf',
+                onGenerate: () => CvPdfGenerator.generate(isEnglish: isEn),
+                filename: isEn ? 'CV_Nazarul_Qudri_STRT_EN.pdf' : 'CV_Nazarul_Qudri_STRT.pdf',
               ),
               const SizedBox(width: 10),
               _DownloadActionButton(
-                label: 'Unduh Portofolio (PDF)',
-                loadingLabel: 'Membuat Dossier...',
+                label: strings.downloadPortfolioBtn,
+                loadingLabel: strings.generatingDossier,
                 icon: Icons.menu_book_rounded,
                 gradientColors: const [Color(0xFF7C3AED), Color(0xFFA855F7)],
                 hoverColors: const [Color(0xFF581C87), Color(0xFF7C3AED)],
-                onGenerate: PortfolioPdfGenerator.generate,
-                filename: 'Portofolio_Lengkap_Nazarul_Qudri_STRT.pdf',
+                onGenerate: () => PortfolioPdfGenerator.generate(isEnglish: isEn),
+                filename: isEn ? 'Portfolio_Dossier_Nazarul_Qudri_STRT_EN.pdf' : 'Portofolio_Lengkap_Nazarul_Qudri_STRT.pdf',
               ),
             ],
           );

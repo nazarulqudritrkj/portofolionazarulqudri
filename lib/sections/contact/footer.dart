@@ -142,7 +142,7 @@ class _FooterState extends State<Footer> {
                               ),
                             ),
                             Text(
-                              'Dirancang secara profesional & Terlindungi UU ITE',
+                              strings.footerSubtitle,
                               style: AppTypography.bodySmall.copyWith(
                                 color: AppColors.primary,
                                 fontSize: 11,
@@ -213,7 +213,7 @@ class _FooterState extends State<Footer> {
                       runSpacing: 10,
                       crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
-                        _buildVisitorCounterBadge(_visitorCount),
+                        _buildVisitorCounterBadge(_visitorCount, strings),
                         _buildLiveClockBadge(hours, minutes, seconds),
                       ],
                     ),
@@ -294,7 +294,7 @@ class _FooterState extends State<Footer> {
     );
   }
 
-  Widget _buildVisitorCounterBadge(int count) {
+  Widget _buildVisitorCounterBadge(int count, AppStrings strings) {
     final countText = _formatNumber(count);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
@@ -316,7 +316,7 @@ class _FooterState extends State<Footer> {
           ),
           const SizedBox(width: 7),
           Text(
-            '$countText Kunjungan',
+            '$countText ${strings.visitorCountSuffix}',
             style: AppTypography.code.copyWith(
               color: AppColors.textPrimary,
               fontSize: 12,

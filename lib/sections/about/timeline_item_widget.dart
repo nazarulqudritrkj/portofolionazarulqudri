@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_typography.dart';
+import '../../core/localization/app_locale.dart';
 import '../../models/experience_model.dart';
 import '../../widgets/cards/glass_card.dart';
 
@@ -16,6 +17,8 @@ class TimelineItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isEn = LocaleController.instance.isEnglish;
+
     return IntrinsicHeight(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,7 +136,7 @@ class TimelineItemWidget extends StatelessWidget {
                             ),
                             const SizedBox(width: 4),
                             Text(
-                              experience.location,
+                              experience.getLocation(isEn),
                               style: AppTypography.bodySmall.copyWith(
                                 color: AppColors.textMuted,
                                 fontSize: 11.5,
@@ -147,7 +150,7 @@ class TimelineItemWidget extends StatelessWidget {
 
                     // Role
                     Text(
-                      experience.role,
+                      experience.getRole(isEn),
                       style: AppTypography.headingSmall.copyWith(
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
@@ -157,7 +160,7 @@ class TimelineItemWidget extends StatelessWidget {
 
                     // Company
                     Text(
-                      experience.company,
+                      experience.getCompany(isEn),
                       style: AppTypography.bodyMedium.copyWith(
                         color: AppColors.primary,
                         fontWeight: FontWeight.w600,
@@ -167,7 +170,7 @@ class TimelineItemWidget extends StatelessWidget {
 
                     // Description
                     Text(
-                      experience.description,
+                      experience.getDescription(isEn),
                       style: AppTypography.bodyMedium.copyWith(
                         color: AppColors.textSecondary,
                         fontSize: 13.5,
@@ -177,7 +180,7 @@ class TimelineItemWidget extends StatelessWidget {
 
                     // Key highlights list
                     Column(
-                      children: experience.highlights.map((item) {
+                      children: experience.getHighlights(isEn).map((item) {
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 6),
                           child: Row(

@@ -22,6 +22,7 @@ class _ProjectCardState extends State<ProjectCard> {
   @override
   Widget build(BuildContext context) {
     final p = widget.project;
+    final isEn = LocaleController.instance.isEnglish;
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
@@ -154,7 +155,7 @@ class _ProjectCardState extends State<ProjectCard> {
                                 ),
                                 const SizedBox(width: 6),
                                 Text(
-                                  p.metric,
+                                  p.getMetric(isEn),
                                   style: AppTypography.badge.copyWith(
                                     fontSize: 11,
                                     color: AppColors.textPrimary,
@@ -177,7 +178,7 @@ class _ProjectCardState extends State<ProjectCard> {
                     children: [
                       // Title
                       Text(
-                        p.title,
+                        p.getTitle(isEn),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: AppTypography.headingSmall.copyWith(
@@ -192,7 +193,7 @@ class _ProjectCardState extends State<ProjectCard> {
 
                       // Subtitle / Brief
                       Text(
-                        p.description,
+                        p.getDescription(isEn),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: AppTypography.bodySmall.copyWith(

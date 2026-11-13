@@ -196,5 +196,30 @@ class AppStrings {
   String get copyrightNote => isId
       ? 'Dirancang secara profesional & Terlindungi UU ITE • Portofolio Resmi Sarjana Terapan Teknik (S.Tr.T.)'
       : 'Professionally Engineered & Protected under UU ITE • Official Engineering Portfolio of Nazarul Qudri, S.Tr.T.';
+  String get footerSubtitle => isId
+      ? 'Dirancang secara profesional & Terlindungi UU ITE'
+      : 'Professionally engineered & protected by law';
+  String get visitorCountSuffix => isId ? 'Kunjungan' : 'Visits';
+
+  // Digital CV & Portfolio Modal Localization
+  String get officialCvTitle => isId ? 'Curriculum Vitae Resmi' : 'Official Curriculum Vitae';
+  String get activeStatus => isId ? 'Aktif 2026' : 'Active 2026';
+  String get downloadOfficialDocs => isId ? 'Unduh Berkas Resmi (Format PDF)' : 'Download Official Documents (PDF Format)';
+  String get downloadDocsDesc => isId
+      ? 'Pilih CV Ringkas (2 Halaman) atau Dokumen Portofolio Lengkap (5 Halaman Dossier)'
+      : 'Select Concise CV (2 Pages) or Comprehensive Engineering Dossier (5 Pages)';
+  String get downloadCvBtn => isId ? 'Unduh CV (PDF)' : 'Download CV (PDF)';
+  String get downloadPortfolioBtn => isId ? 'Unduh Portofolio (PDF)' : 'Download Portfolio (PDF)';
+  String get generatingCv => isId ? 'Membuat CV...' : 'Generating CV...';
+  String get generatingDossier => isId ? 'Membuat Dossier...' : 'Generating Dossier...';
+
+  // Dossier Banner on Projects Section
+  String get dossierBannerTitle => isId
+      ? 'Dokumen Portofolio Rekayasa Resmi (5 Halaman Dossier PDF)'
+      : 'Official Engineering Portfolio Dossier (5-Page PDF)';
+  String get dossierBannerDesc => isId
+      ? 'Memuat studi kasus STARZAR (7 OSI Layer), 3 sistem informasi web TIK PNL, skripsi & 11 sertifikasi Kominfo DTS.'
+      : 'Features STARZAR (7 OSI Layer) case study, 3 PNL web systems, degree thesis & 11 Kominfo DTS certifications.';
+  String get dossierBannerBtn => isId ? 'Unduh Portofolio (PDF)' : 'Download Portfolio (PDF)';
 }
 

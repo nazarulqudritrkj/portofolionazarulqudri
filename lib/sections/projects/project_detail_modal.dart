@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_typography.dart';
+import '../../core/localization/app_locale.dart';
 import '../../models/project_model.dart';
 import '../../widgets/badges/tech_badge.dart';
 
@@ -35,6 +36,8 @@ class ProjectDetailModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isEn = LocaleController.instance.isEnglish;
+
     return Center(
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 720, maxHeight: 820),
@@ -105,7 +108,7 @@ class ProjectDetailModal extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    project.title,
+                                    project.getTitle(isEn),
                                     style: AppTypography.headingLarge.copyWith(
                                       fontSize: 22,
                                       fontWeight: FontWeight.w800,
@@ -113,7 +116,7 @@ class ProjectDetailModal extends StatelessWidget {
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
-                                    project.metric,
+                                    project.getMetric(isEn),
                                     style: AppTypography.badge.copyWith(
                                       color: project.primaryColor,
                                       fontSize: 12,
@@ -136,7 +139,7 @@ class ProjectDetailModal extends StatelessWidget {
 
                       // Subtitle
                       Text(
-                        project.subtitle,
+                        project.getSubtitle(isEn),
                         style: AppTypography.headingSmall.copyWith(
                           fontSize: 16,
                           color: AppColors.textPrimary,
@@ -147,7 +150,7 @@ class ProjectDetailModal extends StatelessWidget {
 
                       // Detailed Full Description
                       Text(
-                        project.fullDescription,
+                        project.getFullDescription(isEn),
                         style: AppTypography.bodyLarge.copyWith(
                           fontSize: 15,
                           height: 1.65,
@@ -158,7 +161,7 @@ class ProjectDetailModal extends StatelessWidget {
 
                       // Key Architectural Features
                       Text(
-                        'KEY ARCHITECTURAL HIGHLIGHTS',
+                        isEn ? 'KEY ARCHITECTURAL HIGHLIGHTS' : 'SOROTAN ARSITEKTUR UTAMA',
                         style: AppTypography.badge.copyWith(
                           color: AppColors.textPrimary,
                           letterSpacing: 1.1,
@@ -167,7 +170,7 @@ class ProjectDetailModal extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       Column(
-                        children: project.keyFeatures.map((feature) {
+                        children: project.getKeyFeatures(isEn).map((feature) {
                           return Padding(
                             padding: const EdgeInsets.only(bottom: 8),
                             child: Row(
@@ -201,7 +204,7 @@ class ProjectDetailModal extends StatelessWidget {
 
                       // Tech Stack Tags
                       Text(
-                        'TECHNOLOGIES USED',
+                        isEn ? 'TECHNOLOGIES USED' : 'TEKNOLOGI YANG DIGUNAKAN',
                         style: AppTypography.badge.copyWith(
                           color: AppColors.textPrimary,
                           letterSpacing: 1.1,

@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../core/constants/app_colors.dart';
@@ -30,8 +29,12 @@ class _ProjectsSectionState extends State<ProjectsSection> {
   Future<void> _downloadPortfolioDossier() async {
     setState(() => _isDownloadingDossier = true);
     try {
-      final pdfBytes = await PortfolioPdfGenerator.generate();
-      await downloadPdfBytes(pdfBytes, 'Portofolio_Lengkap_Nazarul_Qudri_STRT.pdf');
+      final isEn = LocaleController.instance.isEnglish;
+      final pdfBytes = await PortfolioPdfGenerator.generate(isEnglish: isEn);
+      final filename = isEn
+          ? 'Portfolio_Dossier_Nazarul_Qudri_STRT_EN.pdf'
+          : 'Portofolio_Lengkap_Nazarul_Qudri_STRT.pdf';
+      await downloadPdfBytes(pdfBytes, filename);
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -227,7 +230,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Berkas Portofolio Lengkap (PDF)',
+                            strings.dossierBannerTitle,
                             style: AppTypography.headingSmall.copyWith(
                               fontSize: 14.5,
                               fontWeight: FontWeight.w700,
@@ -235,7 +238,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
                             ),
                           ),
                           Text(
-                            'Format Dokumen Rekayasa 5 Halaman Dossier',
+                            strings.dossierBannerDesc,
                             style: AppTypography.bodySmall.copyWith(
                               fontSize: 11.5,
                               color: const Color(0xFF64748B),
@@ -247,7 +250,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
                   ],
                 ),
                 const SizedBox(height: 16),
-                _buildDossierButton(),
+                _buildDossierButton(strings),
               ],
             )
           : Row(
@@ -270,7 +273,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Dokumen Portofolio Rekayasa Resmi (5 Halaman Dossier PDF)',
+                        strings.dossierBannerTitle,
                         style: AppTypography.headingSmall.copyWith(
                           fontSize: 15.5,
                           fontWeight: FontWeight.w700,
@@ -279,7 +282,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
                       ),
                       const SizedBox(height: 3),
                       Text(
-                        'Memuat studi kasus STARZAR (7 OSI Layer), 3 sistem informasi web TIK PNL, skripsi & 11 sertifikasi Kominfo DTS.',
+                        strings.dossierBannerDesc,
                         style: AppTypography.bodySmall.copyWith(
                           fontSize: 12,
                           color: const Color(0xFF64748B),
@@ -289,13 +292,13 @@ class _ProjectsSectionState extends State<ProjectsSection> {
                   ),
                 ),
                 const SizedBox(width: 20),
-                _buildDossierButton(),
+                _buildDossierButton(strings),
               ],
             ),
     ).animate().fadeIn(duration: 600.ms).slideY(begin: 0.1, end: 0);
   }
 
-  Widget _buildDossierButton() {
+  Widget _buildDossierButton(AppStrings strings) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
@@ -334,7 +337,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
                 const Icon(Icons.file_download_rounded, color: Colors.white, size: 18),
               const SizedBox(width: 8),
               Text(
-                _isDownloadingDossier ? 'Membuat Dossier...' : 'Unduh Portofolio (PDF)',
+                _isDownloadingDossier ? strings.generatingDossier : strings.dossierBannerBtn,
                 style: AppTypography.button.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
